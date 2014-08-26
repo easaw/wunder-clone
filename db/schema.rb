@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140826190257) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lists", force: true do |t|
     t.integer  "owner_id",   null: false
     t.string   "name",       null: false
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140826190257) do
     t.datetime "updated_at"
   end
 
-  add_index "lists", ["owner_id"], name: "index_lists_on_owner_id"
+  add_index "lists", ["owner_id"], name: "index_lists_on_owner_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.integer  "list_id",     null: false
@@ -33,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140826190257) do
     t.boolean  "completed"
   end
 
-  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id"
+  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name",            null: false
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140826190257) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["session_token"], name: "index_users_on_session_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
 
 end

@@ -40,7 +40,7 @@ button{
   display: inline;
 }
 
-.group::after;{
+.group::after{
   display: block;
   clear: both;
   content: "";
