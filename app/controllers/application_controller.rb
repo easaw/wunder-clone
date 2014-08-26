@@ -28,4 +28,10 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_url
     end
   end
+  
+  def require_signed_out
+    if signed_in?
+      redirect_to root_url
+    end
+  end
 end

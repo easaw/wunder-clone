@@ -1,0 +1,27 @@
+<h2>Update <%= @task.name %></h2>
+
+<form action="<%= task_url(@task) %>" method="post">
+  
+  <%= auth_token %>
+  <input
+    type="hidden"
+    name="_method"
+    value="put">
+    
+  <label for="name">Name</label>
+  <input
+    id="name"
+    type="text"
+    value="<%= @task.name %>"
+    name="task[name]">
+    
+  <label for="due_data">Due Date</label>
+  <input
+    id="due_date"
+    type="date"
+    name="task[due_date]"
+    valu="<%= @task.due_date %>">
+    
+  <button>Update Task</button>
+  
+</form>

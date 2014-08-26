@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :require_signed_in
 
   def create
     @task = Task.new(task_params)
@@ -15,6 +16,11 @@ class TasksController < ApplicationController
     redirect_to list_url(@task.list)
   end
   
+  def edit
+    @task = Task.find(params[:id])
+    render :edit
+  end
+  
   def update
     @task = Task.find(params[:id])
     @task.update(task_params)
@@ -24,6 +30,6 @@ class TasksController < ApplicationController
   private
   
   def task_params
-    params.require(:task).permit(:name, :list_id, :completed)
+    params.require(:task).permit(:name, :list_id, :completed, :due_date)
   end
 end

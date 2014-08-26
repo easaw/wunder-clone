@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826190257) do
+ActiveRecord::Schema.define(version: 20140826214806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "list_shares", force: true do |t|
+    t.integer  "list_id",    null: false
+    t.integer  "user_id",    null: false
+    t.string   "status",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "list_shares", ["list_id", "user_id"], name: "index_list_shares_on_list_id_and_user_id", unique: true, using: :btree
 
   create_table "lists", force: true do |t|
     t.integer  "owner_id",   null: false

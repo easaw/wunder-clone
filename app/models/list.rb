@@ -15,4 +15,17 @@ class List < ActiveRecord::Base
   foreign_key: :list_id,
   primary_key: :id
   )
+  
+  has_many(
+  :list_shares,
+  class_name: "ListShare",
+  foreign_key: :list_id,
+  primary_key: :id
+  )
+  
+  has_many(
+  :shared_users,
+  through: :list_shares,
+  source: :user
+  )
 end

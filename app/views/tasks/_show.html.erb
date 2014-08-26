@@ -1,22 +1,20 @@
 
-  <form class="complete-form" action="<%= task_url(task) %>" method="post">
-    <%= auth_token %>
+<form class="complete-form" action="<%= task_url(task) %>" method="post">
+  <%= auth_token %>
+
+<!--TODO: Make checkbox for both completed_uncompleted -->
+  <input
+    type="hidden"
+    name="_method"
+    value="put">
   
-  <!--TODO: Make checkbox for both completed_uncompleted -->
-    <input
-      type="hidden"
-      name="_method"
-      value="put">
-    
-    <input
-      type="hidden"
-      name="task[completed]"
-      value="<%= true if !task.completed %>">
-    
-    <button class="complete-button"></button>
-  </form>
+  <input
+    type="hidden"
+    name="task[completed]"
+    value="<%= true if !task.completed %>">
+  
+  <button class="complete-button"></button>
+</form>
 
 
-<span class="task-name"><%= task.name %></span>
-  
-<%= button_to "Delete", task_url(task.id), method: "delete", class: "delete-task" %>
+<span class="task-name"><a href="<%= edit_task_url(task) %>" class="task-link"><%= task.name %></a></span>

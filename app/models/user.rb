@@ -14,6 +14,19 @@ class User < ActiveRecord::Base
   primary_key: :id
   )
   
+  has_many(
+  :list_shares,
+  class_name: "ListShare",
+  foreign_key: :user_id,
+  primary_key: :id
+  )
+  
+  has_many(
+  :shared_lists,
+  through: :list_shares,
+  source: :list
+  )
+  
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     if user.is_password?(password)
