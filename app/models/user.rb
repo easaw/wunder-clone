@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   has_many(
   :owned_lists,
+  dependent: :destroy,
   class_name: "List",
   foreign_key: :owner_id,
   primary_key: :id
@@ -15,8 +16,8 @@ class User < ActiveRecord::Base
   
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
-    if user && user.is_password?(password)
-      return 
+    if user.is_password?(password)
+      return user
     end
   end
   

@@ -1,0 +1,15 @@
+<form class="task-form" action="<%= tasks_url %>" method="post">
+  <%= auth_token %>
+  
+  <input
+    type="hidden"
+    name="task[list_id]"
+    value="<%= @list.id %>">
+  
+  <input
+    id="name"
+    type="text"
+    name="task[name]">
+    
+  <input type="submit" value="Create Task">
+</form>

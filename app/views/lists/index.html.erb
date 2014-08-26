@@ -3,9 +3,9 @@
 <ul>
   
 <% @lists.each do |list| %>
-  <li>
-    <a href="<%= list_url(list) %>"><%= list.name %></a>
-    <%= button_to "Delete List", list_url(list), method: "delete" %>
+  <li class="list">
+    <a class="list-link" href="<%= list_url(list) %>"><%= list.name %></a>
+    <%= button_to "Delete List", list_url(list), method: "delete", class: "delete-list" %>
   </li>
 <% end %>
 

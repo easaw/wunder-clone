@@ -7,4 +7,5 @@ class Task < ActiveRecord::Base
   foreign_key: :list_id,
   primary_key: :id
   )
+  
 end

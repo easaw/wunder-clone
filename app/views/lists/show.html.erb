@@ -1,1 +1,23 @@
-<h2><%= @list.name %></h2>
+<h2 class=""><%= @list.name %></h2>
+<a href="<%= lists_url %>">All Lists</a>
+
+
+<%= render "/tasks/form", list: @list %>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <% next if task.completed %>
+    <li class="active task group">
+      <%= render "/tasks/show", task: task %>
+    </li>
+  <% end %>
+  
+  <h4 class="completed-items">Completed Items</h4>
+  <% @tasks.each do |task| %>
+    <% next if !task.completed %>
+    <li class="completed task group">
+      <%= render "/tasks/show", task: task %>
+    </li>
+  <% end %>
+  
+</ul>

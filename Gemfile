@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'bcrypt'
-
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -37,6 +37,13 @@ group :test do
   gem 'guard-rspec'
   gem 'faker'
   gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'quiet_assets'
 end
 
 # Use unicorn as the app server

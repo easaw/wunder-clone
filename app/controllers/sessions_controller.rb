@@ -8,9 +8,14 @@ class SessionsController < ApplicationController
       sign_in(@user)
       redirect_to root_url
     else
-      flash.now[:error] = "Wrong username/password combo"
+      flash.now[:errors] = ["Wrong username/password combo"]
       render :new
     end
+  end
+  
+  def destroy
+    sign_out
+    redirect_to new_session_url
   end
   
   private

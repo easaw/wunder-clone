@@ -13,3 +13,88 @@
  *= require_tree .
  *= require_self
  */
+
+
+body, h1, h2, h3, h4, ul, li, div, form {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: inherit;
+}
+
+ul, li{
+  list-style: none;
+  display: block;
+}
+
+form.complete-form{
+  display: block;
+  float: left;
+}
+/*input[type="submit"] {
+  display: block;
+  float: left;
+}*/
+
+button{
+  display: inline;
+}
+
+.group::after;{
+  display: block;
+  clear: both;
+  content: "";
+}
+
+li.list{
+  height: 40px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.delete-list{
+  display: block;
+}
+
+.delete-task{
+  display: block;
+}
+
+.list-link{
+  float: left;
+  display: block;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100px;
+}
+
+li.task{
+  height: 20px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.task-name{
+  float: left;
+  display: block;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100px;
+}
+
+form.task-form{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+li.task.completed{
+  color: green;
+}
+
+li.task.active{
+  color: blue;
+}
+
+h4.completed-items{
+  margin: 10px;
+}
