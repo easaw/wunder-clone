@@ -5,6 +5,13 @@ class User < ActiveRecord::Base
   before_validation :ensure_session_token
   attr_reader :password
   
+  has_many(
+  :owned_lists,
+  class_name: "List",
+  foreign_key: :owner_id,
+  primary_key: :id
+  )
+  
   def self.get_by_credentials(username, password)
     user = User.find_by(username: username)
     if user && user.is_password?(password)

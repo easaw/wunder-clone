@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'lists#index'
-  resources :users
   resource :session, only: [:create, :new]
+  resources :users
+  
+  resources :lists
 end

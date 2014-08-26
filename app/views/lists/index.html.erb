@@ -1,0 +1,9 @@
+<h2>Lists</h2>
+
+<ul>
+  
+<% @lists.each do |list| %>
+  <li><a href="<%= list_url(list) %>"><%= list.name %></a></li>
+<% end %>
+
+</ul>
