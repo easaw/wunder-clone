@@ -8,6 +8,7 @@ class ListsController < ApplicationController
   
   def create
     @list = List.new(list_params)
+    @list.owner_id = current_user.id
     if @list.save
       redirect_to lists_url
     else
@@ -17,12 +18,12 @@ class ListsController < ApplicationController
   end
   
   def edit
-    @list = List.find_by(id: params[:id])
+    @list = List.find(params[:id])
     render :edit
   end
   
   def update
-    @list = List.find_by(id: params[:id])
+    @list = List.find(params[:id])
     if @list.update(list_params)
       redirect_to lists_url
     else
@@ -31,13 +32,20 @@ class ListsController < ApplicationController
     end
   end
   
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to root_url
+  end
+  
   def show
-    #TODO pass in taks of list
-    # @list =
+    #TODO pass in tasks of list
+    @list = List.find(params[:id])
+    render :show
   end
   
   def index
-    @lists = current_user.lists
+    @lists = current_user.owned_lists
     render :index
   end
   

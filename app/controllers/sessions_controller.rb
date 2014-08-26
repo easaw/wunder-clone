@@ -6,8 +6,9 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(user_params[:email], user_params[:password])
     if @user
       sign_in(@user)
+      redirect_to root_url
     else
-      flash.now[:errors] = "Wrong username/password combo"
+      flash.now[:error] = "Wrong username/password combo"
       render :new
     end
   end
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
   private
   
   def user_params
-    params.permit(:user).require(:email, :name, :password)
+    params.require(:user).permit(:email, :name, :password)
   end
   
 end

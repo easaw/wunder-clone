@@ -3,7 +3,12 @@
 <ul>
   
 <% @lists.each do |list| %>
-  <li><a href="<%= list_url(list) %>"><%= list.name %></a></li>
+  <li>
+    <a href="<%= list_url(list) %>"><%= list.name %></a>
+    <%= button_to "Delete List", list_url(list), method: "delete" %>
+  </li>
 <% end %>
 
 </ul>
+
+<a href="<%= new_list_url %>">Add a List</a>

@@ -1,6 +1,7 @@
 <% action = list.persisted? ? list_url : lists_url %>
 <% method = list.persisted? ? "put" : "post" %>
-<% value = list.persisted ? "Update List" : "Create List" %>
+<% value = list.persisted? ? "Update List" : "Create List" %>
+
 
 <form action="<%= action %>" method="post">
   <%= auth_token %>
@@ -9,7 +10,7 @@
   <input
     id="name"
     type="name"
-    value="list[name]">
+    name="list[name]">
     
   <input type="submit" value="<%= value %>">
   

@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
-  validates :name, :email, :password, presence: true
+  validates :name, :email, presence: true
   validates :password, length: {minimum: 6, allow_nil: true}
   
   before_validation :ensure_session_token
+  
   attr_reader :password
   
   has_many(
@@ -12,8 +13,8 @@ class User < ActiveRecord::Base
   primary_key: :id
   )
   
-  def self.get_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     if user && user.is_password?(password)
       return 
     end
