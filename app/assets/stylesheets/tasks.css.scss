@@ -46,28 +46,56 @@ li.task{
   font-weight: 400;
 }
 
+
+//.task-form > input[type="text"] {
+//  font-size: 18px;
+//  font-weight: 400;
+//  display: block;
+//  padding: 10px;
+//  width: 100%;
+//  border: 1px solid black;
+//  border-radius: 5px;
+//  background: gray;
+//  color: white;
+//}
+
 .task-form{
-  margin: 30px;
-}
-
-.task-form > input[type="date"]{
-  display: inline-block;
-}
-
-.task-form > input[type="text"] {
   font-size: 18px;
   font-weight: 400;
   display: block;
   padding: 10px;
-  width: 100%;
+  width: 95%;
   border: 1px solid black;
   border-radius: 5px;
   background: gray;
   color: white;
+  margin: 30px;
+}
+
+.task-form > input[type="text"] {
+  width: 80%;
 }
 
 .task-form > input[type="submit"]{
   display: none;
+}
+
+.task-form > input[type="checkbox"]{
+  position: relative;
+  display: inline;
+  padding: 0;
+  top: 5px;
+  margin-left: 20px;
+  float: right;
+}
+
+.task-form > input[type="date"]{
+  position: relative;
+  top: 2px;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  float: right;
 }
 
 li.completed-task a.task-link{

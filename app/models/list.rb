@@ -20,6 +20,7 @@ class List < ActiveRecord::Base
   has_many(
   :list_shares,
   inverse_of: :list,
+  dependent: :destroy,
   class_name: "ListShare",
   foreign_key: :list_id,
   primary_key: :id
@@ -38,4 +39,5 @@ class List < ActiveRecord::Base
   def completed_tasks
     self.tasks.where(completed: true)
   end
+  
 end

@@ -1,5 +1,5 @@
 class ListShare < ActiveRecord::Base
-  validates :list_id, :user_id, :status, presence: true
+  validates :list, :user_id, :status, presence: true
   validates :list_id, uniqueness: { scope: :user_id,
     message: "can't share list with the same user twice" }
   

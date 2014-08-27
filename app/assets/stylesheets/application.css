@@ -27,6 +27,11 @@ ul, li{
   display: block;
 }*/
 
+.avatar {
+  width:25px;
+  height:25px;
+}
+
 button{
   
   display: inline;

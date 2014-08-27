@@ -35,6 +35,19 @@ form.list-form > input{
   float: right;
 }
 
+.edit-list-toolbar {
+  display: block;
+  width: 200px;
+  margin: auto;
+}
+
+.add-list-link {
+  font-size: 40px;
+  display: block;
+  width: 1px;
+  margin: auto;
+}
+
 .task-count {
   float: right;
   padding-right: 10px;

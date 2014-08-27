@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
   
   attr_reader :password
   
+  has_attached_file :avatar,
+    styles: { small: "50x50>" }
+  
+  validates_attachment_content_type(
+    :avatar,
+    content_type: /\Aimage\/.*\Z/
+  )
+  
   has_many(
   :owned_lists,
   inverse_of: :owner,
@@ -17,6 +25,7 @@ class User < ActiveRecord::Base
   
   has_many(
   :list_shares,
+  dependent: :destroy,
   inverse_of: :user,
   class_name: "ListShare",
   foreign_key: :user_id,

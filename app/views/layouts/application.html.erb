@@ -9,6 +9,13 @@
 </head>
 <body>
   <% if signed_in? %>
+  
+    <% if current_user.avatar.exists? %>
+      <img class="avatar" src="<%= current_user.avatar.url %>" >
+    <% else %>
+      <img class="avatar" src="<%= asset_url('default_avatar.png') %>">
+    <% end %>
+    
     <%= current_user.email %>
     <%= button_to "Sign Out", session_url, method: "delete" %>
   <% else %>

@@ -12,12 +12,16 @@
     </li>
   <% end %>
   
-  <h5>COMPLETED ITEMS</h5>
-  <% @tasks.each do |task| %>
-    <% next if !task.completed %>
-    <li class="completed-task task group">
-      <%= render "/tasks/show", task: task %>
-    </li>
+  <% if @list.completed_tasks.length > 0 %>
+    <h5>COMPLETED ITEMS</h5>
+    <% @tasks.each do |task| %>
+      <% next if !task.completed %>
+      <li class="completed-task task group">
+        <%= render "/tasks/show", task: task %>
+      </li>
+    <% end %>
   <% end %>
-  
 </ul>
+
+
+<a class="edit-list-toolbar" href="<%= edit_list_url(@list) %>">Edit List</a>
