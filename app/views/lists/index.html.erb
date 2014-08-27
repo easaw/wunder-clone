@@ -5,10 +5,11 @@
 <% @lists.each do |list| %>
   <li class="list">
     <a class="list-link" href="<%= list_url(list) %>"><%= list.name %></a>
-    <%= button_to "Delete List", list_url(list), method: "delete", class: "delete-list" %>
+    <a class="list-edit-link" href="<%= edit_list_url(list) %>">Edit</a>
+    <span class="task-count"><%= list.active_tasks.length %></span>
   </li>
 <% end %>
 
 </ul>
 
-<a href="<%= new_list_url %>">Add a List</a>
+<a class="add-list-link" href="<%= new_list_url %>">Add a List</a>

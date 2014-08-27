@@ -1,0 +1,20 @@
+<form class="star-form" action=" <%= task_url(task) %>" method="post">
+  <%= auth_token %>
+    
+  <input
+    type="hidden"
+    name="_method"
+    value="put">
+
+  <input
+    type="hidden"
+    name="task[starred]"
+    value="<%= true if !task.starred %>">
+    
+  <% if task.starred %>
+     <button class="star-button starred"></button>
+  <% else %>
+    <button class="star-button"></button>
+  <% end %>
+  
+</form>

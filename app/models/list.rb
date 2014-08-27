@@ -3,6 +3,7 @@ class List < ActiveRecord::Base
   
   belongs_to(
   :owner,
+  inverse_of: :owned_lists,
   class_name: "User",
   foreign_key: :owner_id,
   primary_key: :id
@@ -18,6 +19,7 @@ class List < ActiveRecord::Base
   
   has_many(
   :list_shares,
+  inverse_of: :list,
   class_name: "ListShare",
   foreign_key: :list_id,
   primary_key: :id
@@ -28,4 +30,12 @@ class List < ActiveRecord::Base
   through: :list_shares,
   source: :user
   )
+
+  def active_tasks
+    self.tasks.where(completed: false)
+  end
+  
+  def completed_tasks
+    self.tasks.where(completed: true)
+  end
 end

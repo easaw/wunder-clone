@@ -8,4 +8,11 @@ class Task < ActiveRecord::Base
   primary_key: :id
   )
   
+  after_initialize :init
+  
+  def init
+    self.completed ||= false
+    self.starred ||= false
+  end
+  
 end

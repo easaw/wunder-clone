@@ -2,7 +2,7 @@
 <form class="complete-form" action="<%= task_url(task) %>" method="post">
   <%= auth_token %>
 
-<!--TODO: Make checkbox for both completed_uncompleted -->
+  <!--TODO: Make checkbox show for completed -->
   <input
     type="hidden"
     name="_method"
@@ -18,3 +18,7 @@
 
 
 <span class="task-name"><a href="<%= edit_task_url(task) %>" class="task-link"><%= task.name %></a></span>
+
+<%= render "tasks/star", task: task %>
+
+<span class="task-due_date"><%= task.due_date %></span>

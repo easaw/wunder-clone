@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826214806) do
+ActiveRecord::Schema.define(version: 20140827153440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,14 +36,15 @@ ActiveRecord::Schema.define(version: 20140826214806) do
   add_index "lists", ["owner_id"], name: "index_lists_on_owner_id", using: :btree
 
   create_table "tasks", force: true do |t|
-    t.integer  "list_id",     null: false
-    t.string   "name",        null: false
-    t.boolean  "star"
+    t.integer  "list_id",          null: false
+    t.string   "name",             null: false
     t.date     "due_date"
     t.date     "remind_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "completed"
+    t.integer  "assigned_user_id"
+    t.boolean  "starred"
   end
 
   add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree

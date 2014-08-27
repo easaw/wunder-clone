@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   
   has_many(
   :owned_lists,
+  inverse_of: :owner,
   dependent: :destroy,
   class_name: "List",
   foreign_key: :owner_id,
@@ -16,6 +17,7 @@ class User < ActiveRecord::Base
   
   has_many(
   :list_shares,
+  inverse_of: :user,
   class_name: "ListShare",
   foreign_key: :user_id,
   primary_key: :id

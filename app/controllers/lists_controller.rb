@@ -2,16 +2,20 @@ class ListsController < ApplicationController
   before_action :require_signed_in
   
   def new
+    @users = other_users
     @list = List.new()
+    # fail
     render :new
   end
   
   def create
-    @list = List.new(list_params)
-    @list.owner_id = current_user.id
+    @list = current_user.owned_lists.build(list_params)
+    # @list = List.new(list_params)
+    # @list.owner_id = current_user.id
     if @list.save
       redirect_to lists_url
     else
+      @users = other_users
       flash.now[:errors] = @list.errors.full_messages
       render :new
     end
@@ -19,6 +23,7 @@ class ListsController < ApplicationController
   
   def edit
     @list = List.find(params[:id])
+    @users = other_users
     render :edit
   end
   
@@ -55,6 +60,6 @@ class ListsController < ApplicationController
   private
   
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :shared_user_ids => [])
   end
 end

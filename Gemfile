@@ -27,6 +27,8 @@ gem 'spring',        group: :development
 gem 'bcrypt'
 gem 'rails_12factor'
 gem 'pg'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'rspec-rails'
