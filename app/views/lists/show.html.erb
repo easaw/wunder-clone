@@ -4,18 +4,18 @@
 
 <%= render "/tasks/form", list: @list %>
 
-<ul>
+<ul class="tasks-list">
   <% @tasks.each do |task| %>
     <% next if task.completed %>
-    <li class="active task group">
+    <li class="active-task task group">
       <%= render "/tasks/show", task: task %>
     </li>
   <% end %>
   
-  <h4 class="completed-items">Completed Items</h4>
+  <h5>COMPLETED ITEMS</h5>
   <% @tasks.each do |task| %>
     <% next if !task.completed %>
-    <li class="completed task group">
+    <li class="completed-task task group">
       <%= render "/tasks/show", task: task %>
     </li>
   <% end %>

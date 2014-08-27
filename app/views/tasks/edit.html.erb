@@ -1,5 +1,7 @@
 <h2>Update <%= @task.name %></h2>
 
+<a href="<%= list_url(@task.list) %>">Back to List</a>
+
 <form action="<%= task_url(@task) %>" method="post">
   
   <%= auth_token %>
@@ -25,3 +27,5 @@
   <button>Update Task</button>
   
 </form>
+
+<%= button_to "Delete", task_url(@task), method: "delete", class: "delete-task" %>
