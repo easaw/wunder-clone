@@ -29,7 +29,7 @@ gem 'rails_12factor'
 gem 'pg'
 gem 'paperclip'
 gem 'aws-sdk'
-gem 'figaro', git: 'git@github.com:laserlemon/figaro.git'
+gem 'figaro'
 
 group :development, :test do
   gem 'rspec-rails'
