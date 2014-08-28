@@ -1,0 +1,21 @@
+<h2>Lists</h2>
+
+<ul>
+  
+  <li class="list">
+    <a class="list-link" href="lists/<%= inbox.id %>"> <%= inbox.get("name") %> </a>
+    <span class="task-count"> <%= inbox.active_tasks.length %> </span>
+  </li>
+  
+
+  <% lists.forEach(function(list){ %>
+    <li class="list">
+      <a class="list-link" href="lists/<%= list.id %>" > <%= list.escape('name') %></a>
+      <a class="list-edit-link" href="lists/<%= list.id %>/edit">Edit</a>
+      <span class="task-count"><%= list.active_tasks.length %></span>
+    </li>
+  <% }) %>
+
+</ul>
+
+<a class="add-list-link" href="lists/new">+</a>

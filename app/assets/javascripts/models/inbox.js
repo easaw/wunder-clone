@@ -1,4 +1,4 @@
-Wunderclone.Models.List = Backbone.Model.extend({
+Wunderclone.Models.Inbox = Backbone.Model.extend({
   urlRoot: "/api/lists",
   
   tasks: function() {
