@@ -4,7 +4,17 @@ window.Wunderclone = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    //create store collection for lists
+    Wunderclone.Collections.lists = new Wunderclone.Collections.Lists();
+    Wunderclone.Collections.lists.fetch({
+      success: function () {
+        new Wunderclone.Routers.Lists({
+          $rootEl: $('#content'),
+          lists: Wunderclone.Collections.lists
+        });
+        Backbone.history.start();
+      }
+    });
   }
 };
 
