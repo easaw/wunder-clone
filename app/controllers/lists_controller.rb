@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :require_signed_in
+  before_action :require_destroy_ability, only: [:destroy]
   
   def new
     @users = other_users
@@ -53,7 +54,8 @@ class ListsController < ApplicationController
   end
   
   def index
-    @lists = current_user.owned_lists
+    @inbox = current_user.inbox
+    @lists = current_user.lists
     render :index
   end
   
@@ -62,4 +64,5 @@ class ListsController < ApplicationController
   def list_params
     params.require(:list).permit(:name, :shared_user_ids => [])
   end
+  
 end

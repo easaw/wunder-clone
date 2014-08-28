@@ -1,6 +1,7 @@
 <h1>Sign Up</h1>
 
-<form action="<%= users_url %>" method="post" enctype="multipart/form-data">
+<%= form_errors %>
+<form class="sign-up" action="<%= users_url %>" method="post" enctype="multipart/form-data">
   <%= auth_token %>
   
   <label for="user_avatar">Upload Avatar</label>

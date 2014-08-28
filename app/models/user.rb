@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
-  validates :name, :email, presence: true
+  validates :name, :email, presence: true, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
   
   before_validation :ensure_session_token
+  after_create :init
   
   attr_reader :password
   
@@ -37,6 +38,18 @@ class User < ActiveRecord::Base
   through: :list_shares,
   source: :list
   )
+  
+  def init
+    self.owned_lists.create(name: "Inbox")
+  end
+  
+  def inbox
+    self.owned_lists.find_by(name: "Inbox")
+  end
+  
+  def lists
+    self.owned_lists.where.not(name: "Inbox")
+  end
   
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

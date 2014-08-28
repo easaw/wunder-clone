@@ -2,13 +2,20 @@
 
 <ul>
   
-<% @lists.each do |list| %>
   <li class="list">
-    <a class="list-link" href="<%= list_url(list) %>"><%= list.name %></a>
-    <a class="list-edit-link" href="<%= edit_list_url(list) %>">Edit</a>
-    <span class="task-count"><%= list.active_tasks.length %></span>
+    <a class="list-link" href="<%= list_url(@inbox) %>"><%= @inbox.name %></a>
+    <a class="list-edit-link" href="<%= edit_list_url(@inbox) %>">Edit</a>
+    <span class="task-count"><%= @inbox.active_tasks.length %></span>
   </li>
-<% end %>
+  
+
+  <% @lists.each do |list| %>
+    <li class="list">
+      <a class="list-link" href="<%= list_url(list) %>"><%= list.name %></a>
+      <a class="list-edit-link" href="<%= edit_list_url(list) %>">Edit</a>
+      <span class="task-count"><%= list.active_tasks.length %></span>
+    </li>
+  <% end %>
 
 </ul>
 

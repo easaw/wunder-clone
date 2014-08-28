@@ -1,0 +1,12 @@
+<form action="<%= session_url %>" method="post">
+  
+  <%= auth_token %>
+  
+  <input
+    type="hidden"
+    name="_method"
+    value="destroy">
+    
+  <button>Sign Out</button>
+    
+</form>
