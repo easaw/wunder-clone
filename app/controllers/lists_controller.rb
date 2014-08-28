@@ -45,7 +45,6 @@ class ListsController < ApplicationController
   end
   
   def show
-    #TODO pass in tasks of list
     @list = List.find(params[:id])
     @tasks = @list.tasks
     # @active_tasks = @tasks.where(completed: !true)
