@@ -1,30 +1,27 @@
-class TasksController < ApplicationController
+class Api::TasksController < ApplicationController
   before_action :require_signed_in
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to list_url(@task.list)
+      render "show"
     else
-      flash.now[:errors] = @task.errors.full_messages
+      render json: @task.errors, status: :unprocessable_entity
     end
   end
   
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
-    redirect_to list_url(@task.list)
-  end
-  
-  def edit
-    @task = Task.find(params[:id])
-    render :edit
+    @task.destroy!
   end
   
   def update
     @task = Task.find(params[:id])
-    @task.update(task_params)
-    redirect_to list_url(@task.list)
+    if @task.update(task_params)
+      render "show"
+    else
+      render json: @task.errors, status: :unprocessable_entity
+    end
   end
   
   private
