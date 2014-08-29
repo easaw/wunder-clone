@@ -2,14 +2,13 @@
   
 </div>
 
-<ul id="tasks">
+<ul id="active-tasks">
   
 </ul>
 
-  <% if (list.completedTasks.length > 0){ %>
-     <h5>COMPLETED ITEMS</h5>
+ <% if (list.completedTasks().length > 0){ %>
+    <a href="#" class="show-completed-button">COMPLETED ITEMS</a>
+ <% } %>
    
-     <ul class="completed-task task group">
-       
-     </ul>
-  <% } %>
+<ul id="completed-tasks" class="completed-task-list">
+</ul>

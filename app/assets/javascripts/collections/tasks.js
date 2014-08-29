@@ -7,6 +7,10 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
   
   initialize: function (models, options){
     this.list = options.list;
+  },
+  
+  comparator: function(task){
+    return task.get('created_at');
   }
   
 })

@@ -1,0 +1,20 @@
+<h2>Update <%= task.escape('name') %></h2>
+
+  
+<label for="name">Name</label>
+<input
+  id="name"
+  type="text"
+  value="<%= task.escape('name') %>"
+  name="task[name]">
+  
+<label for="due_date">Due Date</label>
+<input
+  id="due_date"
+  type="date"
+  name="task[due_date]"
+  valu="<%= task.escape('due_date') %>">
+
+<button>Update Task</button>
+
+<button>Delete Task</button>

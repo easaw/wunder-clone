@@ -25,7 +25,6 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
     this.model.save(attrs, {
       success: function (list) {
         that.collection.add(list);
-        Backbone.history.navigate("", { trigger: true });
       }
     });
   }

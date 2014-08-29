@@ -36,6 +36,7 @@ class Api::ListsController < ApplicationController
     # @inbox = current_user.inbox
     # @lists = current_user.lists
     @lists = current_user.owned_lists
+    #render tasks with index
     render "index"
   end
   

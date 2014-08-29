@@ -1,6 +1,7 @@
 Wunderclone.Views.ListsIndex = Backbone.View.extend({
 
   template: JST['lists/index'],
+ //render with default list
   
   events: {
     'click .list-link' : 'showLink'
@@ -14,7 +15,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     this.lists.forEach(function(list){
       list.fetch();
     })
-    this.listenTo(this.collection, "sync remove add change", this.render);
+    this.listenTo(this.collection, "remove add change", this.render);
   },
   
   render: function(){
@@ -26,10 +27,9 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   showLink: function(){
     event.preventDefault();
-    // console.log($(event.target).attr("data-id"));
     var $list = $(event.target);
-    // console.log($list);
-    $list.addClass("selected-list");
+    $(".list-link").removeClass("selected-list");
+    $list.toggleClass("selected-list");
     var listId = $(event.target).attr("data-id");
     Backbone.history.navigate("#/lists/" + listId, {trigger: true});
   }

@@ -1,10 +1,11 @@
-<a href="#" class="task-link">
+<div class="task-link">
+<button class="complete-button"></button>
+
   
-  <span><button class="complete-button"></button></span>
-  
+<a href="#" class="task-edit-link" data-id="<%= task.id %>">
   <span class="task-name"><%= task.escape('name') %></span>
-
-  <span class="task-due_date"><%= task.escape('due_date') %></span>
-
 </a>
 
+<span class="task-due_date"><%= task.escape('due_date') %></span>
+
+</div>

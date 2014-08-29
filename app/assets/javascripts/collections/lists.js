@@ -19,6 +19,8 @@ Wunderclone.Collections.Lists = Backbone.Collection.extend({
     return list;
   }
   
+  // add parse for tasks of every list, make sure api is sending down same things
+  
   // parse: function(payload){
   //   var lists = this;
   //   payload.each(function(list){

@@ -2,6 +2,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   template: JST['lists/show'],
   
   events: {
+    'click .show-completed-button' : 'showCompleted'
   },
   
   initialize: function(){
@@ -9,6 +10,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.activeTasks = this.model.activeTasks();
     this.completedTasks = this.model.completedTasks();
     
+    this.listenTo(this.tasks, "change", this.changeTask);
     this.listenTo(this.tasks, "add change remove sync", this.render);
     this.listenTo(this.model, "add change remove sync", this.render);
   },
@@ -17,15 +19,21 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     var content = this.template({list: this.model});
     this.$el.html(content);
     
-    this.$subSelector = $('#tasks');
+    this.$activeSelector = $('#active-tasks');
+    this.$completedSelector = $('#completed-tasks');
+    
     if (this._subViews){
       this.removeSubViews();
     }
     this.createSubViews();
     this.attachSubViews();
     
-    
     return this;
+  },
+  
+  showCompleted: function(){
+    event.preventDefault();
+    $('#completed-tasks').toggleClass('completed-task-list');
   },
   
   removeSubViews: function(){
@@ -48,7 +56,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this._subViews.push(newTaskView);
     
     this.tasks.forEach(function(task){
-      var subView = new Wunderclone.Views.TasksShow({model: task});
+      var subView = new Wunderclone.Views.TasksShow({model: task, list: that.model});
       that._subViews.push(subView);
     });
   },
@@ -56,7 +64,11 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   attachSubViews: function(){
     var that = this;
     this._subViews.forEach(function(subView){
-      that.$subSelector.append(subView.render().$el);
+      if (subView.model.get('completed') != true){
+        that.$activeSelector.append(subView.render().$el);
+      } else if (subView.model.get('completed') == true){
+        that.$completedSelector.append(subView.render().$el); 
+      }
     });
   }
   

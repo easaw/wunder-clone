@@ -13,8 +13,13 @@ window.Wunderclone = {
           lists: Wunderclone.Collections.lists
         });
         Backbone.history.start();
-        Backbone.history.navigate("", {trigger: true});
-      }
+        
+        var indexView = new Wunderclone.Views.ListsIndex({
+          collection: Wunderclone.Collections.lists
+        });
+  
+        $('#lists-index').html(indexView.render().$el);
+      },
     });
   }
 };

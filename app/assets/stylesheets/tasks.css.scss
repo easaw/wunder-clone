@@ -107,12 +107,8 @@ li.task{
   float: right;
 }
 
-li.completed-task a.task-link{
-  color: green;
-}
-
-li.active-task a.task-link{
-  color: blue;
+.completed-task-list {
+  visibility: hidden;
 }
 
 form.complete-form{
