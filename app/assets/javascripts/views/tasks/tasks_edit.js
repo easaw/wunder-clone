@@ -23,11 +23,14 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   deleteTask: function(){
-    console.log(this.model);
+    var that = this;
     event.preventDefault();
     this.model.destroy({
       success: function(){
         Backbone.history.navigate("#/lists/" + that.list.id, { trigger: true });
+      },
+      error: function(data){
+        console.log("ERROR", data);
       }
     });
   },
