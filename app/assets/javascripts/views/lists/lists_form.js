@@ -20,12 +20,12 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.serializeJSON();
-    console.log(attrs);
-    this.model.collection = this.collection;
-    this.model.save(attrs, {
-      success: function (list) {
-        that.collection.add(list);
-      }
-    });
+    this.collection.create(attrs);
+     // = this.collection;
+ //    this.model.save(attrs, {
+ //      success: function (list) {
+ //        that.collection.add(list);
+ //      }
+ //    });
   }
 });

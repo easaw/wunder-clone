@@ -15,6 +15,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     this.lists.forEach(function(list){
       list.fetch();
     })
+    
     this.listenTo(this.collection, "remove add change", this.render);
   },
   
