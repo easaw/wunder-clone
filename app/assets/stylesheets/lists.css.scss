@@ -3,19 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 li.list{
-  height: 40px;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 30px;
-  padding: 10px;
 }
 
 .delete-list{
   display: block;
 }
 
-form.list-form > input{
+.list-form > input{
   display: block;
   border: 2px solid black;
   padding: 5px;
@@ -26,13 +20,24 @@ form.list-form > input{
 .list-link{
   float: left;
   display: block;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 95%;
+  height: 40px;
+  width: 268px;
+  padding: 10px;
+}
+
+.list-link:active{
+  background: blue;
+  color: white;
 }
 
 .list-edit-link {
+  display:inline-block;
   float: right;
+  width: 35px;
+  height: 100%;
+  border-left: 1px solid black;
+  padding: 10px 0 0 0;
+  text-align: center;
 }
 
 .edit-list-toolbar {
@@ -42,15 +47,17 @@ form.list-form > input{
 }
 
 .add-list-link {
+  border-top: 1px solid gray;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
   font-size: 40px;
   display: block;
-  width: 1px;
-  margin: auto;
+  width: 100%;
 }
 
 .task-count {
   float: right;
-  padding-right: 10px;
 }
 
 .tasks-list h5{

@@ -45,3 +45,14 @@ button{
   content: " ";
   height: 0;
 }
+
+.sidebar {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  float: left;
+  display: block;
+  width: 270px;
+  height: 100vh;
+  border: 1px solid gray;
+}
