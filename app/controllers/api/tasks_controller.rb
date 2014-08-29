@@ -13,7 +13,9 @@ class Api::TasksController < ApplicationController
   
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy!
+    if @task.destroy!
+      head :ok
+    end
   end
   
   def update

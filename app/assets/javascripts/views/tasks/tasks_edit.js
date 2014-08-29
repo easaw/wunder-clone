@@ -6,11 +6,13 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   template: JST["tasks/edit"],
   
   events: {
-    'submit':'submit'
+    'click .update-task':'submit',
+    'click .delete-task': 'deleteTask'
   },
   
   initialize: function(options){
     this.list = options.list;
+    this.tasks = this.list.tasks();
   },
   
   render: function(){
@@ -20,7 +22,18 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     return this;
   },
   
+  deleteTask: function(){
+    console.log(this.model);
+    event.preventDefault();
+    this.model.destroy({
+      success: function(){
+        Backbone.history.navigate("#/lists/" + that.list.id, { trigger: true });
+      }
+    });
+  },
+  
   submit: function(){
+    console.log(this.model);
     var that = this;
     event.preventDefault();
     var attrs = this.$el.serializeJSON();

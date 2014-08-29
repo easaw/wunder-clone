@@ -17,7 +17,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   
   
   render: function(){
-    console.log("re rendered parent");
     var content = this.template({list: this.model});
     this.$el.html(content);
     
