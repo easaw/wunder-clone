@@ -7,11 +7,11 @@ Wunderclone.Models.List = Backbone.Model.extend({
     return this._tasks;
   },
   
-  active_tasks: function(){
+  activeTasks: function(){
     return this.tasks().where({completed: false});
   },
   
-  completed_tasks: function(){
+  completedTasks: function(){
     return this.tasks().where({completed: true});
   },
   

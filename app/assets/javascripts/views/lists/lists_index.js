@@ -9,8 +9,11 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   initialize: function(){
     var view = this;
     this.inbox = this.collection.findWhere({name: "Inbox"});
-    // console.log(this.inbox.get('name'));
     this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
+    this.inbox.fetch();
+    this.lists.forEach(function(list){
+      list.fetch();
+    })
     this.listenTo(this.collection, "sync remove add change", this.render);
   },
   

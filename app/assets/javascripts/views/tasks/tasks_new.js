@@ -1,13 +1,15 @@
 Wunderclone.Views.TasksNew = Backbone.View.extend({
   template: JST["tasks/new"],
   
+  tagName: "li",
+  
   events: {
     'submit .task-form':'submit'
   },
   
   bindKeypress: function() { 
     var that = this;
-    this.$subEl.on('keydown', '.task-form', function (e) {
+    this.$el.on('keydown', '.task-form', function (e) {
       if(e.which === 13){ // enter key
         event.preventDefault();
         that.submit();
@@ -16,15 +18,13 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.$subEl = options.$subEl;
     this.newTask = new Wunderclone.Models.Task({list: this.model});
-    this.render();
     this.bindKeypress();
   },
   
   render: function(){
     var content = this.template({list: this.model});
-    this.$subEl.append(content);
+    this.$el.html(content);
     
     return this;
   },
@@ -32,8 +32,7 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   submit: function(){
     var that = this;
     event.preventDefault();
-    var attrs = this.$subEl.find('.task-form').serializeJSON();
-    // console.log($('.task-form').serializeJSON());
+    var attrs = this.$el.find('.task-form').serializeJSON();
     this.collection.create(attrs);
   }
 })

@@ -13,6 +13,7 @@ window.Wunderclone = {
           lists: Wunderclone.Collections.lists
         });
         Backbone.history.start();
+        Backbone.history.navigate("", {trigger: true});
       }
     });
   }
