@@ -43,7 +43,6 @@ button{
   font-size: 0;
   clear: both;
   content: " ";
-  height: 0;
 }
 
 .sidebar {
@@ -55,4 +54,11 @@ button{
   width: 270px;
   height: 100vh;
   border: 1px solid gray;
+}
+
+#content {
+  position: relative;
+  width: 950px;
+  height: 100vh;
+  float: left;
 }

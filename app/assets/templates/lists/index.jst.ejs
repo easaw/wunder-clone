@@ -3,7 +3,7 @@
 <ul>
   
   <li class="list">
-    <a class="list-link" href="#/lists/<%= inbox.id %>">
+    <a class="list-link" data-id="<%= inbox.id %>" href="#">
       <%= inbox.get("name") %>
       <span class="task-count"><%= inbox.active_tasks.length %></span>
     </a>
@@ -12,7 +12,7 @@
 
   <% lists.forEach(function(list){ %>
     <li class="list">
-      <a class="list-link" href="#/lists/<%= list.id %>" >
+      <a class="list-link" data-id="<%= list.id %>" href="#" >
         <%= list.escape('name') %>
         <span class="task-count"><%= list.active_tasks.length %></span>
       </a>

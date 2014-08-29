@@ -3,6 +3,10 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
   
   template: JST['lists/form'],
   
+  events: {
+    'submit' : 'submit'
+  },
+  
   render: function(){
     var content = this.template({
       list: this.model
@@ -16,6 +20,7 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.serializeJSON();
+    console.log(attrs);
     this.model.collection = this.collection;
     this.model.save(attrs, {
       success: function (list) {

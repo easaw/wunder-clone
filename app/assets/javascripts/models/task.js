@@ -1,3 +1,5 @@
-Wunderclone.Models.Task = Backbone.Model.extend({
-  urlRoot: "/api/tasks"
+Wunderclone.Models.Task = Backbone.Model.extend({  
+  initialize: function(options){
+    this.list = options.list;
+  }
 })

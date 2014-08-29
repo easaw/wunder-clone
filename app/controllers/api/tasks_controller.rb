@@ -2,11 +2,12 @@ class Api::TasksController < ApplicationController
   before_action :require_signed_in
 
   def create
-    @task = Task.new(task_params)
+    @task = List.find(params[:list_id]).tasks.new(task_params)
     if @task.save
       render "show"
     else
-      render json: @task.errors, status: :unprocessable_entity
+      p @task.errors.full_messages
+      render json: @task.errors.full_messages, status: :unprocessable_entity
     end
   end
   
@@ -22,6 +23,11 @@ class Api::TasksController < ApplicationController
     else
       render json: @task.errors, status: :unprocessable_entity
     end
+  end
+  
+  def show
+    @task = Task.find(params[:id])
+    render "show"
   end
   
   private

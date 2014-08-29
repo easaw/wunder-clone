@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require jquery.serializejson
 //= require wunderclone
 //= require_tree ../templates
 //= require_tree ./models

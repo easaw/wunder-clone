@@ -23,6 +23,18 @@ li.task{
   padding: 10px;
 }
 
+.task-link{
+  display: block;
+  font-size:18px;
+  font-weight: 400;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 30px;
+  padding: 10px;
+  height: 40px;
+  width: 100%;
+}
+
 .task-favorite{
   
 }
@@ -37,15 +49,13 @@ li.task{
 .task-name{
   float: left;
   position: relative;
-  top: 3px;
-  display: block;
+//  top: 3px;
   margin: auto;
   padding-right: 10px;
   padding-left: 30px;
   font-size: 18px;
   font-weight: 400;
 }
-
 
 //.task-form > input[type="text"] {
 //  font-size: 18px;
@@ -64,7 +74,7 @@ li.task{
   font-weight: 400;
   display: block;
   padding: 10px;
-  width: 95%;
+  width: 100%;
   border: 1px solid black;
   border-radius: 5px;
   background: gray;
@@ -73,7 +83,7 @@ li.task{
 }
 
 .task-form > input[type="text"] {
-  width: 80%;
+  width: 70%;
 }
 
 .task-form > input[type="submit"]{
@@ -91,7 +101,6 @@ li.task{
 
 .task-form > input[type="date"]{
   position: relative;
-  top: 2px;
   display: inline;
   padding: 0;
   margin: 0;
@@ -114,6 +123,7 @@ form.complete-form{
 .complete-button {
   position: relative;
   display: inline-block;
+  float: left;
   padding: 10px 10px;
   font-weight: bold;
   background: transparent;

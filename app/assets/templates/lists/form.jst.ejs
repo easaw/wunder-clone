@@ -1,15 +1,11 @@
-<form class="list-form">
+<label for="name">Name</label>
+<input
+  id="name"
+  type="text"
+  name="list[name]"
+  value="<%= list.escape('name') %>">
   
-  <label for="name">Name</label>
-  <input
-    id="name"
-    type="text"
-    name="list[name]"
-    value="<%= list.escape('name') %>">
-    
-  <label for="users">Select List Member</label>
-  <!--TODO find backbone way of doing this -->
-    
-  <input type="submit"></input>
+<!-- <label for="users">Select List Member</label> -->
+<!--TODO find backbone way of doing this -->
   
-</form>
+<input type="submit"></input>

@@ -9,11 +9,11 @@ li.list{
   display: block;
 }
 
-.list-form > input{
+.list-form > input[type="text"]{
   display: block;
   border: 2px solid black;
   padding: 5px;
-  width: 286px;
+  width: 600px;
   border-radius: 5px;
 }
 
@@ -26,6 +26,11 @@ li.list{
 }
 
 .list-link:active{
+  background: blue;
+  color: white;
+}
+
+.selected-list {
   background: blue;
   color: white;
 }
