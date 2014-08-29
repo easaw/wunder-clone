@@ -10,12 +10,14 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.activeTasks = this.model.activeTasks();
     this.completedTasks = this.model.completedTasks();
     
-    // this.listenTo(this.tasks, "change", this.changeTask);
-    this.listenTo(this.tasks, "add change remove sync", this.render);
+    // this.listenTo(this.tasks, "change:completed", this.completeTask);
+    this.listenTo(this.tasks, "add remove change sync", this.render);
     this.listenTo(this.model, "add change remove sync", this.render);
   },
   
+  
   render: function(){
+    console.log("re rendered parent");
     var content = this.template({list: this.model});
     this.$el.html(content);
     
