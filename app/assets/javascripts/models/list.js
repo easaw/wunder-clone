@@ -17,7 +17,7 @@ Wunderclone.Models.List = Backbone.Model.extend({
   
   parse: function(payload){
     if (payload.tasks) {
-      this.tasks().set(payload.tasks, {parse: true});
+      this.tasks().set(payload.tasks);
       delete payload.tasks;
     }
     

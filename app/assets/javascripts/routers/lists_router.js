@@ -1,6 +1,4 @@
 Wunderclone.Routers.Lists = Backbone.Router.extend({
-  
-  
   initialize: function(options){
     this.$rootEl = options.$rootEl;
     this.lists = options.lists;
@@ -42,20 +40,26 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   },
   
   listsShow: function(id){
+    var that = this;
     var list = this.lists.getOrFetch(id);
-    var showView = new Wunderclone.Views.ListsShow({
-      model: list
-    });
-    
-    this._swapView(showView);
+    list.fetch({
+      success: function(){
+        var showView = new Wunderclone.Views.ListsShow({
+          model: list
+        });
+        that._swapView(showView);
+      }
+    }); 
   },
   
-  _swapView: function(newView){
-    if (this.currentView) {
-      this.currentView.remove();
+  _swapView: function(view){
+    if (this._currentView && this._currentView.removeSubViews){
+      this._currentView.removeSubViews();
     }
+    this._currentView && this._currentView.remove();
+    this._currentView = view;
     
-    this.$rootEl.html(newView.render().$el);
+    this.$rootEl.html(view.render().$el);
   }
   
   

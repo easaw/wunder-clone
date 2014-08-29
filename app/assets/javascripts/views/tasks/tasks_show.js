@@ -3,10 +3,14 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
   template: JST['tasks/show'],
   
   render: function(){
-    console.log(this.model);
     var content = this.template({task: this.model});
-    this.$el.html(content);
-    
+    this.$subEl.append(content);
     return this;
+  },
+  
+  initialize: function(options){
+    this.$subEl = options.$subEl;
+    this.render();
+    this.listenTo(this.model, "add change remove sync", this.render);
   }
 })
