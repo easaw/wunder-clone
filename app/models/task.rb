@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   validates :list_id, :name, presence: true
+  validates :name, length: {minimum: 1}
   
   belongs_to(
   :list,

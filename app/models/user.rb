@@ -25,6 +25,12 @@ class User < ActiveRecord::Base
   )
   
   has_many(
+  :owned_tasks,
+  through: :owned_lists,
+  source: :tasks
+  )
+  
+  has_many(
   :list_shares,
   dependent: :destroy,
   inverse_of: :user,
@@ -39,6 +45,12 @@ class User < ActiveRecord::Base
   source: :list
   )
   
+  has_many(
+  :shared_tasks,
+  through: :shared_lists,
+  source: :tasks
+  )
+  
   def init
     self.owned_lists.create(name: "Inbox")
   end
@@ -49,6 +61,10 @@ class User < ActiveRecord::Base
   
   def lists
     self.owned_lists.where.not(name: "Inbox")
+  end
+  
+  def tasks
+    self.owned_tasks
   end
   
   def self.find_by_credentials(email, password)

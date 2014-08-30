@@ -2,31 +2,23 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   initialize: function(options){
     this.$rootEl = options.$rootEl;
     this.lists = options.lists;
+    this.tasks = options.tasks;
   },
   
   routes: {
-    'lists/:list_id/tasks/:id/edit' : 'tasksEdit',
+    'tasks/:id/edit' : 'tasksEdit',
     'lists/new' : 'listsNew',
     'lists/:id' : 'listsShow',
     'lists/:id/edit' : 'listsEdit',
   },
   
-  tasksEdit: function(list_id, id){
-    var that = this;
-    var list = this.lists.getOrFetch(list_id);
-    list.fetch({
-      success: function(){
-        var tasks = list.tasks();
-        var task = tasks.get(id);
-        var editView = new Wunderclone.Views.TasksEdit({
-          list: list,
-          model: task,
-          collection: tasks
-        });
-        that._swapView(editView);
-      }
+  tasksEdit: function(id){
+    var task = this.tasks.getOrFetch(id);
+    var editView = new Wunderclone.Views.TasksEdit({
+      model: task
     });
     
+    this._swapView(editView);
   },
   
   listsEdit: function(id){

@@ -11,8 +11,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.list = options.list;
-    this.tasks = this.list.tasks();
+    this.listId = this.model.get('list_id');
   },
   
   render: function(){
@@ -27,7 +26,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     event.preventDefault();
     this.model.destroy({
       success: function(){
-        Backbone.history.navigate("#/lists/" + that.list.id, { trigger: true });
+        Backbone.history.navigate("#/lists/" + that.listId, { trigger: true });
       },
       error: function(data){
         console.log("ERROR", data);
@@ -36,13 +35,12 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   submit: function(){
-    console.log(this.model);
     var that = this;
     event.preventDefault();
     var attrs = this.$el.serializeJSON();
     this.model.save(attrs, {
       success: function (task) {
-        Backbone.history.navigate("#/lists/" + that.list.id, { trigger: true });
+        Backbone.history.navigate("#/lists/" + that.listId, { trigger: true });
       }
     });
   }

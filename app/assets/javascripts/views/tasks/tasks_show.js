@@ -15,7 +15,9 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
   
   initialize: function(options){
     var that = this;
-    this.list = options.list;
+    this.list = Wunderclone.Collections.lists.getOrFetch(this.model.get('list_id'));
+    this.activeTasks = this.list.activeTasks();
+    this.completedTasks = this.list.completedTasks();
     this.listenTo(this.model, "add change remove sync", this.render);
   },
   
@@ -25,12 +27,17 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     if (this.model.get('completed') == false){
       this.model.save({task: {'completed': true}}, {
         success: function(model){
-          that.model.collection.trigger('change');
+          that.activeTasks.remove(that.model);
+          that.completedTasks.add(that.model);
         }
       });
     } else if (this.model.get('completed') == true){
-      this.model.save({task: {'completed': false}});
-      this.model.collection.trigger('change');
+      this.model.save({task: {'completed': false}}, {
+        success: function(model){
+          that.completedTasks.remove(that.model);
+          that.activeTasks.add(that.model);
+        }
+      });
     }
   },
   

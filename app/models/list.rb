@@ -1,5 +1,6 @@
 class List < ActiveRecord::Base
   validates :owner_id, :name, presence: true
+  validates :name, length: {minimum: 1}
   
   belongs_to(
   :owner,

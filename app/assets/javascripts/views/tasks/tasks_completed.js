@@ -5,7 +5,7 @@ Wunderclone.Views.TasksCompleted = Backbone.View.extend({
   className: 'completed-tasks',
   
   initialize: function(options){
-    this.listenTo(this.collection, 'sync add change', this.render);
+    this.listenTo(this.collection, 'sync add change remove', this.render);
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -36,13 +36,11 @@ Wunderclone.Views.TasksCompleted = Backbone.View.extend({
   },
   
   createSubViews: function(){
-    this.completedTasks = this.collection.where({completed: true});
     
     var that = this;
     this._subViews = this._subViews || [];
     
-    //task should have a list, need to update parse or check it
-    this.completedTasks.forEach(function(task){
+    this.collection.each(function(task){
       var taskShowView = new Wunderclone.Views.TasksShow({model: task});
       that._subViews.push(taskShowView);
     });

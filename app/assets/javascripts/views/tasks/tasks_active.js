@@ -14,9 +14,9 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
   },
   
   initialize: function(options){
+    this.completedTasks = options.completedTasks;
     
-    // create a listener and custom callback for list completed event
-    this.listenTo(this.collection, 'add sync change', this.render);
+    this.listenTo(this.collection, 'add sync change remove', this.render);
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -25,14 +25,18 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
   },
   
   render: function(){
-    //extra where for creating completed header/link
-    this.completedTasks = this.collection.where({completed: true});
     
-    var content = this.template({completedTasks: this.completedTasks});
+    var content = this.template();
     this.$el.html(content);
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
+    }
+    
+    if (this.completedTasks.length < 0){
+      $('.show-completed-button').addClass('hidden');
+    } else {
+      $('.show-completed-button').removeClass('hidden');
     }
     
     this.createSubViews();
@@ -51,13 +55,10 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
   },
   
   createSubViews: function(){
-    this.activeTasks = this.collection.where({completed: false});
-    
     var that = this;
     this._subViews = this._subViews || [];
     
-    //task should have a list, need to update parse or check it
-    this.activeTasks.forEach(function(task){
+    this.collection.each(function(task){
       var taskShowView = new Wunderclone.Views.TasksShow({model: task});
       that._subViews.push(taskShowView);
     });

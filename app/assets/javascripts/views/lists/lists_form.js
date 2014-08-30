@@ -22,8 +22,9 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
     event.preventDefault();
     var attrs = this.$el.serializeJSON();
     this.collection.create(attrs, {
+      wait: true,
       success: function(list){
-        Wunderclone.Views.ListsIndex.showSpecifiedList(list);
+        Wunderclone.Views.listsIndex.showSpecifiedList(list);
       }
     });
   }

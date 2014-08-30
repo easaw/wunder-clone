@@ -6,15 +6,25 @@ window.Wunderclone = {
   initialize: function() {
     //create store collection for lists
     Wunderclone.Collections.lists = new Wunderclone.Collections.Lists();
+    Wunderclone.Collections.tasks = new Wunderclone.Collections.Tasks();
+    
     Wunderclone.Collections.lists.fetch({
-      success: function () {
-        new Wunderclone.Routers.Lists({
-          $rootEl: $('#content'),
-          lists: Wunderclone.Collections.lists
-        });
-        Backbone.history.start();
-        Wunderclone.Views.ListsIndex = createListsIndex();
-      },
+      success: function(){
+        Wunderclone.Collections.tasks.fetch({
+          
+          success: function(){
+            new Wunderclone.Routers.Lists({
+              $rootEl: $('#content'),
+              lists: Wunderclone.Collections.lists,
+              tasks: Wunderclone.Collections.tasks
+            });
+            
+            Backbone.history.start();
+            Wunderclone.Views.listsIndex = createListsIndex();
+            
+          }
+        })
+      }
     });
   }
 };

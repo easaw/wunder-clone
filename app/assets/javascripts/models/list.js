@@ -1,26 +1,22 @@
 Wunderclone.Models.List = Backbone.Model.extend({
   urlRoot: "/api/lists",
   
-  tasks: function() {
-    this._tasks = this._tasks ||
-      new Wunderclone.Collections.Tasks([], { list: this });
-    return this._tasks;
+  
+  validate: function(attrs, options){
+    if (attrs.list.name.length < 1){
+      return "Must enter name of list";
+    }
   },
   
   activeTasks: function(){
-    return this.tasks().where({completed: false});
+    this._activeTasks = this._activeTasks ||
+      Wunderclone.Collections.tasks.listFilter(this, {state: 'active'})
+    return this._activeTasks;
   },
   
   completedTasks: function(){
-    return this.tasks().where({completed: true});
-  },
-  
-  parse: function(payload){
-    if (payload.tasks) {
-      this.tasks().set(payload.tasks);
-      delete payload.tasks;
-    }
-    
-    return payload;
+    this._completedTasks = this._completedTasks ||
+      Wunderclone.Collections.tasks.listFilter(this, {state: 'completed'})
+    return this._completedTasks;
   }
 });

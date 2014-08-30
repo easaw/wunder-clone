@@ -18,13 +18,14 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.newTask = new Wunderclone.Models.Task({list: this.model});
+    this.list = options.list;
+    this.model = new Wunderclone.Models.Task({list: this.list});
     this.bindKeypress();
     this.listenTo(this.collection, 'add', this.render);
   },
   
   render: function(){
-    var content = this.template({list: this.model});
+    var content = this.template({list: this.list});
     this.$el.html(content);
     this.delegateEvents();
     
@@ -35,6 +36,8 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.find('.task-form').serializeJSON();
-    this.collection.create(attrs);
+    this.collection.create(attrs, {
+      wait: true,
+    });
   }
 })

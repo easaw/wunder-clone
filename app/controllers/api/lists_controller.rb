@@ -28,15 +28,12 @@ class Api::ListsController < ApplicationController
   
   def show
     @list = List.find(params[:id])
-    @tasks = @list.tasks
+    # @tasks = @list.tasks
     render "show"
   end
   
   def index
-    # @inbox = current_user.inbox
-    # @lists = current_user.lists
     @lists = current_user.owned_lists
-    #render tasks with index
     render "index"
   end
   
