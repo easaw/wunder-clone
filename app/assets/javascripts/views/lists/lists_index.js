@@ -8,7 +8,6 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   initialize: function(options){
     var view = this;
-    // this.inbox = this.collection.findWhere({name: "Inbox"});
  //    this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
     
     //TODO shouldn't have to do this, need to parse tasks from lists collection
@@ -17,14 +16,14 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
 //       list.fetch();
 //     })
 //
-    this.listenTo(this.collection, "remove add change sync", this.render);
+    this.listenTo(this.collection, "remove add change", this.render);
   },
   
-  showInbox: function(){
+  showSpecifiedList: function(list){
     $(".list-link").removeClass("selected-list");
-    var $inbox = $('a[data-id='+ this.inbox.id +']')
-    $inbox.toggleClass("selected-list");
-    Backbone.history.navigate("#/lists/" + this.inbox.id, {trigger: true});
+    var $list = $('a[data-id='+ list.id +']')
+    $list.toggleClass("selected-list");
+    Backbone.history.navigate("#/lists/" + list.id, {trigger: true});
   },
   
   render: function(){

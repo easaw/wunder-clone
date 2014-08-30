@@ -13,7 +13,7 @@ window.Wunderclone = {
           lists: Wunderclone.Collections.lists
         });
         Backbone.history.start();
-        createListsIndex();
+        Wunderclone.Views.ListsIndex = createListsIndex();
       },
     });
   }
@@ -25,7 +25,10 @@ function createListsIndex (){
    });
    
    $('#lists-index').html(indexView.render().$el);
-   indexView.showInbox();
+   this.inbox = Wunderclone.Collections.lists.findWhere({name: "Inbox"});
+   indexView.showSpecifiedList(this.inbox);
+   
+   return indexView;
 }
 
 
