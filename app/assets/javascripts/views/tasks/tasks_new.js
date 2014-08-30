@@ -20,11 +20,13 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   initialize: function(options){
     this.newTask = new Wunderclone.Models.Task({list: this.model});
     this.bindKeypress();
+    this.listenTo(this.collection, 'add', this.render);
   },
   
   render: function(){
     var content = this.template({list: this.model});
     this.$el.html(content);
+    this.delegateEvents();
     
     return this;
   },

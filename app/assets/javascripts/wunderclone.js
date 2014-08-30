@@ -12,9 +12,8 @@ window.Wunderclone = {
           $rootEl: $('#content'),
           lists: Wunderclone.Collections.lists
         });
-        
-        createListsIndex();
         Backbone.history.start();
+        createListsIndex();
       },
     });
   }

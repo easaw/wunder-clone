@@ -6,35 +6,39 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   },
   
   initialize: function(){
-    this.tasks = this.model.tasks();
-    this.activeTasks = this.model.activeTasks();
-    this.completedTasks = this.model.completedTasks();
+    if (this._subViews && this._subViews.length > 0){
+      this.removeSubViews();
+    }
     
-    // this.listenTo(this.tasks, "change:completed", this.completeTask);
-    this.listenTo(this.tasks, "add remove change sync", this.render);
-    this.listenTo(this.model, "add change remove sync", this.render);
+    this.tasks = this.model.tasks();
+    // this.activeTasks = this.model.activeTasks();
+    // this.completedTasks = this.model.completedTasks();
+    // this.listenTo(this.tasks, " remove sync", this.render);
+    this.listenTo(this.model, "add change remove sync", this.createSubViews);
+    
+    
+    this.createSubViews();
   },
   
   
   render: function(){
+    console.log("lists show render")
     var content = this.template({list: this.model});
     this.$el.html(content);
     
-    this.$activeSelector = $('#active-tasks');
-    this.$completedSelector = $('#completed-tasks');
+    this.$newSelector = this.$el.find('.new-task-div');
+    this.$activeSelector = this.$el.find('.active-div');
+    this.$completedSelector = this.$el.find('.completed-div');
     
-    if (this._subViews){
-      this.removeSubViews();
-    }
-    this.createSubViews();
     this.attachSubViews();
+    this.renderSubViews();
     
     return this;
   },
   
   showCompleted: function(){
     event.preventDefault();
-    $('#completed-tasks').toggleClass('completed-task-list');
+    $('#completed-tasks').toggleClass('hidden');
   },
   
   removeSubViews: function(){
@@ -47,31 +51,36 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   
   createSubViews: function(){
     var that = this;
-    
     this._subViews = this._subViews || [];
     
-    var newTaskView = new Wunderclone.Views.TasksNew({
+    this.newTaskView = new Wunderclone.Views.TasksNew({
       collection: that.tasks,
       model: this.model
     });
-    this._subViews.push(newTaskView);
     
-    this.tasks.forEach(function(task){
-      var subView = new Wunderclone.Views.TasksShow({model: task, list: that.model});
-      that._subViews.push(subView);
-    });
+    this.activeTasksView = new Wunderclone.Views.TasksActive({
+      collection: this.tasks
+      // tasks: this.activeTasks
+    })
+    
+    this.completedTasksView = new Wunderclone.Views.TasksCompleted({
+      collection: this.tasks
+      // tasks: this.completedTasks
+    })
+    
+    this._subViews.push(this.newTaskView, this.activeTasksView, this.completedTasksView);
   },
   
   attachSubViews: function(){
-    var that = this;
+    this.$newSelector.html(this.newTaskView.$el);
+    this.$activeSelector.html(this.activeTasksView.$el);
+    this.$completedSelector.html(this.completedTasksView.$el);
+  },
+  
+  renderSubViews: function(){
     this._subViews.forEach(function(subView){
-      if (subView.model.get('completed') != true){
-        that.$activeSelector.append(subView.render().$el);
-      } else if (subView.model.get('completed') == true){
-        that.$completedSelector.append(subView.render().$el); 
-      }
+      subView.render();
     });
   }
-  
   
 })
