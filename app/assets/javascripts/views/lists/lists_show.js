@@ -1,10 +1,6 @@
 Wunderclone.Views.ListsShow = Backbone.View.extend({
   template: JST['lists/show'],
   
-  events: {
-    'click .show-completed-button' : 'showCompleted'
-  },
-  
   initialize: function(){
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -34,11 +30,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.renderSubViews();
     
     return this;
-  },
-  
-  showCompleted: function(){
-    event.preventDefault();
-    $('#completed-tasks').toggleClass('hidden');
   },
   
   removeSubViews: function(){

@@ -4,6 +4,15 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
   tagName: 'ul',
   className: 'active-tasks',
   
+  events: {
+    'click .show-completed-button' : 'toggleCompleted'
+  },
+  
+  toggleCompleted: function(){
+    event.preventDefault();
+    $('.completed-div').toggleClass('hidden');
+  },
+  
   initialize: function(options){
     
     // create a listener and custom callback for list completed event

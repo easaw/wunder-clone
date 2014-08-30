@@ -62,3 +62,7 @@ button{
   height: 100vh;
   float: left;
 }
+
+.hidden {
+  visibility: hidden;
+}
