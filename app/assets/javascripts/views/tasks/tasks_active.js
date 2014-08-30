@@ -4,18 +4,7 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
   tagName: 'ul',
   className: 'active-tasks',
   
-  events: {
-    'click .show-completed-button' : 'toggleCompleted'
-  },
-  
-  toggleCompleted: function(){
-    event.preventDefault();
-    $('.completed-div').toggleClass('hidden');
-  },
-  
   initialize: function(options){
-    this.completedTasks = options.completedTasks;
-    
     this.listenTo(this.collection, 'add sync change remove', this.render);
     
     if (this._subViews && this._subViews.length > 0){
@@ -31,12 +20,6 @@ Wunderclone.Views.TasksActive = Backbone.View.extend({
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
-    }
-    
-    if (this.completedTasks.length < 0){
-      $('.show-completed-button').addClass('hidden');
-    } else {
-      $('.show-completed-button').removeClass('hidden');
     }
     
     this.createSubViews();

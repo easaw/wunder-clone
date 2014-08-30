@@ -33,34 +33,37 @@ ul, li{
 }
 
 button{
-  
   display: inline;
 }
 
 .group::after{
-  visibility: hidden;
   display: block;
-  font-size: 0;
   clear: both;
-  content: " ";
+  content: "";
 }
 
 .sidebar {
+  /*TODO make scrollable*/
   position: relative;
   top: 0px;
   left: 0px;
   float: left;
   display: block;
+/*  width: 18.65%;*/
   width: 270px;
   height: 100vh;
   border: 1px solid gray;
 }
 
-#content {
+.content {
+  /*TODO make scrollable*/
+/*  width: 81%;*/
+  display: block;
+  width: 1170px;
   position: relative;
-  width: 950px;
   height: 100vh;
   float: left;
+  padding: 0 13px;
 }
 
 .hidden {

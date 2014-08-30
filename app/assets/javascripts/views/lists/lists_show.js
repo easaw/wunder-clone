@@ -1,6 +1,17 @@
 Wunderclone.Views.ListsShow = Backbone.View.extend({
   template: JST['lists/show'],
   
+  className: "list-show",
+  
+  events: {
+    'click .show-completed-button' : 'toggleCompleted'
+  },
+  
+  toggleCompleted: function(){
+    event.preventDefault();
+    $('.completed-div').toggleClass('hidden');
+  },
+  
   initialize: function(){
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -10,10 +21,18 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.completedTasks = this.model.completedTasks();
    
     // this.listenTo(this.tasks, " remove sync", this.render);
-    // this.listenTo(this.tasks, "add change remove sync", this.createSubViews);
+    this.listenTo(this.completedTasks, "add remove sync", this.manageShowCompleted);
     
     
     this.createSubViews();
+  },
+  
+  manageShowCompleted: function(){
+    if (this.completedTasks.length == 0){
+      this.$el.find('.show-completed-button').addClass('hidden');
+    } else {
+      this.$el.find('.show-completed-button').removeClass('hidden');
+    }
   },
   
   
@@ -24,6 +43,8 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.$newSelector = this.$el.find('.new-task-div');
     this.$activeSelector = this.$el.find('.active-div');
     this.$completedSelector = this.$el.find('.completed-div');
+    
+    // this.manageShowCompleted()
     
     this.attachSubViews();
     this.renderSubViews();
@@ -49,8 +70,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     });
     
     this.activeTasksView = new Wunderclone.Views.TasksActive({
-      collection: this.activeTasks,
-      completedTasks: this.completedTasks
+      collection: this.activeTasks
     })
     
     this.completedTasksView = new Wunderclone.Views.TasksCompleted({

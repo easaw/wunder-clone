@@ -14,7 +14,7 @@ window.Wunderclone = {
           
           success: function(){
             new Wunderclone.Routers.Lists({
-              $rootEl: $('#content'),
+              $rootEl: $('.content'),
               lists: Wunderclone.Collections.lists,
               tasks: Wunderclone.Collections.tasks
             });

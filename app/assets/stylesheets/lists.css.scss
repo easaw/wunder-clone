@@ -98,3 +98,16 @@ li.list{
   box-shadow: none;
   background: white;
 }
+
+.list-show{
+  width: 100%;
+}
+
+.show-completed-button{
+  display: inline-block;
+  background: gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+}
