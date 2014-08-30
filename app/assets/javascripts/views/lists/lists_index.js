@@ -8,16 +8,16 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   initialize: function(options){
     var view = this;
-    this.inbox = this.collection.findWhere({name: "Inbox"});
-    this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
+    // this.inbox = this.collection.findWhere({name: "Inbox"});
+ //    this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
     
     //TODO shouldn't have to do this, need to parse tasks from lists collection
-    this.inbox.fetch();
-    this.lists.forEach(function(list){
-      list.fetch();
-    })
-    
-    this.listenTo(this.collection, "remove add change", this.render);
+    // this.inbox.fetch();
+//     this.lists.forEach(function(list){
+//       list.fetch();
+//     })
+//
+    this.listenTo(this.collection, "remove add change sync", this.render);
   },
   
   showInbox: function(){
@@ -28,6 +28,8 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   },
   
   render: function(){
+    this.inbox = this.collection.findWhere({name: "Inbox"});
+    this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
     var content = this.template({ lists: this.lists, inbox: this.inbox });
     this.$el.html(content);
     

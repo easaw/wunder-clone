@@ -42,7 +42,6 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   listsNew: function(){
     var list = new Wunderclone.Models.List();
     var newView = new Wunderclone.Views.ListsForm({
-      className: "list-form",
       collection: Wunderclone.Collections.lists,
       model: list
     });

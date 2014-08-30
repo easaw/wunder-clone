@@ -1,5 +1,6 @@
 Wunderclone.Views.ListsForm = Backbone.View.extend({
   tagName: 'form',
+  className: "list-form",
   
   template: JST['lists/form'],
   
@@ -20,12 +21,10 @@ Wunderclone.Views.ListsForm = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.serializeJSON();
-    this.collection.create(attrs);
-     // = this.collection;
- //    this.model.save(attrs, {
- //      success: function (list) {
- //        that.collection.add(list);
- //      }
- //    });
+    this.collection.create(attrs, {
+      success: function(list){
+        Backbone.history.navigate("#/lists/" + list.id, { trigger: true });
+      }
+    });
   }
 });
