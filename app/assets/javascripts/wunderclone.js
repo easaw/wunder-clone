@@ -12,17 +12,23 @@ window.Wunderclone = {
           $rootEl: $('#content'),
           lists: Wunderclone.Collections.lists
         });
-        Backbone.history.start();
         
-        var indexView = new Wunderclone.Views.ListsIndex({
-          collection: Wunderclone.Collections.lists
-        });
-  
-        $('#lists-index').html(indexView.render().$el);
+        createListsIndex();
+        Backbone.history.start();
       },
     });
   }
 };
+
+function createListsIndex (){
+   var indexView = new Wunderclone.Views.ListsIndex({
+     collection: Wunderclone.Collections.lists 
+   });
+   
+   $('#lists-index').html(indexView.render().$el);
+   indexView.showInbox();
+}
+
 
 $(document).ready(function(){
   Wunderclone.initialize();

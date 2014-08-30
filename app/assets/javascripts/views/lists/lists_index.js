@@ -1,22 +1,30 @@
 Wunderclone.Views.ListsIndex = Backbone.View.extend({
 
   template: JST['lists/index'],
- //render with default list
   
   events: {
     'click .list-link' : 'showLink'
   },
   
-  initialize: function(){
+  initialize: function(options){
     var view = this;
     this.inbox = this.collection.findWhere({name: "Inbox"});
     this.lists = this.collection.without(this.collection.findWhere({id: this.inbox.id}));
+    
+    //TODO shouldn't have to do this, need to parse tasks from lists collection
     this.inbox.fetch();
     this.lists.forEach(function(list){
       list.fetch();
     })
     
     this.listenTo(this.collection, "remove add change", this.render);
+  },
+  
+  showInbox: function(){
+    $(".list-link").removeClass("selected-list");
+    var $inbox = $('a[data-id='+ this.inbox.id +']')
+    $inbox.toggleClass("selected-list");
+    Backbone.history.navigate("#/lists/" + this.inbox.id, {trigger: true});
   },
   
   render: function(){
@@ -28,8 +36,9 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   showLink: function(){
     event.preventDefault();
-    var $list = $(event.target);
     $(".list-link").removeClass("selected-list");
+    
+    var $list = $(event.target);
     $list.toggleClass("selected-list");
     var listId = $(event.target).attr("data-id");
     Backbone.history.navigate("#/lists/" + listId, {trigger: true});
