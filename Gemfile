@@ -31,6 +31,7 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'figaro'
 gem 'backbone-on-rails'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails'
