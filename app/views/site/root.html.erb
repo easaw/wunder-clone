@@ -3,7 +3,7 @@
   
   <section class="sidebar">  
 
-    <header>
+    <header class="user-info group">
     <% if signed_in? %>
 
       <% if current_user.avatar.exists? %>
@@ -12,13 +12,10 @@
         <img class="avatar" src="<%= asset_url('default_avatar.png') %>">
       <% end %>
 
-      <%= current_user.email %>
+      <span class="user-email"><%= current_user.email %></span>
 
-      <%= button_to "Sign Out", session_url, method: "delete" %>
-
-    <% else %>
-      <%= link_to "Sign In", new_session_url %>
-      <%= link_to "Sign Up", new_user_url %>
+      <%= button_to "Sign Out", session_url, method: "delete", class: "sign-out-button" %>
+      
     <% end %>
     </header>
 

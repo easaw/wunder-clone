@@ -39,27 +39,16 @@
 
 .logo{
   display:block;
-  margin: 5px auto; 
+  margin: 5px auto;
 }
 
-.create-account-button{
+#landing-modal > a {
   display: block;
-  font-size: 24px;
+  font-size: 22px;
   padding: 5px;
   border-radius: 6px;
   background: #13181B;
   text-align: center;
   color: white;
-  margin: 80px 10px 0px 10px;
-}
-
-.sign-in-button{
-  margin: 10px 10px 10px 10px;
-  display: block;
-  font-size: 24px;
-  padding: 5px;
-  border-radius: 6px;
-  background: #13181B;
-  text-align: center;
-  color: white;
+  margin: 10px 10px;
 }

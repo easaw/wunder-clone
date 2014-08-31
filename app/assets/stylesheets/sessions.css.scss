@@ -6,11 +6,10 @@
 .sign-in > input {
   display: block;
   border: 2px solid black;
-  padding: 5px;
   width: 286px;
   border-radius: 5px;
 }
 
 .sign-in > input:focus {
-  border-color: red;
+  border-color: blue;
 }

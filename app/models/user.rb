@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  validates :name, :email, presence: true, uniqueness: true
+  validates :name, :email, presence: true
+  validates :email, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
   
   before_validation :ensure_session_token
@@ -95,5 +96,11 @@ class User < ActiveRecord::Base
   def reset_session_token!
     self.session_token = User.generate_session_token
     self.save!
+  end
+  
+  def self.new_guest
+    u = User.create(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", guest: true)
+    u.save(validate: false)
+    u
   end
 end

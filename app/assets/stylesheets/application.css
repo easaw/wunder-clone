@@ -27,9 +27,25 @@ ul, li{
   display: block;
 }*/
 
+.user-info{
+  margin: 3px;
+}
 .avatar {
   width:25px;
   height:25px;
+  float: left;
+  margin: 3px;
+}
+
+.user-email{
+  float: left;
+  margin: 4px;
+}
+.sign-out-button{
+  position: relative;
+  display: inline-block;
+  top: 4px;
+  float: right;
 }
 
 button{
