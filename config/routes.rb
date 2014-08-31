@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "site#root"
-  landing to: "site#landing"
+  get 'landing',  to: "site#landing", as: :landing
   
   resource :session, only: [:create, :new, :destroy]
   resources :users

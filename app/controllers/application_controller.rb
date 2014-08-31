@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   
   def require_signed_in
     if !signed_in?
-      redirect_to new_user_url
+      redirect_to landing_url
     end
   end
   
