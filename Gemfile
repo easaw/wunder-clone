@@ -32,6 +32,10 @@ gem 'aws-sdk'
 gem 'figaro'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
+gem 'omniauth'
+gem 'omniauth-facebook'
+# gem 'omniauth-google'
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem 'rspec-rails'

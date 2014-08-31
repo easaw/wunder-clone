@@ -68,17 +68,6 @@ class User < ActiveRecord::Base
     self.owned_tasks
   end
   
-  def self.find_by_credentials(email, password)
-    user = User.find_by(email: email)
-    if user
-      return user.is_password?(password) ? user : nil
-    end
-  end
-  
-  def self.generate_session_token
-    SecureRandom::urlsafe_base64
-  end
-  
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
@@ -98,9 +87,31 @@ class User < ActiveRecord::Base
     self.save!
   end
   
+  
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
+    if user
+      return user.is_password?(password) ? user : nil
+    end
+  end
+  
+  def self.create_with_omniauth(auth)
+    User.create!(
+      provider: auth['provider'],
+      uid: auth['uid'],
+      name: auth["info"]["name"],
+      email: auth["info"]["email"]
+      )
+  end
+  
+  def self.generate_session_token
+    SecureRandom::urlsafe_base64
+  end
+
   def self.new_guest
     u = User.create(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", guest: true)
     u.save(validate: false)
     u
   end
+ 
 end

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root to: "site#root"
   get 'landing',  to: "site#landing", as: :landing
   
+  get "/auth/:provider/callback" => "sessions#oauth"
+  
   resource :session, only: [:create, :new, :destroy]
   resources :users
   

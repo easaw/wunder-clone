@@ -16,6 +16,18 @@ class SessionsController < ApplicationController
     end
   end
   
+  def oauth
+    auth = request.env["omniauth.auth"] 
+    user = User.find_by(provider: auth["provider"], uid: auth["uid"]) || User.create_with_omniauth(auth)
+    if user
+      sign_in(user)
+      redirect_to root_url
+    else
+      flash.now[:errors] = user.errors.full_messages
+      render :new
+    end
+  end
+  
   def destroy
     sign_out
     redirect_to landing_url

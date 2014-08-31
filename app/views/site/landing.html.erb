@@ -7,8 +7,11 @@
       <img class="logo" src="<%= asset_url('logo.png') %>">
 
       <div class="landing-buttons">
-        <button class="facebook-login hidden">Facebook</button>
-        <button class= "google-login hidden">Google</button>
+        <div class="oauth-buttons">
+        <%= link_to "Facebook", "/auth/facebook", class:"facebook-button" %>
+        <%= link_to "Google", "/auth/google_oauth2", class:"google-button"%>
+        </div>
+        
         <%= link_to "Sign In as Guest", users_path, method: :post, class: "try-it-button" %>
         <a class="create-account-button" href="<%= new_user_url %>">
           Create Free Account
