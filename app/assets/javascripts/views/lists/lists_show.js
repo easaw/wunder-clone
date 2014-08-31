@@ -44,7 +44,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.$activeSelector = this.$el.find('.active-div');
     this.$completedSelector = this.$el.find('.completed-div');
     
-    // this.manageShowCompleted()
+    this.manageShowCompleted()
     
     this.attachSubViews();
     this.renderSubViews();
