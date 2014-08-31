@@ -25,10 +25,12 @@
         <input type="submit" value="Sign In">
   
       </form>
-    
-      <button class="facebook-login hidden">Facebook</button>
-      <button class= "google-login hidden">Google</button>
-      
+
+      <div class="oauth-buttons">
+       <%= link_to "Facebook", "/auth/facebook", id:"facebook-button" %>
+       <%= link_to "Google", "/auth/google_oauth2", id:"google-button"%>
+      </div>
+
       
       <a class="back-button" href="<%= landing_url %>">Back</a>
     </div>

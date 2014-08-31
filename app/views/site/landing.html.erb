@@ -4,12 +4,12 @@
     
     <div class="Center-Container">
     
-      <img class="logo" src="<%= asset_url('logo.png') %>">
+      <img class="logo-with-text" src="<%= asset_url('logo_with_text.png') %>">
 
       <div class="landing-buttons">
         <div class="oauth-buttons">
-        <%= link_to "Facebook", "/auth/facebook", class:"facebook-button" %>
-        <%= link_to "Google", "/auth/google_oauth2", class:"google-button"%>
+          <%= link_to "Facebook", "/auth/facebook", id:"facebook-button" %>
+          <%= link_to "Google", "/auth/google_oauth2", id:"google-button"%>
         </div>
         
         <%= link_to "Sign In as Guest", users_path, method: :post, class: "try-it-button" %>

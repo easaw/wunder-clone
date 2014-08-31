@@ -41,13 +41,14 @@
             placeholder="Password">
     
     
-          <input type="submit" value="Sign Up">
+          <input type="submit" value="Create Free Account">
   
         </form>
     
-    
-        <button class="facebook-login hidden">Facebook</button>
-        <button class= "google-login hidden">Google</button>
+        <div class="oauth-buttons">
+          <%= link_to "Facebook", "/auth/facebook", id:"facebook-button" %>
+          <%= link_to "Google", "/auth/google_oauth2", id:"google-button"%>
+        </div>
       </div>
       <a class="back-button" href="<%= landing_url %>">Back</a>
       

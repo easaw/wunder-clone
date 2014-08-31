@@ -49,10 +49,16 @@
 //  filter: blur(5px);
 }
 
-.logo{
+.logo-with-text{
   display:block;
   width: 100%;
   margin: 5px auto;
+}
+
+.logo {
+  display: block;
+  margin: 40px auto;
+  width: 120px;
 }
 
 .sign-up-container{
@@ -138,6 +144,38 @@
   text-align: center;
   color: white;
   margin: 10px 10px;
+}
+
+.oauth-buttons{
+  height: 60px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.oauth-buttons > a{
+  width: 125px;
+  display: inline-block;
+  font-size: 22px;
+  padding: 10px 0;
+//  margin: 10px;
+  border-radius: 6px;
+  background: #13181B;
+  text-align: center;
+  color: white;
+  margin: 10px 10px;
+}
+
+a#google-button{
+  float: right;
+  color: #D9442F;
+  margin-left: 1px;
+}
+
+a#facebook-button{
+  float: left;
+  color: #43609C;
+  margin-right: 1px;
 }
 
 .landing-buttons{
