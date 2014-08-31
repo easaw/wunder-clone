@@ -55,9 +55,10 @@ a:hover
 
 
 input[type="text"],
- input[type="password"],
- input[type="email"],
- input[type="submit"] {
+input[type="password"],
+input[type="email"],
+input[type="submit"],
+input[type="file"] {
    -webkit-appearance: none;
    display: inline-block;
    box-sizing: content-box;
@@ -72,8 +73,12 @@ input[type="text"],
    color: inherit;
    box-sizing: border-box;
  }
+ 
+input[type='file'] {
+ color: transparent;
+}
 
-
+input[type="file"]::-webkit-file-upload-button,
 button {
 
   /*

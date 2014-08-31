@@ -5,45 +5,53 @@
   
   <section id="landing-modal" class="Absolute-Center">
     
-    
-    <%= form_errors %>
-    <form class="sign-up group" action="<%= users_url %>" method="post" enctype="multipart/form-data">
-      <%= auth_token %>
-  
-      <label for="user_avatar">Upload Avatar</label>
-      <input type="file" id="user_avatar" name="user[avatar]">
-  
-      <input
-        id="name"
-        type="text"
-        name="user[name]"
-        value="<%= @user.name %>"
-        placeholder="Name">
-    
-      <input
-        id="email"
-        type="text"
-        name="user[email]"
-        value="<%= @user.email %>"
-        placeholder="Email">
-    
-      <input
-        id="password"
-        type="password"
-        name="user[password]"
-        placeholder="Password">
-    
-    
-      <input type="submit" value="Sign Up">
-  
-    </form>
-    
-    
-    <button class="facebook-login hidden">Facebook</button>
-    <button class= "google-login hidden">Google</button>
-    
-    <a class="back-button" href="<%= landing_url %>">Back</a>
+    <div class="Center-Container">
       
+      <div class="sign-up-container">
+        <%= form_errors %>
+        <form class="sign-up group" action="<%= users_url %>" method="post" enctype="multipart/form-data">
+          <%= auth_token %>
+          
+          <div class="image-upload">
+              <label for="file-input">
+                  <img src="<%= asset_url('icons/img-upload-icon.png') %>"/>
+              </label>
+
+              <input id="file-input" name="user[avatar]" type="file"/>
+          </div>
+          
+          <input
+            id="name"
+            type="text"
+            name="user[name]"
+            value="<%= @user.name %>"
+            placeholder="Name">
+    
+          <input
+            id="email"
+            type="text"
+            name="user[email]"
+            value="<%= @user.email %>"
+            placeholder="Email">
+    
+          <input
+            id="password"
+            type="password"
+            name="user[password]"
+            placeholder="Password">
+    
+    
+          <input type="submit" value="Sign Up">
+  
+        </form>
+    
+    
+        <button class="facebook-login hidden">Facebook</button>
+        <button class= "google-login hidden">Google</button>
+      </div>
+      <a class="back-button" href="<%= landing_url %>">Back</a>
+      
+    </div>
   </section>
   
 </div>
