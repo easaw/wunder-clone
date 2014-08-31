@@ -1,18 +1,25 @@
 <div class="landing-page background-image">
   
-  <section id="landing-modal" class="Absolute-Center">
+  <section id="landing-modal" class="Absolute-Center group">
     
-    <img class="logo" src="<%= asset_url('logo.png') %>">
+    <div class="Center-Container">
+    
+      <img class="logo" src="<%= asset_url('logo.png') %>">
 
-    <button class="facebook-login hidden">Facebook</button>
-    <button class= "google-login hidden">Google</button>
-    <%= link_to "Sign In as Guest", users_path, method: :post, class: "try-it-button" %>
-    <a class="create-account-button" href="<%= new_user_url %>">
-      Create Free Account
-    </a>
-    <a class="sign-in-button" href="<%= new_session_url %>">
-      Sign In
-    </a>
+      <div class="landing-buttons">
+        <button class="facebook-login hidden">Facebook</button>
+        <button class= "google-login hidden">Google</button>
+        <%= link_to "Sign In as Guest", users_path, method: :post, class: "try-it-button" %>
+        <a class="create-account-button" href="<%= new_user_url %>">
+          Create Free Account
+        </a>
+        <a class="sign-in-button" href="<%= new_session_url %>">
+          Sign In
+        </a>
+      
+      </div>
+        
+    </div>
       
   </section>
   

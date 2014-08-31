@@ -26,13 +26,16 @@ li.task{
 .task-link{
   display: block;
   font-size:18px;
-  font-weight: 400;
-  border: 1px solid black;
+  font-weight: 300;
+  border: 1px solid #ccc;
   border-radius: 5px;
   margin: 30px 0;
   padding: 10px;
   height: 40px;
   width: 100%;
+  background: #F7F8F8;
+  box-shadow: 0 1px 2px 0 #9AABB0;
+//  background: #D6E6F3;
 }
 
 .task-favorite{
@@ -49,12 +52,9 @@ li.task{
 .task-name{
   float: left;
   position: relative;
-//  top: 3px;
-  margin: auto;
-  padding-right: 10px;
-  padding-left: 30px;
+  margin: 0 10px;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 //.task-form > input[type="text"] {
@@ -71,19 +71,22 @@ li.task{
 
 .task-form{
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
   display: block;
   padding: 10px;
   width: 100%;
   border: 1px solid black;
   border-radius: 5px;
-  background: gray;
+//  background: #ADADAD;
+  background: #9E9C9C;
   color: white;
   margin: 30px 0;
+  height: 40px;
 }
 
 .task-form > input[type="text"] {
   width: 70%;
+  color: white;
 }
 
 .task-form > input[type="submit"]{
@@ -116,12 +119,17 @@ form.complete-form{
   position: relative;
   display: inline-block;
   float: left;
-  padding: 10px 10px;
-  font-weight: bold;
+  padding: 8px 8px;
+  vertical-align:middle;
+//  bottom: 1px;
   background: transparent;
   border: solid 1px black;
   border-radius: 5px;
 }
+
+.complete-button:hover {
+  cursor: pointer;
+};
 
 .complete-button:active {
   box-shadow: none;

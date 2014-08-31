@@ -66,20 +66,22 @@ button{
   float: left;
   display: block;
 /*  width: 18.65%;*/
-  width: 270px;
+  background: #FCFCFC;
+  width: 269px;
   height: 100vh;
-  border: 1px solid gray;
+  border-right: 1px solid gray;
 }
 
 .content {
   /*TODO make scrollable*/
 /*  width: 81%;*/
   display: block;
-  width: 1170px;
+  width: 1169px;
   position: relative;
   height: 100vh;
   float: left;
   padding: 0 13px;
+  background: #B3C6CD;
 }
 
 .hidden {

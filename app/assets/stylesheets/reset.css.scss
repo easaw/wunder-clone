@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a:hover 
 {
-     color:#00A0C6; 
+//     color:#00A0C6; 
      text-decoration:none; 
      cursor:pointer;  
 }
@@ -105,6 +105,10 @@ input[type="submit"] {
 body{
   min-width: 100%;
   min-height: 100%;
+}
+
+::-webkit-input-placeholder {
+   color: #E0DEDE;
 }
 
 

@@ -7,31 +7,31 @@
     
     
     <%= form_errors %>
-    <form class="sign-up" action="<%= users_url %>" method="post" enctype="multipart/form-data">
+    <form class="sign-up group" action="<%= users_url %>" method="post" enctype="multipart/form-data">
       <%= auth_token %>
   
       <label for="user_avatar">Upload Avatar</label>
       <input type="file" id="user_avatar" name="user[avatar]">
   
-      <label for="name">Name</label>
       <input
         id="name"
         type="text"
         name="user[name]"
-        value="<%= @user.name %>">
+        value="<%= @user.name %>"
+        placeholder="Name">
     
-      <label for="email">Email</label>
       <input
         id="email"
         type="text"
         name="user[email]"
-        value="<%= @user.email %>">
+        value="<%= @user.email %>"
+        placeholder="Email">
     
-      <label for="password">Password</label>
       <input
         id="password"
         type="password"
-        name="user[password]">
+        name="user[password]"
+        placeholder="Password">
     
     
       <input type="submit" value="Sign Up">

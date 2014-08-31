@@ -1,11 +1,17 @@
 #landing-modal {
   background: #5B6466;
+  display: block;
   width: 320px;
   height: 510px;
   z-index: 999;
   border-radius: 6px;
   padding: 15px;
 }
+
+#landing-modal ::-webkit-input-placeholder {
+   color: #5B6466;
+}
+
 
 #landing-modal input[type="text"]{
   background: white;
@@ -21,6 +27,11 @@
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.Center-Container {
+  position: relative;
+  height: 100%;
 }
 
 .background-image{
@@ -42,13 +53,83 @@
   margin: 5px auto;
 }
 
-#landing-modal > a {
+.sign-up,
+.sign-in{
+  margin-top: 20px;
+  display: block;
+  width: 290px;
+  height: 190px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+
+.sign-up > input[type="text"],
+.sign-in > input[type="text"],
+.sign-up > input[type="password"],
+.sign-in > input[type="password"] {
+  display: block;
+  float: left;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 15px;
+}
+
+.sign-up > input[type="submit"],
+.sign-in > input[type="submit"]{
+  display: inline;
+  width: 250px;
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 6px;
+  background: #13181B;
+  text-align: center;
+  color: white;
+  margin: 20px;
+}
+
+.back-button{
+  position: absolute;
+  bottom:0;
+  display:block;
+  border-top: 1px solid #ccc;
+  background: transparent;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+#landing-modal a{
+  color: white;
+}
+
+.create-account-button,
+.sign-in-button,
+.try-it-button{
   display: block;
   font-size: 22px;
-  padding: 5px;
+  padding: 10px;
   border-radius: 6px;
   background: #13181B;
   text-align: center;
   color: white;
   margin: 10px 10px;
 }
+
+.landing-buttons{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+//#landing-modal > a {
+//  display: block;
+//  font-size: 22px;
+//  padding: 5px;
+//  border-radius: 6px;
+//  background: #13181B;
+//  text-align: center;
+//  color: white;
+//  margin: 10px 10px;
+//}
