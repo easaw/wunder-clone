@@ -38,6 +38,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   initialize: function(options){
+    this.listenTo(this.model, "change sync", this.render);
     this.listId = this.model.get('list_id');
     this.render();
   },
@@ -45,6 +46,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   render: function(){
     var content = this.template({task: this.model});
     this.$el.html(content);
+    this.checkStar();
     
     return this;
   },

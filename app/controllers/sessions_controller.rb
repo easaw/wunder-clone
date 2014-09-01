@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   
   def oauth
     auth = request.env["omniauth.auth"] 
-    user = User.find_by(provider: auth["provider"], uid: auth["uid"]) || User.create_with_omniauth(auth)
+    user = User.find_by(provider: auth["provider"], uid: auth["uid"]) || User.find_by(email: auth["info"]["email"]) || User.create_with_omniauth(auth)
     if user
       sign_in(user)
       redirect_to root_url
