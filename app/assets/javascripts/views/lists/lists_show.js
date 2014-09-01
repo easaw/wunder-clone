@@ -4,7 +4,8 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   className: "list-show",
   
   events: {
-    'click li' : 'selectTask',
+    'click .show-completed-button' : 'toggleCompleted',
+    'click .task-link' : 'selectTask',
     'dblclick li': 'editTask'
   },
   
@@ -15,17 +16,16 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   
   selectTask: function(event){
     //highlight task
-    // console.log(event.target)
+    event.preventDefault();
     $taskEl = $(event.target);
     $('.task-link').removeClass("selected-task");
     $taskEl.toggleClass("selected-task");
   },
   
   editTask: function(event){
-    console.log($(event.target));
+    console.log($(event.currentTarget));
     // var editTaskView = new Wunderclone.Views.TasksEdit({
-//
-//     })
+    // })
   },
   
   initialize: function(){
