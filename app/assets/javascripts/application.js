@@ -16,6 +16,7 @@
 //= require underscore
 //= require backbone
 //= require jquery.serializejson
+//= require backbone.subset.js
 //= require wunderclone
 //= require_tree ../templates
 //= require_tree ./models

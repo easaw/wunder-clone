@@ -3,8 +3,7 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
   template: JST['tasks/show'],
   
   events: {
-    'click a.task-edit-link' : 'editTask',
-    'click button.complete-button' : 'completeTask'
+    'click button.complete-button': 'completeTask',
   },
   
   render: function(){
@@ -21,9 +20,10 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     this.listenTo(this.model, "add change remove sync", this.render);
   },
   
-  completeTask: function(){
-    var that = this;
+  completeTask: function(event){
+    event.stopPropagation();
     event.preventDefault();
+    var that = this;
     if (this.model.get('completed') == false){
       this.model.save({task: {'completed': true}}, {
         success: function(model){
