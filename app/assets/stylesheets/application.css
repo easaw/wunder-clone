@@ -81,16 +81,15 @@ button{
   display: block;
   height: 100vh;
   overflow: auto;
-  padding: 0 13px;
+/*  padding: 0 13px;*/
   background: #B3C6CD;
-  height: 100vh;
 }
 
 #content{
   float: left;
   display: block;
   width: 100%;
-  margin: 15px 0;
+  padding: 15px;
 }
 
 .hidden {
@@ -98,17 +97,12 @@ button{
 }
 
 #side-content {
-  margin: 15px 0;
+  padding: 15px;
   position: relative;
-/*  top: 0;*/
-/*  left: 100%;*/
   display: none;
   float: right;
-  width: 22%;
-  margin: 15px;
-  height: 100vh;
-  background: #F7F8F8;
-  border-radius: 5px;
+  width: 25%;
+  height: 100%;
 }
 
 #content-container.expand > #content{

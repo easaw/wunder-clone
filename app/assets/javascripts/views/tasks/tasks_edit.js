@@ -1,7 +1,7 @@
 Wunderclone.Views.TasksEdit = Backbone.View.extend({
   tagName: 'div',
   
-  className: 'edit-task-view',
+  className: 'edit-task-view group',
   
   template: JST["tasks/edit"],
   
