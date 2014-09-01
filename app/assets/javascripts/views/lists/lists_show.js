@@ -6,12 +6,12 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   events: {
     'click .show-completed-button' : 'toggleCompleted',
     'click .task-link' : 'selectTask',
-    'dblclick li': 'editTask'
+    'dblclick .task-link': 'editTask'
   },
   
   toggleCompleted: function(){
     event.preventDefault();
-    $('.completed-div').toggleClass('hidden');
+    $('#completed-div').toggleClass('hidden');
   },
   
   selectTask: function(event){
@@ -23,15 +23,39 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   },
   
   editTask: function(event){
-    console.log($(event.currentTarget));
-    // var editTaskView = new Wunderclone.Views.TasksEdit({
-    // })
+    event.stopPropagation();
+    var taskId = $(event.currentTarget).attr("data-id");
+    var task = Wunderclone.Collections.tasks.get(taskId);
+    
+    // if (this.sideView){
+   //    this.sideView.remove();
+   //  }
+    
+    this.$el.closest('#content-container').addClass("expand");
+    
+    var editView = new Wunderclone.Views.TasksEdit({
+      model: task
+    });
+    
+    this.swapSideView(editView);
+  },
+  
+  swapSideView: function(view){
+    if (this.sideView && this.sideView.removeSubViews){
+      this.sideView.removeSubViews();
+    }
+    this.sideView && this.sideView.remove();
+    this.sideView = view;
+    
+    $('#side-content').html(view.render().$el);
   },
   
   initialize: function(){
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
     }
+    
+    this.sideView = null;
     
     this.activeTasks = this.model.activeTasks();
     this.completedTasks = this.model.completedTasks();
@@ -56,9 +80,9 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     var content = this.template({list: this.model});
     this.$el.html(content);
     
-    this.$newSelector = this.$el.find('.new-task-div');
-    this.$activeSelector = this.$el.find('.active-div');
-    this.$completedSelector = this.$el.find('.completed-div');
+    this.$newSelector = this.$el.find('#new-task-div');
+    this.$activeSelector = this.$el.find('#active-div');
+    this.$completedSelector = this.$el.find('#completed-div');
     
     this.manageShowCompleted()
     
@@ -69,6 +93,13 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   },
   
   removeSubViews: function(){
+    this.$el.closest('#content-container').removeClass("expand");
+    
+    if (this.sideView != null){
+      this.sideView.remove();
+      this.sideView = null;
+    }
+    
     this._subViews.forEach(function (subView){
       subView.remove();
     });

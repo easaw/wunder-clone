@@ -4,11 +4,40 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
   
   events: {
     'click button.complete-button': 'completeTask',
+    'click div.star' : 'starTask'
+  },
+  
+  starTask: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    var that = this;
+    if (this.model.get('starred') == false){
+      this.model.save({task: {'starred' : true }}, {
+        success: function(){
+          $(event.target).addClass("starred")
+        }
+      })
+    } else {
+      this.model.save({task: {'starred' : false }}, {
+        success: function(){
+          $(event.target).removeClass("starred")
+        }
+      })
+    }
+  },
+  
+  checkStar: function(){
+    if (this.model.get('starred')){
+      this.$el.find('.star').addClass("starred")
+    }
   },
   
   render: function(){
     var content = this.template({task: this.model});
     this.$el.html(content);
+    this.checkStar();
+    
     return this;
   },
   
@@ -18,6 +47,7 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     this.activeTasks = this.list.activeTasks();
     this.completedTasks = this.list.completedTasks();
     this.listenTo(this.model, "add change remove sync", this.render);
+    
   },
   
   completeTask: function(event){

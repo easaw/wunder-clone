@@ -61,8 +61,6 @@ button{
 .sidebar {
   /*TODO make scrollable*/
   position: relative;
-  top: 0px;
-  left: 0px;
   float: left;
   display: block;
   background: #FCFCFC;
@@ -73,18 +71,50 @@ button{
 
 .app-container{
   min-width: 100%;
+  overflow: hidden;
   height: 100vh;
+  position: absolute;
 }
 
-.content {
+#content-container {
   /*TODO make scrollable*/
   display: block;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   padding: 0 13px;
   background: #B3C6CD;
+  height: 100vh;
+}
+
+#content{
+  float: left;
+  display: block;
+  width: 100%;
+  margin: 15px 0;
 }
 
 .hidden {
   visibility: hidden;
+}
+
+#side-content {
+  margin: 15px 0;
+  position: relative;
+/*  top: 0;*/
+/*  left: 100%;*/
+  display: none;
+  float: right;
+  width: 22%;
+  margin: 15px;
+  height: 100vh;
+  background: #F7F8F8;
+  border-radius: 5px;
+}
+
+#content-container.expand > #content{
+  width: 75%;
+}
+
+#content-container.expand > #side-content{
+  display: block;
 }

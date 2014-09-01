@@ -1,20 +1,26 @@
-<h2>Update <%= task.escape('name') %></h2>
 
+<!--form should submit on unfocus -->
+<!--cant submit form with empty name -->
+<div class="edit-task-top group">
   
-<label for="name">Name</label>
-<input
-  id="name"
-  type="text"
-  value="<%= task.escape('name') %>"
-  name="task[name]">
-  
-<label for="due_date">Due Date</label>
-<input
-  id="due_date"
-  type="date"
-  name="task[due_date]"
-  value="<%= task.escape('due_date') %>">
+  <input
+    id="name"
+    type="text"
+    value="<%= task.escape('name') %>"
+    name="task[name]">
+    
+  <div class="star"></div>
 
-<button class="update-task">Update Task</button>
+</div>
 
-<button class="delete-task">Delete Task</button>
+<form class="edit-task-middle">
+  <input
+    id="due-date"
+    type="date"
+    name="task[due_date]">
+    
+</form>
+
+<div class="edit-task-bottom">
+    <button class="delete-task">Delete</button>
+</div>

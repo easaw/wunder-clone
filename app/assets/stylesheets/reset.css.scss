@@ -58,7 +58,8 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="submit"],
-input[type="file"] {
+input[type="file"]
+input[type="checkbox"]{
    -webkit-appearance: none;
    display: inline-block;
    box-sizing: content-box;
@@ -74,6 +75,17 @@ input[type="file"] {
    box-sizing: border-box;
  }
  
+input[type="checkbox"]{
+  -webkit-appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+input[type="checkbox"]:focus{
+  outline:0;
+}
+
 input[type='file'] {
  color: transparent;
 }

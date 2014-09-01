@@ -3,23 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-form.edit-task-form > input{
-  display: block;
-  border: 2px solid black;
-  padding: 5px;
-  width: 286px;
-  border-radius: 5px;
+
+.star:before{
+  content:"★";
+  display:inline-block;
+//  font-size: 20px;
+  color: #C6C6C6;
 }
 
-.delete-task{
-  display: block;
+.starred:before{
+  color: #E2342C; 
 }
+
+/* Styles for task show subview */
 
 li.task{
 //  height: 20px;
   border: 1px solid black;
   border-radius: 5px;
-  margin: 30px;
   padding: 10px;
 }
 
@@ -29,16 +30,23 @@ li.task{
   font-weight: 300;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: 30px 0;
+  margin: 2px 0;
   padding: 10px;
   height: 40px;
   width: 100%;
   background: #F7F8F8;
   box-shadow: 0 1px 2px 0 #9AABB0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.task-favorite{
-  
+.task-link > .star {
+  float: right;
+  font-size: 20px;
 }
 
 .task-due_date{
@@ -76,10 +84,9 @@ li.task{
   width: 100%;
   border: 1px solid black;
   border-radius: 5px;
-//  background: #ADADAD;
   background: #9E9C9C;
   color: white;
-  margin: 30px 0;
+  margin-bottom: 14px;
   height: 40px;
 }
 
@@ -135,24 +142,50 @@ form.complete-form{
   background: black;
 }
 
-form.star-form{
-  float: right;
+.selected-task{
+  background: #DDEAF6;
 }
 
-.star-button {
-  position: relative;
-  display: inline-block;
-  padding: 10px 10px;
-  font-weight: bold;
-  background: transparent;
-  border: solid 1px black;
+
+/* Styles for task edit/side view */
+
+.edit-task-top{
+  padding: 11px;
+  background: #fff;
   border-radius: 5px;
 }
 
-.starred {
-  background: red;
+.edit-task-top > #name{
+  display: inline-block;
+  width: 85%;
+  float: left;
 }
 
-.selected-task{
-  background: #DDEAF6;
+.edit-task-top > .star{
+  font-size: 25px;
+  float: right;
+}
+
+.edit-task-middle{
+  padding: 11px;
+  height: 530px;
+  padding: 10px 10px;
+}
+
+.edit-task-middle > input{
+  display: block;
+  padding: 5px;
+  width: 100%;
+}
+
+.edit-task-bottom {
+  padding: 0 10px;
+  display: block;
+  height: 82px;
+}
+
+.delete-task{
+  float: right;
+  position: relative;
+  display: block;
 }
