@@ -18,10 +18,10 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
   listFilter: function(list, options){
     if (options.state == 'active') {
         var results = this.where({list_id: list.id, completed: false});
-        return new Wunderclone.Collections.Tasks(results);
+        return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
     } else if (options.state == 'completed'){
         var results = this.where({list_id: list.id, completed: true});
-        return new Wunderclone.Collections.Tasks(results);
+        return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
     }
   },
   
