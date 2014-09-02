@@ -4,17 +4,8 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   tagName: "li",
   
   events: {
-    'submit .task-form':'submit'
-  },
-  
-  bindKeypress: function() { 
-    var that = this;
-    this.$el.on('keydown', '.task-form', function (e) {
-      if(e.which === 13){ // enter key
-        event.preventDefault();
-        that.submit();
-      }
-    });
+    'submit .task-form':'submit',
+    'click .star' : 'starTask'
   },
   
   initialize: function(options){
@@ -31,6 +22,31 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     
     return this;
   },
+  
+  starTask: function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    
+    var that = this;
+    if (this.model.get('starred') !== true){
+      this.$el.find('#star').val(true);
+      $(event.target).addClass("starred");
+    } else {
+        this.$el.find('#star').val(false);
+      $(event.target).removeClass("starred");
+    }
+  },
+  
+  bindKeypress: function() { 
+    var that = this;
+    this.$el.on('keydown', '.task-form', function (e) {
+      if(e.which === 13){ // enter key
+        event.preventDefault();
+        that.submit();
+      }
+    });
+  },
+  
   
   submit: function(){
     // will become useless after creating listindex subviews

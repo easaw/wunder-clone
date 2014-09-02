@@ -5,16 +5,25 @@
     value="<%= list.id %>">
   
   <input
+    id="star"
+    type="hidden"
+    name="task[starred]"
+    value="<%= false %>">
+  
+  <input
     id="name"
     type="text"
     name="task[name]"
     placeholder="Add an item in <%= list.get('name') %>">
     
   <!--add star -->
-    
+  
+ 
   <input
     id="due-date"
     type="date"
     name="task[due_date]">
+    
+ <div class="star"></div>
     
 </form>

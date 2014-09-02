@@ -99,21 +99,18 @@ li.task{
   display: none;
 }
 
-.task-form > input[type="checkbox"]{
-  position: relative;
-  display: inline;
-  padding: 0;
-  top: 5px;
-  margin-left: 20px;
-  float: right;
-}
-
 .task-form > input[type="date"]{
   position: relative;
   display: inline;
   padding: 0;
   margin: 0;
   float: right;
+}
+
+.task-form > .star{
+  float: right;
+  display: inline;
+  padding: 0 5px;
 }
 
 form.complete-form{
