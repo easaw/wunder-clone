@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
     content_type: /\Aimage\/.*\Z/
   )
   
+  has_many :notifications, inverse_of: :user, dependent: :destroy
+  
   has_many(
   :owned_lists,
   inverse_of: :owner,
@@ -56,12 +58,16 @@ class User < ActiveRecord::Base
     self.owned_lists.create(name: "Inbox")
   end
   
+  def unread_notifications
+    self.notifications.where(is_read: false)
+  end
+  
   def inbox
     self.owned_lists.find_by(name: "Inbox")
   end
   
   def lists
-    self.owned_lists.where.not(name: "Inbox")
+    self.owned_lists + self.shared_lists
   end
   
   def tasks

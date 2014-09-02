@@ -1,5 +1,5 @@
 class ListShare < ActiveRecord::Base
-  validates :list, :user_id, :status, presence: true
+  validates :list_id, :user_id, presence: true
   validates :list_id, uniqueness: { scope: :user_id,
     message: "can't share list with the same user twice" }
   
@@ -19,9 +19,21 @@ class ListShare < ActiveRecord::Base
     primary_key: :id
   )
   
+  has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
+  after_commit :set_notification, on: [:create]
+  
   after_initialize :init
   
   def init
-    self.status = "Pending"
+    # self.status = "Pending"
   end
+  
+  private
+
+  def set_notification
+    notification = self.notifications.unread.event(:new_shared_list).new
+    notification.user = self.user
+    notification.save
+  end
+  
 end

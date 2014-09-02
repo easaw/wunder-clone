@@ -17,7 +17,7 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   
   selectDate: function(event){
     event.stopPropagation();
-    
+    // implement jquery date ui dropdown
   },
   
   deactivateForm: function(){

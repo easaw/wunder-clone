@@ -11,33 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831162527) do
+ActiveRecord::Schema.define(version: 20140902220457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "list_shares", force: true do |t|
-    t.integer  "list_id",    null: false
-    t.integer  "user_id",    null: false
-    t.string   "status",     null: false
+    t.integer  "list_id",             null: false
+    t.integer  "user_id",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.integer  "notifications_count"
   end
 
   add_index "list_shares", ["list_id", "user_id"], name: "index_list_shares_on_list_id_and_user_id", unique: true, using: :btree
 
   create_table "lists", force: true do |t|
-    t.integer  "owner_id",   null: false
-    t.string   "name",       null: false
+    t.integer  "owner_id",            null: false
+    t.string   "name",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "notifications_count"
   end
 
   add_index "lists", ["owner_id"], name: "index_lists_on_owner_id", using: :btree
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.integer  "event_id"
+    t.boolean  "is_read"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tasks", force: true do |t|
-    t.integer  "list_id",          null: false
-    t.string   "name",             null: false
+    t.integer  "list_id",             null: false
+    t.string   "name",                null: false
     t.date     "due_date"
     t.date     "remind_date"
     t.datetime "created_at"
@@ -45,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140831162527) do
     t.boolean  "completed"
     t.integer  "assigned_user_id"
     t.boolean  "starred"
+    t.integer  "notifications_count"
   end
 
   add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree
@@ -63,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140831162527) do
     t.string   "password_digest"
     t.string   "uid"
     t.string   "provider"
+    t.integer  "notifications_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

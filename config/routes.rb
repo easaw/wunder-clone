@@ -11,5 +11,9 @@ Rails.application.routes.draw do
     resources :lists, only: [:create, :show, :index, :destroy, :update]
     
     resources :tasks, only: [:create, :show, :index, :destroy, :update]
+    
+    resources :list_shares, only: [:create, :destroy]
+    
+    resources :notifications, only: [:index]
   end
 end
