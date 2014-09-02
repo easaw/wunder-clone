@@ -8,8 +8,13 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   events: {
     'click .update-task':'submit',
     'click .delete-task': 'deleteTask',
+    'click': 'handleClick',
     'click .star' : 'starTask',
     'focusout input' : 'submit'
+  },
+  
+  handleClick: function(event){
+    event.stopPropagation();
   },
   
   starTask: function(event){

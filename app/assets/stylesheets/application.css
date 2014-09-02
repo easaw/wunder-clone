@@ -12,6 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui/core
+ *= require jquery-ui/theme
+ *= require jquery-ui/menu
  */
 
 /*body, h1, h2, h3, h4, ul, li, div, form, span {
@@ -29,8 +32,13 @@ ul, li{
 
 
 /* User Nav View style */
-.user-info{
-  margin: 3px;
+#user-nav{
+  display: block;
+  height: 38px;
+}
+
+#user-info{
+  padding: 3px;
 }
 .avatar {
   width:25px;
@@ -40,14 +48,23 @@ ul, li{
 }
 
 .user-email{
+  display: inline-block;
+  width: 130px;
   float: left;
-  margin: 4px;
+  padding: 11px 4px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.sign-out-button{
+.sign-out-button > img{
   position: relative;
   display: inline-block;
-  top: 4px;
+  width: 45px;
+  height: 30px;
   float: right;
+  cursor:pointer;
 }
 
 /* */

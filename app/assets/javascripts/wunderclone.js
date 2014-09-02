@@ -23,6 +23,7 @@ window.Wunderclone = {
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
             bindFocusOutCallbacks();
+            bindClickOutCallbacks();
           }
         })
       }
@@ -36,6 +37,12 @@ function bindFocusOutCallbacks(){
     focusOutCallBacks.forEach(function(callBack){
       callBack();
     })
+  })
+}
+
+function bindClickOutCallbacks(){
+  $(document).on('click', function(event){
+    $('#content-container').removeClass("expand");
   })
 }
 
