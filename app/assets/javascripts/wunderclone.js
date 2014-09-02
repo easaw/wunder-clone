@@ -30,15 +30,22 @@ window.Wunderclone = {
 };
 
 function createListsIndex (){
-   var indexView = new Wunderclone.Views.ListsIndex({
-     collection: Wunderclone.Collections.lists 
-   });
-   
-   $('#lists-index').html(indexView.render().$el);
-   this.inbox = Wunderclone.Collections.lists.findWhere({name: "Inbox"});
-   indexView.showSpecifiedList(this.inbox);
-   
-   return indexView;
+  var lists = Wunderclone.Collections.lists;
+  var inbox = lists.findWhere({name: "Inbox"});
+  var userLists = new Wunderclone.Collections.ListsSubset(
+    lists.without(lists.findWhere({ id: inbox.id })),
+    {parentCollection: lists}
+  );
+
+  var indexView = new Wunderclone.Views.ListsIndex({
+    inbox: inbox,
+    collection: userLists
+  });
+
+  $('#lists-index').html(indexView.render().$el);
+  indexView.showSpecifiedList(inbox);
+
+  return indexView;
 }
 
 

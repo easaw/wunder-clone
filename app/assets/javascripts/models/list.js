@@ -8,15 +8,21 @@ Wunderclone.Models.List = Backbone.Model.extend({
     }
   },
   
+  tasks: function(){
+    this._tasks = this._tasks ||
+      Wunderclone.Collections.tasks.listFilter(this, {});
+    return this._tasks;
+  },
+  
   activeTasks: function(){
     this._activeTasks = this._activeTasks ||
-      Wunderclone.Collections.tasks.listFilter(this, {state: 'active'})
+      Wunderclone.Collections.tasks.listFilter(this, {state: 'active'});
     return this._activeTasks;
   },
   
   completedTasks: function(){
     this._completedTasks = this._completedTasks ||
-      Wunderclone.Collections.tasks.listFilter(this, {state: 'completed'})
+      Wunderclone.Collections.tasks.listFilter(this, {state: 'completed'});
     return this._completedTasks;
   }
 });

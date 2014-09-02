@@ -1,0 +1,1 @@
+Wunderclone.Collections.ListsSubset = Backbone.Subset.extend({})

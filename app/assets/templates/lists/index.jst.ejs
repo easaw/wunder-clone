@@ -1,21 +1,4 @@
 <ul>
-  
-  <li class="list">
-    <a class="list-link" data-id="<%= inbox.id %>" href="#">
-      <%= inbox.get("name") %>
-      <span class="task-count"><%= inbox.activeTasks().length %></span>
-    </a>
-  </li>
-  
-
-  <% lists.forEach(function(list){ %>
-    <li class="list">
-      <a class="list-link" data-id="<%= list.id %>" href="#" >
-        <%= list.escape('name') %>
-        <span class="task-count"><%= list.activeTasks().length %></span>
-      </a>
-    </li>
-  <% }) %>
 
 </ul>
 

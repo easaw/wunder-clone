@@ -15,7 +15,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   },
   
   selectTask: function(event){
-    //highlight task
     event.preventDefault();
     $taskEl = $(event.target);
     $('.task-link').removeClass("selected-task");
@@ -26,10 +25,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     event.stopPropagation();
     var taskId = $(event.currentTarget).attr("data-id");
     var task = Wunderclone.Collections.tasks.get(taskId);
-    
-    // if (this.sideView){
-   //    this.sideView.remove();
-   //  }
     
     this.$el.closest('#content-container').addClass("expand");
     
@@ -59,10 +54,8 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     
     this.activeTasks = this.model.activeTasks();
     this.completedTasks = this.model.completedTasks();
-   
-    // this.listenTo(this.tasks, " remove sync", this.render);
-    this.listenTo(this.completedTasks, "add remove sync", this.manageShowCompleted);
-    
+  
+    this.listenTo(this.completedTasks, "add remove sync", this.manageShowCompleted);  
     
     this.createSubViews();
   },

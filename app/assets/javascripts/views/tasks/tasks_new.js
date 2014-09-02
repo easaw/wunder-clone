@@ -48,9 +48,6 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   
   
   submit: function(){
-    // will become useless after creating listindex subviews
-    // var currentTaskCount = $("[data-id=" + this.list.id + "]").find(".task-count").html();
-    // $("[data-id=" + this.list.id + "]").find(".task-count").html(parseInt(currentTaskCount)+1);
     var that = this;
     event.preventDefault();
     var attrs = this.$el.find('.task-form').serializeJSON();

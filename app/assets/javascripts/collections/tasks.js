@@ -22,6 +22,9 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
     } else if (options.state == 'completed'){
         var results = this.where({list_id: list.id, completed: true});
         return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+    } else {
+      var results = this.where({list_id: list.id});
+      return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
     }
   },
   
