@@ -7,10 +7,14 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   tagName: 'ul',
   
+  className: 'lists-index-ul',
+  
   initialize: function(options){
     this.listenTo(this.collection, "remove add", this.render);
-    
+    var that = this;
     this.inbox = options.inbox;
+    
+    this.grabUserLists();
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -18,7 +22,24 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     
   },
   
+  grabUserLists: function(){
+    var that = this;
+    
+    var results = this.collection.reject(function(list){
+      return list.id == that.inbox.id
+    })
+    
+    this.userLists = new Wunderclone.Collections.ListsSubset(
+      results,
+      {parentCollection: this.collection}
+    );
+  },
+  
   render: function(){
+    var that = this;
+    console.log("rendering lists index");
+    this.grabUserLists();
+    
     var content = this.template({});
     this.$el.html(content);
     
@@ -34,14 +55,6 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     return this;
   },
   
-  showSpecifiedList: function(list){
-    // $(".list-link").removeClass("selected-list");
-    // var $list = $('[data-id='+ list.id +']')
-    // $list.toggleClass("selected-list");
-    this.inboxView.selectList();
-    // Backbone.history.navigate("#/lists/" + list.id, {trigger: true});
-  },
-  
   removeSubViews: function(){
     this._subViews.forEach(function (subView){
       subView.remove();
@@ -54,10 +67,16 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     var that = this;
     this._subViews = this._subViews || [];
     
-    this.inboxView = new Wunderclone.Views.ListsCard({model: this.inbox});
+    this.inboxView = new Wunderclone.Views.ListsCard({
+      model: this.inbox,
+      editable: false
+    });
     
-    this.collection.each(function(list){
-      var listCardView = new Wunderclone.Views.ListsCard({model: list});
+    this.userLists.each(function(list){
+      var listCardView = new Wunderclone.Views.ListsCard({
+        model: list,
+        editable: true
+      });
       that._subViews.push(listCardView);
     });
   },

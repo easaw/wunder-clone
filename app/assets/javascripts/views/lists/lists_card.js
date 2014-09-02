@@ -9,9 +9,11 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
     'click' : 'selectList'
   },
   
-  initialize: function(){
+  initialize: function(options){
+    this.editable = options.editable;
     this.activeTasks = this.model.activeTasks();
     this.listenTo(this.activeTasks, "add remove sync", this.render);
+    this.listenTo(this.model, "show", this.selectList);
   },
   
   render: function(){
@@ -26,10 +28,16 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
   
   selectList: function(){
     event.preventDefault();
-    $(".list-link").removeClass("selected-list");
-    
+    $(".list-link").removeClass("selected-list editable");
     this.$el.toggleClass("selected-list");
+    this.showEditLink();
     Backbone.history.navigate("#/lists/" + this.model.id, {trigger: true});
+  },
+  
+  showEditLink: function(){
+    if (this.editable === true){
+      this.$el.toggleClass('editable');
+    }
   }
   
   

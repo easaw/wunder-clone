@@ -2,7 +2,61 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-li.list{
+
+/* List Index Styles */
+#lists-index{
+}
+.lists-index-ul{
+  display: block;
+  overflow: auto;
+  position: relative
+}
+.list-link{
+  float: left;
+  display: block;
+  height: 40px;
+  width: 268px;
+}
+
+.list-link > .list-name{
+  display: inline-block;
+  padding: 12px;
+}
+
+.task-count {
+  display: inline-block;
+  float: right;
+  padding: 12px;
+}
+
+.list-link:active{
+  background: #009AE4;
+  color: white;
+}
+
+.selected-list {
+  background: #009AE4;
+  color: white;
+}
+
+.editable:before{
+  display: inline-block;
+  float: right;
+  padding: 12px;
+  border-left: 1px solid #fff;
+  content: "Edit";
+  margin-left: 5px;
+}
+
+.add-list-link {
+  border-top: 1px solid gray;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  font-size: 40px;
+  display: block;
+  height: 40px;
+  width: 100%;
 }
 
 .delete-list{
@@ -16,53 +70,10 @@ li.list{
   width: 600px;
   border-radius: 5px;
 }
-
-.list-link{
-  float: left;
-  display: block;
-  height: 40px;
-  width: 268px;
-  padding: 10px;
-}
-
-.list-link:active{
-  background: #009AE4;
-  color: white;
-}
-
-.selected-list {
-  background: #009AE4;
-  color: white;
-}
-
-.list-edit-link {
-  display:inline-block;
-  float: right;
-  width: 35px;
-  height: 100%;
-  border-left: 1px solid black;
-  padding: 10px 0 0 0;
-  text-align: center;
-}
-
 .edit-list-toolbar {
   display: block;
   width: 200px;
   margin: auto;
-}
-
-.add-list-link {
-  border-top: 1px solid gray;
-  position: absolute;
-  text-align: center;
-  bottom: 0;
-  font-size: 40px;
-  display: block;
-  width: 100%;
-}
-
-.task-count {
-  float: right;
 }
 
 .tasks-list h5{

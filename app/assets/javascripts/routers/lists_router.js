@@ -45,14 +45,11 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   listsShow: function(id){
     var that = this;
     var list = this.lists.getOrFetch(id);
-    list.fetch({
-      success: function(){
-        var showView = new Wunderclone.Views.ListsShow({
-          model: list
-        });
-        that._swapView(showView);
-      }
-    }); 
+    list.fetch(); 
+    var showView = new Wunderclone.Views.ListsShow({
+      model: list
+    });
+    that._swapView(showView);
   },
   
   _swapView: function(view){

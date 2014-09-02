@@ -32,18 +32,15 @@ window.Wunderclone = {
 function createListsIndex (){
   var lists = Wunderclone.Collections.lists;
   var inbox = lists.findWhere({name: "Inbox"});
-  var userLists = new Wunderclone.Collections.ListsSubset(
-    lists.without(lists.findWhere({ id: inbox.id })),
-    {parentCollection: lists}
-  );
+
 
   var indexView = new Wunderclone.Views.ListsIndex({
     inbox: inbox,
-    collection: userLists
+    collection: lists
   });
 
   $('#lists-index').html(indexView.render().$el);
-  indexView.showSpecifiedList(inbox);
+  inbox.trigger('show');
 
   return indexView;
 }
