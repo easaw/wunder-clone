@@ -27,6 +27,8 @@ ul, li{
   display: block;
 }*/
 
+
+/* User Nav View style */
 .user-info{
   margin: 3px;
 }
@@ -47,6 +49,8 @@ ul, li{
   top: 4px;
   float: right;
 }
+
+/* */
 
 button{
   display: inline;
