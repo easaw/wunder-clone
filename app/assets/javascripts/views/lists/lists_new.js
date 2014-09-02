@@ -1,19 +1,6 @@
 Wunderclone.Views.ListsNewModal = Backbone.View.extend({
   template: JST['lists/new_modal'],
   
-  hideModal: function(){
-    event.preventDefault();
-    event.stopPropagation();
-    this.$el.find('#modal').removeClass("is-active");
-  },
-  
-  checkHideModal: function(event){
-    if(event.target.id == "modal"){
-      event.preventDefault();
-      this.$el.find('#modal').removeClass("is-active");
-    }
-  },
-  
   events: {
     'click .hide-modal': 'hideModal',
     'click' : 'checkHideModal',
@@ -26,6 +13,19 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
     this.$el.html(content).appendTo('#modal-container');
     
     return this;
+  },
+  
+  hideModal: function(){
+    event.preventDefault();
+    event.stopPropagation();
+    this.$el.find('#modal').removeClass("is-active");
+  },
+  
+  checkHideModal: function(event){
+    if(event.target.id == "modal"){
+      event.preventDefault();
+      this.$el.find('#modal').removeClass("is-active");
+    }
   },
   
   newList: function(){

@@ -10,20 +10,21 @@
     name="task[starred]"
     value="<%= false %>">
   
+  
+  
   <input
     id="name"
     type="text"
     name="task[name]"
+    class="task-form-name"
     placeholder="Add an item in &quot;<%= list.get('name') %>&quot;...">
-    
-  <!--add star -->
-  
  
   <input
     id="due-date"
+    class="task-form-date"
     type="date"
     name="task[due_date]">
     
- <div class="star"></div>
+  <div class="star task-form-star"></div>
     
 </form>

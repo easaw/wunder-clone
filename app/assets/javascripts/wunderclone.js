@@ -7,7 +7,6 @@ window.Wunderclone = {
     //create store collection for lists
     Wunderclone.Collections.lists = new Wunderclone.Collections.Lists();
     Wunderclone.Collections.tasks = new Wunderclone.Collections.Tasks();
-    
     Wunderclone.Collections.lists.fetch({
       success: function(){
         Wunderclone.Collections.tasks.fetch({
@@ -18,17 +17,33 @@ window.Wunderclone = {
               lists: Wunderclone.Collections.lists,
               tasks: Wunderclone.Collections.tasks
             });
-            
+            Wunderclone.Views.tasksNew = createTasksNewView();
             Backbone.history.start();
             Wunderclone.Views.listsIndex = createListsIndex();
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
+            bindFocusOutCallbacks();
           }
         })
       }
     });
   }
 };
+
+function bindFocusOutCallbacks(){
+  var focusOutCallBacks = [Wunderclone.Views.tasksNew.deactivateForm];
+  $(document).on('focusout', function(){
+    focusOutCallBacks.forEach(function(callBack){
+      callBack();
+    })
+  })
+}
+
+function createTasksNewView(){
+  var newTaskView = new Wunderclone.Views.TasksNew();
+  // debugger
+  return newTaskView;
+}
 
 function createListsEditModal(){
   var editModalView = new Wunderclone.Views.ListsEditModal();

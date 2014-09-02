@@ -1,24 +1,42 @@
 Wunderclone.Views.TasksNew = Backbone.View.extend({
   template: JST["tasks/new"],
   
-  tagName: "li",
-  
   events: {
     'submit .task-form':'submit',
-    'click .star' : 'starTask'
+    'mousedown .star.task-form-star' : 'starTask',
+    'click .task-form' : 'activateForm'
+  },
+  
+  handleClick: function(event){
+  },
+  
+  activateForm: function(){
+    this.$el.find('.task-form').addClass('active-task-form');
+  },
+  
+  selectDate: function(event){
+    event.stopImmediatePropagation();
+  },
+  
+  deactivateForm: function(){
+    $('.task-form').removeClass('active-task-form');
   },
   
   initialize: function(options){
-    this.list = options.list;
     this.bindKeypress();
-    this.listenTo(this.collection, 'add', this.render);
+  },
+  
+  changeList: function(list){
+    this.list = list;
+    this.render();
+    this.collection = this.list.activeTasks();
   },
   
   render: function(){
     var content = this.template({list: this.list});
     this.$el.html(content);
+    $('#new-task-div').html(this.$el);
     this.delegateEvents();
-    
     return this;
   },
   
@@ -27,11 +45,12 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     event.stopPropagation();
     var attrs = this.$el.find('.task-form').serializeJSON();
     var that = this;
-    if (attrs['starred'] !== true){
-      this.$el.find('#star').val(true);
+    var $star = this.$el.find('#star')
+    if ($star.val() == "false"){
+      $star.val(true);
       $(event.target).addClass("starred");
     } else {
-        this.$el.find('#star').val(false);
+      $star.val(false);
       $(event.target).removeClass("starred");
     }
   },
@@ -53,6 +72,9 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     var attrs = this.$el.find('.task-form').serializeJSON();
     this.collection.create(attrs, {
       wait: true,
+      success: function(){
+        that.render();
+      }
     });
   }
 })

@@ -56,7 +56,8 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.completedTasks = this.model.completedTasks();
   
     this.listenTo(this.completedTasks, "add remove sync", this.manageShowCompleted);  
-    
+    this.newTaskView = Wunderclone.Views.tasksNew;
+    this.newTaskView.changeList(this.model);
     this.createSubViews();
   },
   
@@ -73,7 +74,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     var content = this.template({list: this.model});
     this.$el.html(content);
     
-    this.$newSelector = this.$el.find('#new-task-div');
     this.$activeSelector = this.$el.find('#active-div');
     this.$completedSelector = this.$el.find('#completed-div');
     
@@ -104,11 +104,6 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     var that = this;
     this._subViews = this._subViews || [];
     
-    this.newTaskView = new Wunderclone.Views.TasksNew({
-      collection: this.activeTasks,
-      list: this.model
-    });
-    
     this.activeTasksView = new Wunderclone.Views.TasksActive({
       collection: this.activeTasks
     })
@@ -117,11 +112,10 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
       collection: this.completedTasks
     })
     
-    this._subViews.push(this.newTaskView, this.activeTasksView, this.completedTasksView);
+    this._subViews.push(this.activeTasksView, this.completedTasksView);
   },
   
   attachSubViews: function(){
-    this.$newSelector.html(this.newTaskView.$el);
     this.$activeSelector.html(this.activeTasksView.$el);
     this.$completedSelector.html(this.completedTasksView.$el);
   },

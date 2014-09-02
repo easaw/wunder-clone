@@ -4,7 +4,7 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
   events: {
     'click .hide-modal': 'hideModal',
     'click' : 'checkHideModal',
-    'click' : 'deleteList'
+    'click .delete-list' : 'deleteList'
   },
   
   hideModal: function(){
