@@ -3,11 +3,17 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   template: JST['lists/index'],
   
   events: {
+    'click .add-list-link' : 'addList'
   },
   
   tagName: 'ul',
   
-  className: 'lists-index-ul',
+  className: 'lists-index-container',
+  
+  addList: function(){
+    event.preventDefault();
+    Wunderclone.Views.listsNewModal.newList();
+  },
   
   initialize: function(options){
     this.listenTo(this.collection, "remove add", this.render);
@@ -37,7 +43,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   render: function(){
     var that = this;
-    console.log("rendering lists index");
+
     this.grabUserLists();
     
     var content = this.template({});
@@ -83,10 +89,10 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   attachSubViews: function(){
     var that = this;
-    this.$el.append(this.inboxView.$el);
+    this.$el.find(".lists-ul").append(this.inboxView.$el);
     
     this._subViews.forEach(function(subView){
-      that.$el.append(subView.$el);
+      that.$el.find(".lists-ul").append(subView.$el);
     });
   },
   

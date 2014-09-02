@@ -21,7 +21,8 @@ window.Wunderclone = {
             
             Backbone.history.start();
             Wunderclone.Views.listsIndex = createListsIndex();
-            
+            Wunderclone.Views.listsEditModal = createListsEditModal();
+            Wunderclone.Views.listsNewModal = createListsNewModal();
           }
         })
       }
@@ -29,10 +30,20 @@ window.Wunderclone = {
   }
 };
 
+function createListsEditModal(){
+  var editModalView = new Wunderclone.Views.ListsEditModal();
+  return editModalView;
+}
+
+function createListsNewModal(){
+  var newModalView = new Wunderclone.Views.ListsNewModal();
+  return newModalView;
+}
+
 function createListsIndex (){
   var lists = Wunderclone.Collections.lists;
   var inbox = lists.findWhere({name: "Inbox"});
-
+  Wunderclone.Models.inbox = inbox;
 
   var indexView = new Wunderclone.Views.ListsIndex({
     inbox: inbox,

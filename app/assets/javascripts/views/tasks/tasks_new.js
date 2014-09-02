@@ -25,9 +25,9 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   starTask: function(event){
     event.preventDefault();
     event.stopPropagation();
-    
+    var attrs = this.$el.find('.task-form').serializeJSON();
     var that = this;
-    if (this.model.get('starred') !== true){
+    if (attrs['starred'] !== true){
       this.$el.find('#star').val(true);
       $(event.target).addClass("starred");
     } else {

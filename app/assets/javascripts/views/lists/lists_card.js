@@ -6,7 +6,14 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
   className: "list-link",
   
   events: {
-    'click' : 'selectList'
+    'click' : 'selectList',
+    'click .edit-button' : 'editList'
+  },
+  
+  editList: function(){
+    // var editView = new Wunderclone.Views.ListsEdit({model: this.model});
+    Wunderclone.Views.listsEditModal.edit(this.model);
+    // editView.render().$el.appendTo('#modal');
   },
   
   initialize: function(options){
