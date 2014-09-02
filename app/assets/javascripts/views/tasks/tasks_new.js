@@ -4,6 +4,7 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   events: {
     'submit .task-form':'submit',
     'mousedown .star.task-form-star' : 'starTask',
+    'mousedown .task-form-date' : 'selectDate',
     'click .task-form' : 'activateForm'
   },
   
@@ -15,7 +16,8 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   },
   
   selectDate: function(event){
-    event.stopImmediatePropagation();
+    event.stopPropagation();
+    
   },
   
   deactivateForm: function(){
