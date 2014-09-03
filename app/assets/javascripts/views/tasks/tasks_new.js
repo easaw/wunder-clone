@@ -26,10 +26,11 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   
   initialize: function(options){
     this.bindKeypress();
+    this.listenTo(Wunderclone.Models.activeList, "change", this.changeList)
   },
   
-  changeList: function(list){
-    this.list = list;
+  changeList: function(){
+    this.list = Wunderclone.Models.activeList;
     this.render();
     this.collection = this.list.activeTasks();
   },

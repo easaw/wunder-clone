@@ -4,7 +4,6 @@ window.Wunderclone = {
   Views: {},
   Routers: {},
   initialize: function() {
-    //create store collection for lists
     Wunderclone.Collections.lists = new Wunderclone.Collections.Lists();
     Wunderclone.Collections.tasks = new Wunderclone.Collections.Tasks();
     Wunderclone.Collections.lists.fetch({
@@ -17,13 +16,14 @@ window.Wunderclone = {
               lists: Wunderclone.Collections.lists,
               tasks: Wunderclone.Collections.tasks
             });
-            Wunderclone.Views.tasksNew = createTasksNewView();
-            Backbone.history.start();
+            
             Wunderclone.Views.listsIndex = createListsIndex();
+            Wunderclone.Views.tasksNew = createTasksNewView();
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
             bindFocusOutCallbacks();
             bindClickOutCallbacks();
+            Backbone.history.start();
           }
         })
       }
@@ -66,7 +66,7 @@ function createListsIndex (){
   var lists = Wunderclone.Collections.lists;
   var inbox = lists.findWhere({name: "Inbox"});
   Wunderclone.Models.inbox = inbox;
-
+  Wunderclone.Models.activeList = inbox;
   var indexView = new Wunderclone.Views.ListsIndex({
     inbox: inbox,
     collection: lists

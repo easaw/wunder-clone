@@ -56,8 +56,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     this.completedTasks = this.model.completedTasks();
   
     this.listenTo(this.completedTasks, "add remove sync", this.manageShowCompleted);  
-    this.newTaskView = Wunderclone.Views.tasksNew;
-    this.newTaskView.changeList(this.model);
+
     this.createSubViews();
   },
   

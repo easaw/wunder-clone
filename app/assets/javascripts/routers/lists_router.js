@@ -12,10 +12,12 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   listsShow: function(id){
     var that = this;
     var list = this.lists.getOrFetch(id);
-    list.fetch(); 
+    Wunderclone.Models.activeList = list;
+    
     var showView = new Wunderclone.Views.ListsShow({
       model: list
     });
+    
     that._swapView(showView);
     Wunderclone.Views.tasksNew.changeList(list);
   },
