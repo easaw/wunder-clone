@@ -10,20 +10,19 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.tasks = this.model.tasks();
-    // this.listenTo(Wunderclone.Collections.tasks, "add change remove", this.render);
+    this.activeTasks = this.model.activeTasks();
     if(this.activeTasks)
-    this.listenTo(this.tasks, "add remove sync change", this.render);
+    this.listenTo(this.activeTasks, "add remove sync change", this.render);
     this.listenTo(this.model, "add remove sync change", this.render);
     this.listenTo(this.model, "show", this.selectList);
   },
   
   render: function(){
-    this.tasks = this.model.tasks()
+    this.activeTasks = this.model.activeTasks()
     
     var content = this.template({
       list: this.model,
-      tasks: this.tasks
+      tasks: this.activeTasks
     });
     this.$el.html(content);
     

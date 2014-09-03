@@ -8,7 +8,7 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
     this.starredList = options.starredList;
     
     this.listenTo(Wunderclone.Collections.tasks, "change:starred", this.render)
-    this.listenTo(Wunderclone.Models.starredList.tasks(), "add remove", this.render);
+    this.listenTo(Wunderclone.Models.starredList.activeTasks(), "add remove", this.render);
   
     
     if (this._subViews && this._subViews.length > 0){
@@ -53,7 +53,7 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
       model: this.inbox,
     });
     
-    if(this.starredList.tasks().length > 0){
+    if(this.starredList.activeTasks().length > 0){
       this.starredView = new Wunderclone.Views.CuratedCard({
         model: this.starredList
       });
@@ -65,7 +65,7 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
     var that = this;
     this.$el.find(".lists-ul").append(this.inboxView.$el);
     
-    if (Wunderclone.Models.starredList.tasks().length > 0){
+    if (Wunderclone.Models.starredList.activeTasks().length > 0){
       this.$el.find("#curated-lists-ul").append(this.starredView.$el);
     }
     
@@ -74,7 +74,7 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
   renderSubViews: function(){
     this.inboxView.render();
     
-    if (Wunderclone.Models.starredList.tasks().length > 0){
+    if (Wunderclone.Models.starredList.activeTasks().length > 0){
       this.starredView.render();
     }
     
