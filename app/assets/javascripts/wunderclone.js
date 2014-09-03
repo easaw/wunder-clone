@@ -53,8 +53,8 @@ function bindClickOutCallbacks(){
     $('.notifications-container').removeClass('show-activities');
   })
   
-  $(document).on('mousedown', function(event){
-   Wunderclone.Views.tasksNew.deactivateDate();
+  $(document).on('click', function(event){
+    Wunderclone.Views.tasksNew.deactivateDate();
   })
 }
 

@@ -19,16 +19,16 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   },
   
   deactivateDate: function(){
-    $('.task-form-date').removeClass('show-date-dropdown');
+    this.$el.find('.task-form-date').removeClass('show-date-dropdown');
     Wunderclone.bindFocusOutCallbacks();
+    this.$el.find(".task-form-name").focus();
   },
   
   selectDate: function(event){
     event.preventDefault();
     event.stopPropagation();
-    // $('.task-form-name').focus();
-    $(document).off("focusout"); this.$el.find('.task-form-date').addClass('show-date-dropdown');
-    // implement jquery date ui dropdown
+    $(document).off("focusout");
+    this.$el.find('.task-form-date').addClass('show-date-dropdown');
   },
   
   deactivateForm: function(){
