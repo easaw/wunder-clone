@@ -107,24 +107,62 @@ form.complete-form{
 }
 
 .task-form > input[type="text"] {
-  width: 100%;
+  width: 85%;
   color: white;
 }
 
-.task-form.active-task-form > input[type="text"]{
-  width: 80%;
-}
+//.task-form.active-task-form > input[type="text"]{
+//  width: 80%;
+//}
 
 .task-form > input[type="submit"]{
   display: none;
 }
 
-.task-form > input[type="date"]{
-  position: relative;
-  display: none;
-  padding: 0;
-  margin: 0;
+
+//.task-form > input[type="date"]{
+//  position: relative;
+//  display: none;
+//  padding: 0;
+//  margin: 0;
+//  float: right;
+//}
+
+.task-form-date{
   float: right;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.task-form-date-icon{
+//  cursor: pointer;
+//  float: right;
+  display: none;
+
+}
+
+.task-form-date > span{
+  font-size: 20px;
+  cursor: pointer;
+//  padding-bottom: 5px;
+}
+
+.task-form-date > div {
+  display: none;
+  position: absolute;
+  background: #FAFAFA;
+  width: 150px;
+  height: 70px;
+  left: -75px;
+//  left: -11px;
+  z-index: 999;
+  border-radius: 5px;
+  cursor: auto;
+}
+
+.task-form-date.show-date-dropdown > div{
+  display: block;
 }
 
 .task-form .star{
@@ -132,9 +170,10 @@ form.complete-form{
   display: none;
   cursor: pointer;
   padding: 0 5px;
+  margin-right: 20px;
 }
 
-.task-form.active-task-form > input[type="date"],
+.task-form.active-task-form .task-form-date-icon,
 .task-form.active-task-form .star{
   display: inline;
 }

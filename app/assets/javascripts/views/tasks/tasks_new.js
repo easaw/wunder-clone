@@ -4,19 +4,30 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   events: {
     'submit .task-form':'submit',
     'mousedown .star.task-form-star' : 'starTask',
-    'mousedown .task-form-date' : 'selectDate',
+    'mousedown .task-form-date-icon' : 'selectDate',
+    'mousedown .task-form-date' : 'handleClick',
     'click .task-form' : 'activateForm'
   },
   
   handleClick: function(event){
+    event.stopPropagation();
   },
-  
-  activateForm: function(){
+
+  activateForm: function(event){
+    event.stopPropagation();
     this.$el.find('.task-form').addClass('active-task-form');
   },
   
+  deactivateDate: function(){
+    $('.task-form-date').removeClass('show-date-dropdown');
+    Wunderclone.bindFocusOutCallbacks();
+  },
+  
   selectDate: function(event){
+    event.preventDefault();
     event.stopPropagation();
+    // $('.task-form-name').focus();
+    $(document).off("focusout"); this.$el.find('.task-form-date').addClass('show-date-dropdown');
     // implement jquery date ui dropdown
   },
   

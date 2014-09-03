@@ -23,8 +23,8 @@ window.Wunderclone = {
             Wunderclone.Views.tasksNew = createTasksNewView();
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
-            bindFocusOutCallbacks();
             bindClickOutCallbacks();
+            bindFocusOutCallbacks();
             Backbone.history.start();
             
             Wunderclone.Models.inbox.trigger('show');
@@ -45,10 +45,16 @@ function bindFocusOutCallbacks(){
   })
 }
 
+window.Wunderclone.bindFocusOutCallbacks = bindFocusOutCallbacks;
+
 function bindClickOutCallbacks(){
   $(document).on('click', function(event){
     $('#content-container').removeClass("expand");
     $('.notifications-container').removeClass('show-activities');
+  })
+  
+  $(document).on('mousedown', function(event){
+   Wunderclone.Views.tasksNew.deactivateDate();
   })
 }
 
