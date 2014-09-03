@@ -15,12 +15,6 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     var that = this;
     this.inbox = options.inbox;
     
-    this.grabUserLists();
-    
-    // this.listenTo(this.collection, "remove add", this.render);
-    // this.listenTo(Wunderclone.Collections.tasks, "remove add", this.render);
-    // this.listenTo(Wunderclone.Models.starredList, "curatedChange", this.render);
-    // this.listenTo(Wunderclone.Collections.starredTasks, "add sync change reset remove", this.render);
     this.listenTo(Wunderclone.Collections.tasks, "add change:starred", this.render)
     this.listenTo(Wunderclone.Models.starredList.tasks(), "add sync change reset remove", this.render);
   

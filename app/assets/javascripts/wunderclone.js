@@ -16,7 +16,8 @@ window.Wunderclone = {
               lists: Wunderclone.Collections.lists,
               tasks: Wunderclone.Collections.tasks
             });
-            
+
+            generateCuratedLists();
             createModelRefs();
             Wunderclone.Views.listsIndex = createListsIndex();
             Wunderclone.Views.tasksNew = createTasksNewView();
@@ -35,7 +36,8 @@ window.Wunderclone = {
 };
 
 function generateCuratedLists(){
-  var stars = Wunderclone.Collections.tasks.where({starred: true})
+  Wunderclone.Models.starredList = new Wunderclone.Models.CuratedList({type: "starred"});
+  // Wunderclone.Collections.starredTasks = Wunderclone.Models.starredList.tasks();
 }
 
 function bindFocusOutCallbacks(){

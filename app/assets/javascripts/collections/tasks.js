@@ -28,4 +28,11 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
     }
   },
   
+  curatedFilter: function(type){
+    if (type == "starred"){
+       var results = this.where({starred: true, completed: false});
+       return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+    }
+  }
+  
 })
