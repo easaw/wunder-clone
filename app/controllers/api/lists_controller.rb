@@ -34,7 +34,7 @@ class Api::ListsController < ApplicationController
   end
   
   def index
-    @lists = current_user.owned_lists
+    @lists = current_user.lists
     render "index"
   end
   

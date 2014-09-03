@@ -17,55 +17,7 @@
  *= require jquery-ui/menu
  */
 
-/*body, h1, h2, h3, h4, ul, li, div, form, span {
-  margin: 0;
-  padding: 0;
-  border: none;
-  font-family: inherit;
-  box-sizing: border-box;
-}
 
-ul, li{
-  list-style: none;
-  display: block;
-}*/
-
-
-/* User Nav View style */
-#user-nav{
-  display: block;
-  height: 38px;
-}
-
-#user-info{
-  padding: 3px;
-}
-.avatar {
-  width:25px;
-  height:25px;
-  float: left;
-  margin: 3px;
-}
-
-.user-email{
-  display: inline-block;
-  width: 130px;
-  float: left;
-  padding: 11px 4px;
-  font-size: 12px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.sign-out-button > img{
-  position: relative;
-  display: inline-block;
-  width: 45px;
-  height: 30px;
-  float: right;
-  cursor:pointer;
-}
 
 /* */
 
@@ -95,6 +47,9 @@ button{
   overflow: hidden;
   height: 100vh;
   position: absolute;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
 }
 
 #content-container {

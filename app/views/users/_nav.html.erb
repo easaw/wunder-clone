@@ -1,0 +1,23 @@
+<nav id="user-nav">
+  <span id="user-info" class="group">
+    <% if signed_in? %>
+
+      <% if current_user.avatar.exists? %>
+        <img class="avatar" src="<%= current_user.avatar.url %>" >
+      <% else %>
+        <img class="avatar" src="<%= asset_url('default_avatar.png') %>">
+      <% end %>
+  
+      <% if current_user.guest != true %>
+        <span class="user-email"><%= current_user.email %></span>
+      <% else %>
+        <span class="user-email">Guest</span>
+      <% end %>
+            
+      <%= link_to "Sign Out", session_url, method: "delete", id: "sign-out-button" %>
+      <%= render partial: "notifications/dropdown" %>
+  
+    <% end %>
+  </span>
+
+</nav>

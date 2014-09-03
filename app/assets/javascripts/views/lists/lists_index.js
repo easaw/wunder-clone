@@ -6,10 +6,6 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     'click .add-list-link' : 'addList'
   },
   
-  tagName: 'ul',
-  
-  className: 'lists-index-container',
-  
   addList: function(){
     event.preventDefault();
     Wunderclone.Views.listsNewModal.newList();

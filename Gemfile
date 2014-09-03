@@ -36,6 +36,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 gem 'jquery-ui-rails'
+gem 'pusher'
 
 group :development, :test do
   gem 'rspec-rails'

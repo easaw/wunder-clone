@@ -26,13 +26,13 @@ li.task{
 
 .task-link{
   display: block;
-  font-size:18px;
-  font-weight: 300;
+  font-size:14px;
+  line-height: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 2px 0;
-  padding: 10px;
-  height: 40px;
+  padding: 8px;
+  height: 37px;
   width: 100%;
   background: #F7F8F8;
   box-shadow: 0 1px 2px 0 #9AABB0;
@@ -59,26 +59,40 @@ li.task{
 .task-name{
   float: left;
   position: relative;
-  margin: 0 10px;
-  font-size: 18px;
-  font-weight: 300;
+//  margin: 0 10px;
+  padding-top: 0 12px;
 }
 
-//.task-form > input[type="text"] {
-//  font-size: 18px;
-//  font-weight: 400;
+form.complete-form{
 //  display: block;
-//  padding: 10px;
-//  width: 100%;
-//  border: 1px solid black;
-//  border-radius: 5px;
-//  background: gray;
-//  color: white;
-//}
+  float: left;
+}
+
+.complete-button {
+  position: relative;
+  display: inline-block;
+  float: left;
+  padding: 8px 8px;
+  margin-right: 8px;
+  background: transparent;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.complete-button:hover {
+  cursor: pointer;
+};
+
+.complete-button:active {
+  box-shadow: none;
+  background: black;
+}
+
+.selected-task{
+  background: #DDEAF6;
+}
 
 .task-form{
-  font-size: 18px;
-  font-weight: 300;
   display: block;
   padding: 10px;
   width: 100%;
@@ -87,7 +101,7 @@ li.task{
   background: #9E9C9C;
   color: white;
   margin-bottom: 14px;
-  height: 40px;
+  height: 37px;
 }
 
 .task-form > input[type="text"] {
@@ -123,35 +137,6 @@ li.task{
   display: inline;
 }
 
-form.complete-form{
-//  display: block;
-  float: left;
-}
-
-.complete-button {
-  position: relative;
-  display: inline-block;
-  float: left;
-  padding: 8px 8px;
-  vertical-align:middle;
-//  bottom: 1px;
-  background: transparent;
-  border: solid 1px black;
-  border-radius: 5px;
-}
-
-.complete-button:hover {
-  cursor: pointer;
-};
-
-.complete-button:active {
-  box-shadow: none;
-  background: black;
-}
-
-.selected-task{
-  background: #DDEAF6;
-}
 
 
 /* Styles for task edit/side view */

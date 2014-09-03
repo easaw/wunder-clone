@@ -6,28 +6,26 @@
 /* List Index Styles */
 #lists-index{
 }
-.lists-index-ul{
-  display: block;
+.lists-ul{
   overflow: auto;
-  position: relative
 }
 .list-link{
   float: left;
   display: block;
-  height: 40px;
+  height: 35px;
   width: 268px;
   cursor: pointer;
 }
 
 .list-link > .list-name{
   display: inline-block;
-  padding: 12px;
+  padding: 9px;
 }
 
 .task-count {
   display: inline-block;
   float: right;
-  padding: 12px;
+  padding: 9px;
   color: #CBCBCB;
 }
 
@@ -151,29 +149,20 @@
   margin: auto;
 }
 
-.tasks-list h5{
-  display: inline-block;
-  margin-left: 30px;
-  font-size: 12px;
-  font-weight: 300;
-  padding: 5px;
-  background: gray;
-  color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-
 .list-show{
   width: 100%;
 }
 
 .show-completed-button{
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 1px;
   margin-top: 20px;
   margin-bottom: 10px;
   display: inline-block;
   background: gray;
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 5px;
+  padding: 3px 10px;
   color: white;
 }

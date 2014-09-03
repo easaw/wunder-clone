@@ -1,0 +1,40 @@
+<div class="notifications-container">
+  <%= image_tag "icons/bell.png", id: "notifications-bell" %>
+  <div class="notifications-dropdown">
+
+    <h1>Activity Center</h1>
+    
+    
+    <% if current_user.unread_notifications.length > 0 %>
+  
+      <ul class="notification-ul">
+      <% current_user.unread_notifications.each do |notification| %>
+        <li class="notification">
+          <a href="<%= notification.url %>">
+            <%= notification.text %>
+          </a>
+        </li>
+      <% end %>
+      </ul>
+      
+    <% else %>
+      <h3>No Activities</h5>
+    <% end %>
+  </div>
+</div>
+
+
+
+<script>
+  $(function(){
+    $('#notifications-bell').on('click', function(event){
+      event.stopPropagation();
+      $('.notifications-container').toggleClass('show-activities');
+    })
+    
+    $('.notifications-container').on('click', function(event){
+      event.stopPropagation()
+    })
+  })
+
+</script>

@@ -18,6 +18,15 @@ class Notification < ActiveRecord::Base
   scope :unread, -> { where(is_read: false) }
   scope :event, ->(event_name) { where(event_id: EVENT_IDS[event_name]) }
 
+  def url
+    case self.event_name
+    when :new_shared_list
+      list_share = self.notifiable
+      list = list_share.list
+      return "#/lists/#{list.id}"
+    end
+  end
+
   def text
     case self.event_name
     when :new_shared_list

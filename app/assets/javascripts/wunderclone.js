@@ -43,6 +43,7 @@ function bindFocusOutCallbacks(){
 function bindClickOutCallbacks(){
   $(document).on('click', function(event){
     $('#content-container').removeClass("expand");
+    $('.notifications-container').removeClass('show-activities');
   })
 }
 
