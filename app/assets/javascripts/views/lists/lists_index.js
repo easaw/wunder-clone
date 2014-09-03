@@ -3,7 +3,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   template: JST['lists/index'],
   
   events: {
-    'click .add-list-link' : 'addList'
+    'click .add-list-container' : 'addList'
   },
   
   addList: function(){
