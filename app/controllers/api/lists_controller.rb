@@ -44,7 +44,7 @@ class Api::ListsController < ApplicationController
   
   
   def triggerShareNotification
-    if !list_params[shared_user_ids].empty?
+    if !list_params[:shared_user_ids].nil?
       #trigger pusher notification
       notification = current_user.unread_notifications.last
       notification_partial = render_to_string(
