@@ -34,6 +34,10 @@ window.Wunderclone = {
   }
 };
 
+function generateCuratedLists(){
+  var stars = Wunderclone.Collections.tasks.where({starred: true})
+}
+
 function bindFocusOutCallbacks(){
   var focusOutCallBacks = [Wunderclone.Views.tasksNew.deactivateForm];
   $(document).on('focusout', function(){

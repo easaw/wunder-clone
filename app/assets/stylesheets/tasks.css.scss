@@ -30,7 +30,8 @@ li.task{
   line-height: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: 2px 0;
+  margin-bottom: 2px;
+//  margin-top: 15px;
   padding: 8px;
   height: 37px;
   width: 100%;
@@ -100,7 +101,7 @@ form.complete-form{
   border-radius: 5px;
   background: #9E9C9C;
   color: white;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
   height: 37px;
   font-size: 15px;
 }

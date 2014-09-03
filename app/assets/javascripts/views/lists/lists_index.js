@@ -35,6 +35,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
       results,
       {parentCollection: this.collection}
     );
+    
   },
   
   render: function(){

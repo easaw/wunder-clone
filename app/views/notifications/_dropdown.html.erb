@@ -9,11 +9,7 @@
   
       <ul class="notification-ul">
       <% current_user.unread_notifications.each do |notification| %>
-        <li class="notification">
-          <a href="<%= notification.url %>">
-            <%= notification.text %>
-          </a>
-        </li>
+        
       <% end %>
       </ul>
       
@@ -24,7 +20,7 @@
 </div>
 
 
-
+<script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
 <script>
   $(function(){
     $('#notifications-bell').on('click', function(event){
@@ -35,6 +31,11 @@
     $('.notifications-container').on('click', function(event){
       event.stopPropagation()
     })
+    
+    var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
+    var channel = pusher.subscribe('notifications');
+    channel.bind('new', function(data){
+      $('.notification-ul').append(data);
+    })
   })
-
 </script>
