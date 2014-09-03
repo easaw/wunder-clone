@@ -18,7 +18,6 @@
 //= require jquery.serializejson
 //= require jquery-ui/core
 //= require jquery-ui/widget
-//= require jquery-ui/menu
 //= require backbone.subset.js
 //= require wunderclone
 //= require_tree ../templates
