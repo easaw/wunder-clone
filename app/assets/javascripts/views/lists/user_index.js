@@ -1,6 +1,6 @@
-Wunderclone.Views.ListsIndex = Backbone.View.extend({
+Wunderclone.Views.UserIndex = Backbone.View.extend({
 
-  template: JST['lists/index'],
+  template: JST['lists/user_index'],
   
   events: {
     'click .add-list-container' : 'addList'
@@ -13,17 +13,8 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   initialize: function(options){
     var that = this;
-    this.inbox = options.inbox;
     
-    this.grabUserLists();
-    
-    // this.listenTo(this.collection, "remove add", this.render);
-    // this.listenTo(Wunderclone.Collections.tasks, "remove add", this.render);
-    // this.listenTo(Wunderclone.Models.starredList, "curatedChange", this.render);
-    // this.listenTo(Wunderclone.Collections.starredTasks, "add sync change reset remove", this.render);
-    this.listenTo(Wunderclone.Collections.tasks, "add change:starred", this.render)
-    this.listenTo(Wunderclone.Models.starredList.tasks(), "add sync change reset remove", this.render);
-  
+    this.grabUserLists();  
     
     if (this._subViews && this._subViews.length > 0){
       this.removeSubViews();
@@ -35,7 +26,7 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     var that = this;
     
     var results = this.collection.reject(function(list){
-      return list.id == that.inbox.id
+      return list.id == Wunderclone.Models.inbox.id;
     })
     
     this.userLists = new Wunderclone.Collections.ListsSubset(
@@ -77,15 +68,6 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     var that = this;
     this._subViews = this._subViews || [];
     
-    this.inboxView = new Wunderclone.Views.ListsCard({
-      model: this.inbox,
-      editable: false
-    });
-    
-    this.starredView = new Wunderclone.Views.CuratedCard({
-      model: Wunderclone.Models.starredList
-    });
-    
     this.userLists.each(function(list){
       var listCardView = new Wunderclone.Views.ListsCard({
         model: list,
@@ -97,23 +79,13 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
   
   attachSubViews: function(){
     var that = this;
-    this.$el.find(".lists-ul").append(this.inboxView.$el);
-    
-    if (Wunderclone.Models.starredList.tasks().length > 0){
-      this.$el.find(".lists-ul").append(this.starredView.$el);
-    }
     
     this._subViews.forEach(function(subView){
-      that.$el.find(".lists-ul").append(subView.$el);
+      that.$el.find("#user-lists-ul").append(subView.$el);
     });
   },
   
   renderSubViews: function(){
-    this.inboxView.render();
-    
-    if (Wunderclone.Models.starredList.tasks().length > 0){
-      this.starredView.render();
-    }
     
     this._subViews.forEach(function(subView){
       subView.render();

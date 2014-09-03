@@ -33,7 +33,7 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
     event.preventDefault();
     $(".list-link").removeClass("selected-list editable");
     this.$el.toggleClass("selected-list");
-    // Backbone.history.navigate("#/lists/" + this.model.id, {trigger: true});
+    Backbone.history.navigate("#/lists/" + this.model.id, {trigger: true});
   }
   
 })

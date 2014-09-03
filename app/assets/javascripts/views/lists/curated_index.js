@@ -1,22 +1,14 @@
-Wunderclone.Views.ListsIndex = Backbone.View.extend({
+Wunderclone.Views.CuratedIndex = Backbone.View.extend({
 
-  template: JST['lists/index'],
-  
-  events: {
-    'click .add-list-container' : 'addList'
-  },
-  
-  addList: function(){
-    event.preventDefault();
-    Wunderclone.Views.listsNewModal.newList();
-  },
+  template: JST['lists/curated_index'],
   
   initialize: function(options){
     var that = this;
     this.inbox = options.inbox;
+    this.starredList = options.starredList;
     
-    this.listenTo(Wunderclone.Collections.tasks, "add change:starred", this.render)
-    this.listenTo(Wunderclone.Models.starredList.tasks(), "add sync change reset remove", this.render);
+    this.listenTo(Wunderclone.Collections.tasks, "change:starred", this.render)
+    this.listenTo(Wunderclone.Models.starredList.tasks(), "add remove", this.render);
   
     
     if (this._subViews && this._subViews.length > 0){
@@ -25,24 +17,10 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     
   },
   
-  grabUserLists: function(){
-    var that = this;
-    
-    var results = this.collection.reject(function(list){
-      return list.id == that.inbox.id
-    })
-    
-    this.userLists = new Wunderclone.Collections.ListsSubset(
-      results,
-      {parentCollection: this.collection}
-    );
-    
-  },
   
   render: function(){
     var that = this;
     
-    this.grabUserLists();
     
     var content = this.template({});
     this.$el.html(content);
@@ -71,22 +49,16 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     var that = this;
     this._subViews = this._subViews || [];
     
-    this.inboxView = new Wunderclone.Views.ListsCard({
+    this.inboxView = new Wunderclone.Views.CuratedCard({
       model: this.inbox,
-      editable: false
     });
     
-    this.starredView = new Wunderclone.Views.CuratedCard({
-      model: Wunderclone.Models.starredList
-    });
-    
-    this.userLists.each(function(list){
-      var listCardView = new Wunderclone.Views.ListsCard({
-        model: list,
-        editable: true
+    if(this.starredList.tasks().length > 0){
+      this.starredView = new Wunderclone.Views.CuratedCard({
+        model: this.starredList
       });
-      that._subViews.push(listCardView);
-    });
+    }
+    
   },
   
   attachSubViews: function(){
@@ -94,12 +66,9 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
     this.$el.find(".lists-ul").append(this.inboxView.$el);
     
     if (Wunderclone.Models.starredList.tasks().length > 0){
-      this.$el.find(".lists-ul").append(this.starredView.$el);
+      this.$el.find("#curated-lists-ul").append(this.starredView.$el);
     }
     
-    this._subViews.forEach(function(subView){
-      that.$el.find(".lists-ul").append(subView.$el);
-    });
   },
   
   renderSubViews: function(){
@@ -109,9 +78,9 @@ Wunderclone.Views.ListsIndex = Backbone.View.extend({
       this.starredView.render();
     }
     
-    this._subViews.forEach(function(subView){
-      subView.render();
-    });
+    // this._subViews.forEach(function(subView){
+//       subView.render();
+//     });
   }
 
 });

@@ -43,7 +43,6 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
     Wunderclone.Collections.lists.create(attrs, {
       wait: true,
       success: function(list){
-        // Wunderclone.Views.listsIndex.showSpecifiedList(list);
         that.hideModal();
         list.trigger("show");
       }

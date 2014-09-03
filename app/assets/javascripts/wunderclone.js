@@ -18,8 +18,8 @@ window.Wunderclone = {
             });
 
             generateCuratedLists();
-            createModelRefs();
-            Wunderclone.Views.listsIndex = createListsIndex();
+            Wunderclone.Views.curatedListsIndex = createCuratedListsIndex();
+            Wunderclone.Views.userListsIndex = createUserListsIndex();
             Wunderclone.Views.tasksNew = createTasksNewView();
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
@@ -35,10 +35,6 @@ window.Wunderclone = {
   }
 };
 
-function generateCuratedLists(){
-  Wunderclone.Models.starredList = new Wunderclone.Models.CuratedList({type: "starred"});
-  // Wunderclone.Collections.starredTasks = Wunderclone.Models.starredList.tasks();
-}
 
 function bindFocusOutCallbacks(){
   var focusOutCallBacks = [Wunderclone.Views.tasksNew.deactivateForm];
@@ -72,21 +68,31 @@ function createListsNewModal(){
   return newModalView;
 }
 
-function createModelRefs(){
-  var lists = Wunderclone.Collections.lists;
-  var inbox = lists.findWhere({name: "Inbox"});
+function generateCuratedLists(){
+  var inbox = Wunderclone.Collections.lists.findWhere({name: "Inbox"});
   Wunderclone.Models.inbox = inbox;
   Wunderclone.Models.activeList = Wunderclone.Models.inbox;
+  Wunderclone.Models.starredList = new Wunderclone.Models.CuratedList({type: "starred"});
 }
 
-function createListsIndex (){
-  var indexView = new Wunderclone.Views.ListsIndex({
+function createCuratedListsIndex(){
+  var curatedIndexView = new Wunderclone.Views.CuratedIndex({
     inbox: Wunderclone.Models.inbox,
+    starredList: Wunderclone.Models.starredList
+  });
+
+  $('#lists-index').html(curatedIndexView.render().$el);
+  return curatedIndexView;
+}
+
+
+function createUserListsIndex (){
+  var userIndexView = new Wunderclone.Views.UserIndex({
     collection: Wunderclone.Collections.lists
   });
 
-  $('#lists-index').html(indexView.render().$el);
-  return indexView;
+  $('#lists-index').append(userIndexView.render().$el);
+  return userIndexView;
 }
 
 
