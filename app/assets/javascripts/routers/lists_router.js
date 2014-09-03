@@ -6,7 +6,12 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   },
   
   routes: {
+    'lists/starred' : 'starredShow',
     'lists/:id' : 'listsShow'
+  },
+  
+  starredShow: function(){
+    //
   },
   
   listsShow: function(id){

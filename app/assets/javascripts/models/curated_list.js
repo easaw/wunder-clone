@@ -14,7 +14,8 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
   setAttr: function(){
     switch(this.type) {
     case "starred":
-      this.set({name: "Starred"})
+      this.set({name: "Starred"});
+      this.set({id: "starred"});
       break;
     }
   },
