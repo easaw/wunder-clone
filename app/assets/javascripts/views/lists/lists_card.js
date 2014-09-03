@@ -42,6 +42,7 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
   },
   
   showEditLink: function(){
+    
     if (this.editable === true){
       this.$el.toggleClass('editable');
     }
