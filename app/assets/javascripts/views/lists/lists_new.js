@@ -3,7 +3,8 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
   
   events: {
     'click .hide-modal': 'hideModal',
-    'click #save-new-button' : 'submit',
+    'click #save-list-button' : 'submit',
+    'submit .new-list-form' : 'submit',
     'submit #share-user-form' : 'addSharedUser'
   },
   
@@ -39,7 +40,6 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
     if (this.currentSharedIds.indexOf(id) == -1){
       var newUserLi = '<li>' + email + '</li>';
       this.currentSharedIds.push(id); 
-      // this.$el.find('#shared-user-ids').attr("value", this.currentSharedIds);
       this.$el.find('#list-members-ul').append(newUserLi);
     }
   },

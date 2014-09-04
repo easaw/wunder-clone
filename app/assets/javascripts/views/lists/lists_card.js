@@ -19,6 +19,7 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
   initialize: function(options){
     this.editable = options.editable;
     this.activeTasks = this.model.activeTasks();
+    this.listenTo(this.model, "change", this.render);
     this.listenTo(this.activeTasks, "add remove sync", this.render);
     this.listenTo(this.model, "show", this.selectList);
   },

@@ -17,7 +17,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     if @list.update(list_params)
-      trigger_share_notification(json: @list)
+      # trigger_share_notification(json: @list)
       render "show"
     else
       render json: @list.errors, status: :unprocessable_entity

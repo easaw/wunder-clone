@@ -4,7 +4,7 @@
       <div id="top-modal-container">
         <h1>Edit List</h1>
       
-        <form class="new-list-form">
+        <form class="edit-list-form">
         
           <input
             type="text"
@@ -26,11 +26,16 @@
         </form>
         
         <ul id="list-members-ul"></ul>
+        <% list.get("shared_users").forEach(function(user){ %>
+          <li>
+            <%= user.name %>
+          </li>
+        <% }) %>
       </div>
       
       <div id="cancel-save-container">
         <button class="delete-list">Delete</span>
-        <button id="save-new-button">Save</button>
+        <button id="save-list-button">Save</button>
       </div>  
     </article>
     

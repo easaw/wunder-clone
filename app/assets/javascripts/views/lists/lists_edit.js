@@ -4,7 +4,10 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
   events: {
     'click .hide-modal': 'hideModal',
     'click' : 'checkHideModal',
-    'click .delete-list' : 'deleteList'
+    'click .delete-list' : 'deleteList',
+    'submit #share-user-form' : 'addSharedUser',
+    'submit .edit-list-form' : 'updateList',
+    'click #save-list-button' : 'updateList'
   },
   
   hideModal: function(){
@@ -20,6 +23,23 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     }
   },
   
+  addSharedUser: function(event){
+    event.preventDefault();
+    // grab email
+    var email = $(event.target).serializeJSON()['user_email']
+    var id = Wunderclone.otherUsers[email];
+    if (!id){
+      // need to show pop up saying enter a valid email address
+      return;
+    }
+    
+    if (this.currentSharedIds.indexOf(id) == -1){
+      var newUserLi = '<li>' + email + '</li>';
+      this.currentSharedIds.push(id); 
+      this.$el.find('#list-members-ul').append(newUserLi);
+    }
+  },
+  
   initialize: function(){
   },
   
@@ -29,18 +49,37 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     
     return this;
   },
+  updateList: function(){
+    event.preventDefault();
+    //need to update model on click of update
+    var that = this;
+    event.preventDefault();
+    var attrs = this.$el.find('.edit-list-form').serializeJSON();
+    attrs['list']['shared_user_ids'] = this.currentSharedIds;
+    
+    this.model.save(attrs, {
+      success: function(){
+        that.hideModal();
+        that.model.trigger("show");
+      }
+    })
+  },
   
   edit: function(model){
+    var that = this;
     this.$el.empty();
     this.model = model;
     this.render();
     this.$el.find('#modal').addClass("is-active");
+    this.currentSharedIds = [];
+    this.model.get("shared_users").forEach(function(user){
+      that.currentSharedIds.push(user.id);
+    })
   },
   
   deleteList: function(){
     var that = this;
     event.preventDefault();
-    
     this.model.destroy({
       success: function(){
         that.hideModal();
