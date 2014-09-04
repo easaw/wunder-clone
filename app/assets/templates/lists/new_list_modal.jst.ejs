@@ -11,18 +11,24 @@
           <input
             type="text"
             name="list[name]"
+            autocomplete="off"
             placeholder="List Name">
           
           <div id="list-settings-select-container">
             <h5>List Members</h5>
           </div>
+          
+        </form>
         
+        <form id="share-user-form">
           <input
             type="text"
-            name="list[shared_user_ids]"
+            name="user_email"
+            autocomplete="off"
             placeholder="Email Address...">
         </form>
-        <div class="list-members-ul"></div>
+        
+        <ul id="list-members-ul"></ul>
       </div>
       
       <div id="cancel-save-container">

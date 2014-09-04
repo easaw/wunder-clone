@@ -1,17 +1,42 @@
 <section id="modal">
     <article>
-      <span class="hide-modal">&times;</span>
-
-      <h1>Edit list</h1>
       
-      <form class="edit-list-form">
-        <input
-          type="text"
-          name="list[name]"
-          value="<%= list.escape("name") %>">
-      </form>
+      <div id="top-modal-container">
+        <h1>Edit List</h1>
       
-      <button class="delete-list">Delete</span>
+        <form class="new-list-form">
+        
+          <input
+            type="text"
+            name="list[name]"
+            value="<%= list.escape("name") %>"
+            placeholder="List Name">
+          
+          <div id="list-settings-select-container">
+            <h5>List Members</h5>
+          </div>
+        
+          <input
+            id="shared-user-ids"
+            type="hidden"
+            value=""
+            name="list[shared_user_ids]">
+        </form>
+        
+        <form id="share-user-form">
+          <input
+            type="text"
+            name="user_email"
+            placeholder="Email Address...">
+        </form>
+        
+        <ul id="list-members-ul"></ul>
+      </div>
       
+      <div id="cancel-save-container">
+        <button class="delete-list">Delete</span>
+        <button id="save-new-button">Save</button>
+      </div>  
     </article>
+    
 </section>
