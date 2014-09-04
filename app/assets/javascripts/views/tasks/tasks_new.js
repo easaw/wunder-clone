@@ -37,11 +37,15 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
   
   initialize: function(options){
     this.bindKeypress();
-    this.listenTo(Wunderclone.Models.activeList, "change", this.changeList)
   },
   
-  changeList: function(){
-    this.list = Wunderclone.Models.activeList;
+  changeList: function(list, options){
+    if(options && options.type){
+      this.type = options.type;
+    } else {
+      this.type = null;
+    }
+    this.list = list, 
     this.render();
     this.collection = this.list.activeTasks();
   },
@@ -51,6 +55,14 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     this.$el.html(content);
     $('#new-task-div').html(this.$el);
     this.delegateEvents();
+    
+    if(this.type === "starred"){
+      // change placeholder
+      this.$el.find('.task-form-name').attr("placeholder",
+       'Add a starred item in "Inbox"...');
+      this.$el.find('#star').val(true);
+      this.$el.find('.task-form-star').addClass("starred")
+    };
     return this;
   },
   

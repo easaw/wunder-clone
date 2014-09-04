@@ -11,17 +11,18 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   },
   
   starredShow: function(){
-    Wunderclone.Models.activeList = Wunderclone.Models.inbox;
-    var showView = new Wunderclone.Views.StarShow({
+    
+    var showView = new Wunderclone.Views.StarredShow({
       model: Wunderclone.Models.starredList
     });
     
+    this._swapView(showView);
+    Wunderclone.Views.tasksNew.changeList(Wunderclone.Models.inbox, {type: "starred"});
   },
   
   listsShow: function(id){
     var that = this;
     var list = this.lists.getOrFetch(id);
-    Wunderclone.Models.activeList = list;
     
     var showView = new Wunderclone.Views.ListsShow({
       model: list
