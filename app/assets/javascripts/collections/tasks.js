@@ -45,7 +45,7 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
     if (type == "today"){
       
       var results = this.filter(function(task){
-        return task.checkDueToday();
+        return task.checkDueToday() && task.get('completed') == false;
       })
       
       return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});

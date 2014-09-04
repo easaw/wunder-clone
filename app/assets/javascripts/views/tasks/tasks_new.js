@@ -49,6 +49,13 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     this.collection = this.list.activeTasks();
   },
   
+  ISODateString: function(d){
+   function pad(n){return n<10 ? '0'+n : n}
+   return d.getUTCFullYear()+'-'
+        + pad(d.getUTCMonth()+1)+'-'
+        + pad(d.getUTCDate())
+  },
+  
   render: function(){
     var content = this.template({list: this.list});
     this.$el.html(content);
@@ -61,7 +68,12 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
        'Add a starred item in "Inbox"...');
       this.$el.find('#star').val(true);
       this.$el.find('.task-form-star').addClass("starred")
-    };
+    } else if (this.type === "today"){
+      this.$el.find('.task-form-name').attr("placeholder",
+       'Add an item due today in "Inbox"...');
+      var today = this.ISODateString(new Date);
+      this.$el.find('input[type=date]').attr('value', today);
+    }
     return this;
   },
   

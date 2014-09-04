@@ -7,7 +7,17 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   
   routes: {
     'lists/starred' : 'starredShow',
+    'lists/today' : 'todayShow',
     'lists/:id' : 'listsShow'
+  },
+  
+  todayShow: function(){
+    var showView = new Wunderclone.Views.TodayShow({
+      model: Wunderclone.Models.todayList
+    });
+    
+    this._swapView(showView);
+    Wunderclone.Views.tasksNew.changeList(Wunderclone.Models.inbox, {type: "today"})
   },
   
   starredShow: function(){

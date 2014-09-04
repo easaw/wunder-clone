@@ -1,5 +1,5 @@
-Wunderclone.Views.StarredShow = Backbone.View.extend({
-  template: JST['lists/starred_show'],
+Wunderclone.Views.TodayShow = Backbone.View.extend({
+  template: JST['lists/today_show'],
   
   className: "list-show",
   
@@ -28,14 +28,14 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
     
     var content = this.template({list: this.model});
     this.$el.html(content);
-    this.$miniListsContainer = this.$el.find('#starred-lists-container');
+    this.$miniListsContainer = this.$el.find('#today-lists-container');
     
     
     this.splitByList();
     this.createSubViews();
     this.attachSubViews();
     this.renderSubViews();
-    Wunderclone.Views.tasksNew.changeList(Wunderclone.Models.inbox, {type: "starred"});
+    Wunderclone.Views.tasksNew.changeList(Wunderclone.Models.inbox, {type: "today"});
     return this;
   },
   
@@ -57,7 +57,6 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
     })
   },
   
-  
   createSubViews: function(){
     var that = this;
     
@@ -65,10 +64,10 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
 
     Object.keys(this.tasksByList).forEach(function(list_id){
         var list = Wunderclone.Collections.lists.get(list_id);
-        var starredTasks = that.tasksByList[list_id]; // could be subset?
+        var todayTasks = that.tasksByList[list_id]; // could be subset?
         var miniListView = new Wunderclone.Views.MiniListShow({
           model: list,
-          miniListTasks: starredTasks
+          miniListTasks: todayTasks
         });
         that._subViews.push(miniListView);
     });

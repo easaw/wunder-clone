@@ -10,7 +10,7 @@ Wunderclone.Views.MiniListShow = Backbone.View.extend({
       this.removeSubViews();
     }
     
-    this.collection = options.starredTasks;
+    this.collection = options.miniListTasks;
     
   },
   

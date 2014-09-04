@@ -32,17 +32,9 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
   checkChangeToday: function(model){
     if(model.checkDueToday() == true && model.get("completed") == false && this.activeTasks().contains(model) == false){
       this.activeTasks().add(model);
-    } else if (model.checkDueToday() == false){
+    } else if (model.checkDueToday() == false || model.get("completed") == true){
       this.activeTasks().remove(model);
     }
-  },
-  
-  checkAddToday: function(){
-    
-  },
-  
-  checkCompleteToday: function(){
-    
   },
   
   activeTasks: function(){
