@@ -22,9 +22,14 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
   },
   
   render: function(){
+    if (this._subViews){
+      this.removeSubViews();
+    }
+    
     var content = this.template({list: this.model});
     this.$el.html(content);
     this.$miniListsContainer = this.$el.find('#starred-lists-container');
+    
     
     this.splitByList();
     this.createSubViews();
@@ -62,6 +67,7 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
   
   createSubViews: function(){
     var that = this;
+    
     this._subViews = this._subViews || [];
 
     Object.keys(this.tasksByList).forEach(function(list_id){
