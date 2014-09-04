@@ -20,7 +20,7 @@
 <script>
 
 $(document).ready(function(){
-  
+  window.currentUserId = <%= current_user.id %>;
   Wunderclone.otherUsers = {};
   $.getJSON("api/users", function(data){
     data.forEach(function(user_data){

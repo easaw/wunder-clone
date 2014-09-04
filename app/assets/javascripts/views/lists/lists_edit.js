@@ -74,7 +74,10 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     this.currentSharedIds = [];
     this.model.get("shared_users").forEach(function(user){
       that.currentSharedIds.push(user.id);
-    })
+    });
+    if (this.currentSharedIds.indexOf(currentUserId) != -1){
+      this.$el.find('.delete-list').addClass("hidden");
+    };
   },
   
   deleteList: function(){

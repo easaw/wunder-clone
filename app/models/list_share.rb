@@ -21,6 +21,7 @@ class ListShare < ActiveRecord::Base
   
   has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
   after_commit :set_notification, on: [:create]
+  after_destroy :destroy_notification
   
   after_initialize :init
   
@@ -32,6 +33,12 @@ class ListShare < ActiveRecord::Base
 
   def set_notification
     notification = self.notifications.unread.event(:new_shared_list).new
+    notification.user = self.user
+    notification.save
+  end
+  
+  def destroy_notification
+    notification = self.notifications.unread.event(:destroy_shared_list).new
     notification.user = self.user
     notification.save
   end

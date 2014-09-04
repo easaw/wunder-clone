@@ -26,6 +26,7 @@ class Api::ListsController < ApplicationController
   
   def destroy
     @list = List.find(params[:id])
+    trigger_delete_notification(@list)
     @list.destroy!
     render json: true
   end
@@ -52,7 +53,6 @@ class Api::ListsController < ApplicationController
         notification_partial = render_to_string(
                 partial: "notifications/notification",
                 formats: [:html],
-                #change naming
                 locals: {notification: notification}
         )
         Pusher["notifications-#{user_id}"].trigger("new", {list:  list, notification: notification_partial})
@@ -61,7 +61,17 @@ class Api::ListsController < ApplicationController
   end
   
   def trigger_delete_notification(list)
-    # if list.
+    if list.shared_users.length > 0
+      list.shared_users.each do |user|
+        notification = User.find(user.id).unread_notifications.last
+        notification_partial = render_to_string(
+                partial: "notifications/notification",
+                formats: [:html],
+                locals: {notification: notification}
+        )
+        Pusher["notifications-#{user.id}"].trigger("destroy", {list_id:  list.id, notification: notification_partial})
+      end
+    end
   end
  
   def require_destroy_ability

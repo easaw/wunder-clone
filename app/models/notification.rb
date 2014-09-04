@@ -2,7 +2,8 @@ class Notification < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   EVENTS = {
-    1 => :new_shared_list
+    1 => :new_shared_list,
+    2 => :destroy_shared_list
   }
 
   EVENT_IDS = EVENTS.invert
@@ -24,6 +25,8 @@ class Notification < ActiveRecord::Base
       list_share = self.notifiable
       list = list_share.list
       return "#{list.id}"
+    when :destroy_shared_list
+      return "#"
     end
   end
 
@@ -35,6 +38,13 @@ class Notification < ActiveRecord::Base
       list_owner = list.owner
       
       "#{list_owner.name} shared their list, #{list.name}, with you!"
+    when :destroy_shared_list
+      list_share = self.notifiable
+      list = list_share.list
+      list_owner = list.owner
+      
+      "#{list_owner.name} deleted their shared list, #{list.name}!"
+      return "#"
     end
   end
 

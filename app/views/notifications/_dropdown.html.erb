@@ -44,9 +44,16 @@
       var list = data.list;
       var notification = data.notification;
       Wunderclone.Collections.lists.create(list['json']);
-      console.log(notification);
       $('.notification-ul').append(notification);
       
+    })
+    
+    channel.bind('destroy', function(data){
+      var list_id = data.list_id;
+      var notification = data.notification;
+      console.log(data);
+      Wunderclone.Collections.lists.remove(list_id);
+      $('.notification-ul').append(notification);
     })
   })
 </script>
