@@ -15,7 +15,7 @@ Wunderclone.Views.MiniListShow = Backbone.View.extend({
   },
   
   render: function(){
-    var content = this.template();
+    var content = this.template({list: this.model});
     this.$el.html(content);
     
     if (this._subViews && this._subViews.length > 0){
