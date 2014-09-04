@@ -1,0 +1,125 @@
+
+/*Edit List Modal Styles*/
+
+
+#modal {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+#modal.is-active {
+  display: block;
+}
+
+#modal:before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#modal > article {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: 395px;
+  height: 450px;
+  margin-bottom: 100px;
+  margin-left: -197.5px;
+  min-height: 200px;
+  background: white;
+  border-radius: 5px;
+}
+
+#modal #top-modal-container{
+  padding: 20px 15px;
+}
+
+#modal > article > h1 {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#modal > article input[type="text"]{
+  background: white;
+  width: 100%;
+  margin: 14px 0;
+  padding: 10px;
+  border: 1px solid #C9C9C9;
+  border-radius: 5px;
+}
+
+#list-settings-select-container{
+  padding: 7px 0;
+  border-bottom: 1px solid #C9C9C9;
+}
+
+#cancel-save-container{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  height: 54px;
+  padding-top: 12px;
+  border-top: 1px solid #C9C9C9;
+  width: 100%;
+}
+ 
+#modal > article h5{
+  font-size: 10px;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+#save-new-button,
+#cancel-new-button{
+ padding: 7px 0px;
+ font-size: 13px;
+ border-radius: 5px;
+ float: right;
+ width: 100px;
+}
+
+
+#save-new-button{
+  font-weight: 500;
+  background: #95C9FB;
+  color: #fff;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#cancel-new-button{
+//  font-weight: bold;
+  background: #fff;
+  color: #7D7C7C;
+  border: 1px solid #C9C9C9;
+
+}
+
+#modal .hide-modal {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  color: gray;
+}
+
+#modal .hide-modal:hover {
+  color: black;
+}
+
+.delete-list{
+  display: block;
+}
+
+/**/

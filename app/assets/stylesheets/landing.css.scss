@@ -53,7 +53,10 @@
   display: block;
   background-size: 100%;
   background-image: url(image-path('landing/landing_background2.jpg'));
-  background-repeat: no-repeat;
+  background-repeat:no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;  /* Firefox 3.6 */
+  background-position: center;  /* Internet Explorer 7/8 */
   content: "";
 //  -webkit-filter: blur(1px);
 //   -moz-filter: blur(1px);

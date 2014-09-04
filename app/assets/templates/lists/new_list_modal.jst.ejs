@@ -2,17 +2,33 @@
 <!--TODO find backbone way of doing this -->
 <section id="modal">
     <article>
-      <span class="hide-modal">&times;</span>
-
-      <h1>Create New list</h1>
       
-      <form class="new-list-form">
-        <input
-          type="text"
-          name="list[name]"
-          placeholder="Name">
+      <div id="top-modal-container">
+        <h1>Create New list</h1>
+      
+        <form class="new-list-form">
+        
+          <input
+            type="text"
+            name="list[name]"
+            placeholder="List Name">
           
-        <input type="submit">Save</save>
-      </form>
+          <div id="list-settings-select-container">
+            <h5>List Members</h5>
+          </div>
+        
+          <input
+            type="text"
+            name="list[shared_user_ids]"
+            placeholder="Email Address...">
+        </form>
+        <div class="list-members-ul"></div>
+      </div>
+      
+      <div id="cancel-save-container">
+        <button id="save-new-button">Save</button>
+        <button class="hide-modal" id="cancel-new-button">Cancel</button>
+      </div>  
     </article>
+    
 </section>
