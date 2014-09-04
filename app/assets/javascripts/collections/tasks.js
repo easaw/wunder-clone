@@ -10,7 +10,7 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
       this.list = options.list;
     }
   },
-  
+
   comparator: function(task){
     return task.get('created_at');
   },
@@ -18,20 +18,39 @@ Wunderclone.Collections.Tasks = Backbone.Collection.extend({
   listFilter: function(list, options){
     if (options.state == 'active') {
         var results = this.where({list_id: list.id, completed: false});
-        return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+        return new Wunderclone.Collections.TasksSubset(
+          results,
+          {parentCollection: Wunderclone.Collections.tasks}
+        );
     } else if (options.state == 'completed'){
         var results = this.where({list_id: list.id, completed: true});
-        return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+        return new Wunderclone.Collections.TasksSubset(
+          results,
+          {parentCollection: Wunderclone.Collections.tasks}
+        );
     } else {
       var results = this.where({list_id: list.id});
-      return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+      return new Wunderclone.Collections.TasksSubset(
+        results,
+        {parentCollection: Wunderclone.Collections.tasks}
+      );
     }
   },
   
   curatedFilter: function(type, options){
     if (type == "starred"){
-       var results = this.where({starred: true, completed: options.completed});
-       return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+      var results = this.where({starred: true, completed: options.completed});
+      return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+    }
+    if (type == "today"){
+      
+      var results = this.filter(function(task){
+        return task.checkDueToday();
+      })
+      
+      return new Wunderclone.Collections.TasksSubset(results, {parentCollection: Wunderclone.Collections.tasks});
+      
+      
     }
   }
   

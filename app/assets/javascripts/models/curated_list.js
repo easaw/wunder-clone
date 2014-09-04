@@ -4,9 +4,7 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
     this.type = options.type;
     this.setAttr();
     // this.listenTo(this.tasks(), "add remove", this.triggerChange); // this.trigger.bind(this, "curatedChange"));
-    this.listenTo(this.activeTasks().parentCollection, "change:starred", this.addStarredTask);
-    this.listenTo(this.activeTasks().parentCollection, "add", this.addNewStarredTask);
-    this.listenTo(this.completedTasks().parentCollection, "change:completed", this.addBackStarredTask);
+   
   },
 
   triggerChange: function(){
@@ -18,8 +16,22 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
     case "starred":
       this.set({name: "Starred"});
       this.set({id: "starred"});
-      this.set({})
+      this.listenTo(this.activeTasks().parentCollection, "change:starred", this.addStarredTask);
+      this.listenTo(this.activeTasks().parentCollection, "add", this.addNewStarredTask);
+      this.listenTo(this.completedTasks().parentCollection, "change:completed", this.addBackStarredTask);
       break;
+    case "today":
+      this.set({name: "Today"});
+      this.set({id: "today"});
+      this.listenTo(this.activeTasks().parentCollection, "change:due_date", this.checkIfToday);
+      this.listenTo(this.activeTasks().parentCollection, "add", this.checkIfToday);
+      this.listenTo(this.completedTasks().parentCollection, "change:completed", this.checkIfToday);
+    }
+  },
+  
+  checkStillToday: function(model){
+    if(model.checkDueToday && this.activeTasks.contains(model) == false && model.get("completed") == false){
+      this.activeTasks.add(model);
     }
   },
   
@@ -55,9 +67,5 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
     } else {
       this.activeTasks().remove(model);
     }
-  },
-  
-  grabTasks: function(){
-    this._tasks = Wunderclone.Collections.tasks.curatedFilter(this.type);
   }
 })
