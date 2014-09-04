@@ -34,14 +34,13 @@
     
     var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
     var channel = pusher.subscribe('notifications-' + <%= current_user.id %>);
-    channel.bind('new', function(list_data){
-      console.log(list_data);
-      // notification = current_user.unread_notifications.last
-
-      // notification_partial = render partial: "notifications/notification", notification: notificatio
+    channel.bind('new', function(data){
+      var list = data.list;
+      var notification = data.notification;
+      console.log(data);
+      Wunderclone.Collections.list.add(list_data);
+      $('.notification-ul').append(notification);
       
-      // $('.notification-ul').append();
-      // Wunderclone.Collections.list.add(list_data)
     })
   })
 </script>

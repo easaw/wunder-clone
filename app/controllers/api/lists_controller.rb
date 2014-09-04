@@ -17,7 +17,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     if @list.update(list_params)
-      triggerShareNotification
+      trigger_share_notification(json: @list)
       render "show"
     else
       render json: @list.errors, status: :unprocessable_entity
@@ -48,7 +48,14 @@ class Api::ListsController < ApplicationController
     if !list_params[:shared_user_ids].nil?
       
       list_params[:shared_user_ids].each do |user_id|
-        Pusher["notifications-" + user_id].trigger("new", list)
+        notification = User.find(user_id).unread_notifications.last
+        notification_partial = render_to_string(
+                partial: "notifications/notification",
+                formats: [:html],
+                #change naming
+                locals: {notification: Notification.new}
+        )
+        Pusher["notifications-#{user_id}"].trigger("new", {list:  list, notification: notification_partial})
       end
     end
   end

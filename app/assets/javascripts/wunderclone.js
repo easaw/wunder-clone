@@ -103,12 +103,4 @@ function createUserListsIndex (){
 
 $(document).ready(function(){
   Wunderclone.initialize();
-  
-  Wunderclone.otherUsers = {};
-  $.getJSON("api/users", function(data){
-    data.forEach(function(user_data){
-      Wunderclone.otherUsers[user_data['email']] = user_data['id'];
-    })
-  });
-  
 });

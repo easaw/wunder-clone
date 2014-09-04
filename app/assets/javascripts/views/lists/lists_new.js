@@ -56,7 +56,7 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
     event.preventDefault();
     var attrs = this.$el.find('.new-list-form').serializeJSON();
     attrs['list']['shared_user_ids'] = this.currentSharedIds;
-    debugger
+
     Wunderclone.Collections.lists.create(attrs, {
       wait: true,
       success: function(list){
