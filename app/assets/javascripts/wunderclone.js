@@ -51,10 +51,8 @@ function bindClickOutCallbacks(){
   $(document).on('click', function(event){
     $('#content-container').removeClass("expand");
     $('.notifications-container').removeClass('show-activities');
-  })
-  
-  $(document).on('click', function(event){
     Wunderclone.Views.tasksNew.deactivateDate();
+    Wunderclone.Views.tasksNew.deactivateForm();
   })
 }
 
