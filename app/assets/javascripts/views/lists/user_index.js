@@ -20,7 +20,7 @@ Wunderclone.Views.UserIndex = Backbone.View.extend({
       this.removeSubViews();
     }
     
-    this.listenTo(this.collection, "add change remove", this.render);
+    this.listenTo(this.collection, "add remove", this.render);
     
   },
   

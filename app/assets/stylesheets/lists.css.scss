@@ -17,8 +17,12 @@
 }
 
 .list-link > .list-name{
+  width: 185px;
   display: inline-block;
   padding: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .task-count {

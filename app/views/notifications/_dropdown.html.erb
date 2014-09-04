@@ -38,7 +38,7 @@
       var list = data.list;
       var notification = data.notification;
       console.log(data);
-      Wunderclone.Collections.list.add(list_data);
+      Wunderclone.Collections.lists.create(list['json']);
       $('.notification-ul').append(notification);
       
     })
