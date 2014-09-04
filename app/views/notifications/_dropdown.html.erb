@@ -33,9 +33,15 @@
     })
     
     var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
-    var channel = pusher.subscribe('notifications');
-    channel.bind('new', function(data){
-      $('.notification-ul').append(data);
+    var channel = pusher.subscribe('notifications-' + <%= current_user.id %>);
+    channel.bind('new', function(list_data){
+      console.log(list_data);
+      // notification = current_user.unread_notifications.last
+
+      // notification_partial = render partial: "notifications/notification", notification: notificatio
+      
+      // $('.notification-ul').append();
+      // Wunderclone.Collections.list.add(list_data)
     })
   })
 </script>

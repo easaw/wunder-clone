@@ -6,8 +6,9 @@ class Api::ListsController < ApplicationController
     @list = current_user.owned_lists.build(list_params)
     
     if @list.save
-      trigger_share_notification
-      render "show"# , formats: [:json]
+      #should remove notifications count / use jbuilder partial
+      trigger_share_notification(json: @list)
+      render "show"
     else
       render json: @list.errors, status: :unprocessable_entity
     end
@@ -43,18 +44,12 @@ class Api::ListsController < ApplicationController
   private
   
   
-  def trigger_share_notification
+  def trigger_share_notification(list)
     if !list_params[:shared_user_ids].nil?
-      #trigger pusher notification
-      notification = current_user.unread_notifications.last
-      notification_partial = render_to_string(
-        partial: "notifications/notification",
-        formats: [:html],
-        #change naming
-        locals: {notification: Notification.new}
-        )
-        
-      Pusher["notifications"].trigger("new", notification_partial)
+      
+      list_params[:shared_user_ids].each do |user_id|
+        Pusher["notifications-" + user_id].trigger("new", list)
+      end
     end
   end
  
