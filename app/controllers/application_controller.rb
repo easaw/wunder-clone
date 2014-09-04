@@ -35,8 +35,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
-  
-  def other_users
-    User.all.where.not(id: current_user.id)
-  end
 end

@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :show, :index, :destroy, :update]
     
     resources :list_shares, only: [:create, :destroy]
+    
+    resources :users, only: [:index]
   end
 end

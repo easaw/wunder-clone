@@ -1,14 +1,13 @@
 Wunderclone.Views.ListsNewModal = Backbone.View.extend({
-  template: JST['lists/new_modal'],
+  template: JST['lists/new_list_modal'],
   
   events: {
     'click .hide-modal': 'hideModal',
     'click' : 'checkHideModal',
     'submit' : 'submit'
-  },
+  }, 
   
   render: function(){
-    // console.log("trying to render new list");
     var content = this.template();
     this.$el.html(content).appendTo('#modal-container');
     
