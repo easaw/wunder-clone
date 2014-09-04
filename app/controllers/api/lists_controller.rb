@@ -53,11 +53,15 @@ class Api::ListsController < ApplicationController
                 partial: "notifications/notification",
                 formats: [:html],
                 #change naming
-                locals: {notification: Notification.new}
+                locals: {notification: notification}
         )
         Pusher["notifications-#{user_id}"].trigger("new", {list:  list, notification: notification_partial})
       end
     end
+  end
+  
+  def trigger_delete_notification(list)
+    # if list.
   end
  
   def require_destroy_ability

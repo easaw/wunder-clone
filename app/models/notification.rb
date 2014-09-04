@@ -23,7 +23,7 @@ class Notification < ActiveRecord::Base
     when :new_shared_list
       list_share = self.notifiable
       list = list_share.list
-      return "#/lists/#{list.id}"
+      return "#{list.id}"
     end
   end
 

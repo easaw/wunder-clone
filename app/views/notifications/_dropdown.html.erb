@@ -29,7 +29,13 @@
     })
     
     $('.notifications-container').on('click', function(event){
-      event.stopPropagation()
+      event.stopPropagation();
+    })
+    
+    $('.notifications-container').on('click', 'a', function(event){
+      var modelId = $(event.target).attr("data-id");
+      var model = Wunderclone.Collections.lists.get(modelId);
+      model.trigger("show");
     })
     
     var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
@@ -37,8 +43,8 @@
     channel.bind('new', function(data){
       var list = data.list;
       var notification = data.notification;
-      console.log(data);
       Wunderclone.Collections.lists.create(list['json']);
+      console.log(notification);
       $('.notification-ul').append(notification);
       
     })
