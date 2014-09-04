@@ -3,6 +3,7 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
   initialize: function(options){
     this.type = options.type;
     this.setAttr();
+    // this._activeTasks = this.activeTasks();
     // this.listenTo(this.tasks(), "add remove", this.triggerChange); // this.trigger.bind(this, "curatedChange"));
    
   },
@@ -23,16 +24,25 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
     case "today":
       this.set({name: "Today"});
       this.set({id: "today"});
-      this.listenTo(this.activeTasks().parentCollection, "change:due_date", this.checkIfToday);
-      this.listenTo(this.activeTasks().parentCollection, "add", this.checkIfToday);
-      this.listenTo(this.completedTasks().parentCollection, "change:completed", this.checkIfToday);
+      this.listenTo(this.activeTasks().parentCollection, "change:due_date add change:completed", this.checkChangeToday);
+      break;
     }
   },
   
-  checkStillToday: function(model){
-    if(model.checkDueToday && this.activeTasks.contains(model) == false && model.get("completed") == false){
-      this.activeTasks.add(model);
+  checkChangeToday: function(model){
+    if(model.checkDueToday() == true && model.get("completed") == false && this.activeTasks().contains(model) == false){
+      this.activeTasks().add(model);
+    } else if (model.checkDueToday() == false){
+      this.activeTasks().remove(model);
     }
+  },
+  
+  checkAddToday: function(){
+    
+  },
+  
+  checkCompleteToday: function(){
+    
   },
   
   activeTasks: function(){

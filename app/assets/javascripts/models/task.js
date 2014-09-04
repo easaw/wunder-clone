@@ -11,12 +11,16 @@ Wunderclone.Models.Task = Backbone.Model.extend({
       this.list = options.list; 
     }
     
+  },
+  
+  setDateAttr: function(){
     this.set('due_day', this.dueDate());
     this.set('due_month', this.dueMonth());
     this.set('due_year', this.dueYear());
   },
   
   checkDueToday: function(){
+    this.setDateAttr();
     var today = new Date;
     var todayDate = today.getDate();
     var todayMonth = today.getMonth();
@@ -27,7 +31,12 @@ Wunderclone.Models.Task = Backbone.Model.extend({
     var ms = Math.abs(dateToday-dateCompare);
     var days = Math.floor(ms/1000/60/60/24);
     
-    return days <= 1;
+    if (days <= 1){
+      return true;
+    } else {
+      return false;
+    }
+    // return days <= 1;
   },
   
   dueDate: function(){

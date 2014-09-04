@@ -6,9 +6,12 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
     var that = this;
     this.inbox = options.inbox;
     this.starredList = options.starredList;
+    this.todayList = options.todayList;
     
-    this.listenTo(Wunderclone.Collections.tasks, "change:starred", this.render)
+    this.listenTo(Wunderclone.Collections.tasks, "change:starred", this.render);
     this.listenTo(Wunderclone.Models.starredList.activeTasks(), "add remove", this.render);
+    this.listenTo(Wunderclone.Models.todayList.activeTasks(), "add remove", this.render);
+    this.listenTo(Wunderclone.Collections.tasks, "change:due_date", this.render);
   
     
     if (this._subViews && this._subViews.length > 0){
@@ -20,7 +23,6 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
   
   render: function(){
     var that = this;
-    
     
     var content = this.template({});
     this.$el.html(content);
@@ -59,14 +61,24 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
       });
     }
     
+    if(this.todayList.activeTasks().length > 0){
+      this.todayView = new Wunderclone.Views.CuratedCard({
+        model: this.todayList
+      });
+    }
+    
   },
   
   attachSubViews: function(){
     var that = this;
     this.$el.find(".lists-ul").append(this.inboxView.$el);
     
-    if (Wunderclone.Models.starredList.activeTasks().length > 0){
+    if (this.starredList.activeTasks().length > 0){
       this.$el.find("#curated-lists-ul").append(this.starredView.$el);
+    }
+    
+    if(this.todayList.activeTasks().length > 0){
+      this.$el.find("#curated-lists-ul").append(this.todayView.$el);
     }
     
   },
@@ -74,8 +86,12 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
   renderSubViews: function(){
     this.inboxView.render();
     
-    if (Wunderclone.Models.starredList.activeTasks().length > 0){
+    if (this.starredList.activeTasks().length > 0){
       this.starredView.render();
+    }
+    
+    if (this.todayList.activeTasks().length > 0){
+      this.todayView.render();
     }
     
     // this._subViews.forEach(function(subView){

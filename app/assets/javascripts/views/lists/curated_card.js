@@ -11,7 +11,6 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
   
   initialize: function(options){
     this.activeTasks = this.model.activeTasks();
-    if(this.activeTasks)
     this.listenTo(this.activeTasks, "add remove sync change", this.render);
     this.listenTo(this.model, "add remove sync change", this.render);
     this.listenTo(this.model, "show", this.selectList);

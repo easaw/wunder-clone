@@ -82,7 +82,8 @@ function generateCuratedLists(){
 function createCuratedListsIndex(){
   var curatedIndexView = new Wunderclone.Views.CuratedIndex({
     inbox: Wunderclone.Models.inbox,
-    starredList: Wunderclone.Models.starredList
+    starredList: Wunderclone.Models.starredList,
+    todayList: Wunderclone.Models.todayList
   });
 
   $('#lists-index').html(curatedIndexView.render().$el);
