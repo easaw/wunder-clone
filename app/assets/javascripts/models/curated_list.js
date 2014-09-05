@@ -64,7 +64,7 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
   },
   
   addStarredTask: function(model, starred){
-    if (starred){
+    if (starred && model.get("completed") == false){
       this.activeTasks().add(model);
     } else {
       this.activeTasks().remove(model);
