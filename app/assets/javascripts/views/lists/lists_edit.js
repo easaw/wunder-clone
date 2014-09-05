@@ -49,6 +49,7 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     
     return this;
   },
+  
   updateList: function(){
     event.preventDefault();
     if (this.currentSharedIds.indexOf(currentUserId) != -1){
