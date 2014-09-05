@@ -23,17 +23,11 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     
     var that = this;
     if (this.model.get('starred') == false){
-      this.model.save({task: {'starred' : true }}, {
-        success: function(){
-          $(event.target).addClass("starred")
-        }
-      })
+      $(event.target).addClass("starred");
+      this.model.save({task: {'starred' : true }});
     } else {
-      this.model.save({task: {'starred' : false }}, {
-        success: function(){
-          $(event.target).removeClass("starred")
-        }
-      })
+      $(event.target).removeClass("starred");
+      this.model.save({task: {'starred' : false }});
     }
   },
   
