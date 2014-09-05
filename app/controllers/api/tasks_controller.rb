@@ -24,7 +24,8 @@ class Api::TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      # trigger_update_shared_task(@task)
+      users = @task.list.shared_users
+      trigger_update_shared_task(users, @task.list.owner.id, {json: task_params}, @task.id)
       render "show"
     else
       render json: @task.errors, status: :unprocessable_entity
@@ -56,10 +57,15 @@ class Api::TasksController < ApplicationController
     users.each do |user|
       Pusher["notifications-#{user.id}"].trigger("delete-shared-task", {task_data: task_data})
     end
-    Pusher["notifications-#{owner_id}"].trigger("new-shared-task", {task_data: task_data})
+    Pusher["notifications-#{owner_id}"].trigger("delete-shared-task", {task_data: task_data})
   end
   
-  def trigger_update_shared_task
+  def trigger_update_shared_task(users, owner_id, task_data, task_id)
+    return unless !users.nil?
+    users.each do |user|
+      Pusher["notifications-#{user.id}"].trigger("update-shared-task", {task_data: task_data, task_id: task_id})
+    end
+    Pusher["notifications-#{owner_id}"].trigger("update-shared-task", {task_data: task_data, task_id: task_id})
   end
   
   def task_params

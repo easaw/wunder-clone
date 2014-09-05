@@ -40,12 +40,11 @@ $(document).ready(function(){
   
     channel.bind('update', function(data){
       var list_data = data.list_data.json;
-      var list_id = list_data.id;
+      var list_id = data.list_id;
+      debugger
       var list = Wunderclone.Collections.lists.get(list_id);
-      list.save(list_data);
-      
-      // Wunderclone.Collections.lists.fetch();
-      // Wunderclone.Collections.notifications.fetch();
+      list.set(list_data);
+      debugger
     })
   
     channel.bind('destroy', function(data){
@@ -65,13 +64,19 @@ $(document).ready(function(){
     channel.bind('delete-shared-task', function(data){
       var task_data = data.task_data.json;
       var task = Wunderclone.Collections.tasks.get(task_data.id);
-      var list_id = task.get("list_id");
-      var list = Wunderclone.Collections.lists.get(list_id);
-      if (task.get("completed")){
+      if (task){
+        var list_id = task.get("list_id");
+        var list = Wunderclone.Collections.lists.get(list_id);
         list.activeTasks().remove(task);
-      } else {
         list.completedTasks().remove(task);
       }
+    })
+    
+    channel.bind('update-shared-task', function(data, task_id){
+      var task_data = data.task_data.json;
+      var task = Wunderclone.Collections.tasks.get(data.task_id);
+      task.set(task_data);
+      debugger
       // Wunderclone.Collections.notifications.fetch();
     })
   }

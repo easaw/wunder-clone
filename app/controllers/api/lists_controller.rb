@@ -17,7 +17,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     if @list.update(list_params)
-      trigger_update_notification(json: @list)
+      trigger_update_notification({json: list_params}, @list.id)
       render "show"
     else
       render json: @list.errors, status: :unprocessable_entity
@@ -60,11 +60,11 @@ class Api::ListsController < ApplicationController
     end
   end
   
-  def trigger_update_notification(list_data)
+  def trigger_update_notification(list_data, list_id)
     return unless !list_params[:shared_user_ids].nil?
       
     list_params[:shared_user_ids].each do |user_id|
-      Pusher["notifications-#{user_id}"].trigger("update", {list_data: list_data})
+      Pusher["notifications-#{user_id}"].trigger("update", {list_data: list_data, list_id: list_id})
     end
   end
  

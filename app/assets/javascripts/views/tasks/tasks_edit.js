@@ -46,6 +46,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   initialize: function(options){
     this.listenTo(this.model, "change sync", this.render);
     this.listId = this.model.get('list_id');
+    this.list = Wunderclone.Collections.lists.get(this.listId);
     this.render();
   },
   
@@ -60,8 +61,11 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   deleteTask: function(){
     var that = this;
     event.preventDefault();
+    
     this.model.destroy({
       success: function(){
+        that.list.activeTasks().remove(that.model);
+        that.list.completedTasks().remove(that.model);
         Backbone.history.navigate("#/lists/" + that.listId, { trigger: true });
       },
       error: function(data){
