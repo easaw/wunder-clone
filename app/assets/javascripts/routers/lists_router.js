@@ -34,7 +34,7 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   listsShow: function(id){
     var that = this;
     var list = this.lists.getOrFetch(id);
-    Wunderclone.displayedList = Wunderclone.Models.list;
+    Wunderclone.displayedList = list;
     var showView = new Wunderclone.Views.ListsShow({
       model: list
     });
