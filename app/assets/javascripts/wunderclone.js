@@ -4,6 +4,7 @@ window.Wunderclone = {
   Views: {},
   Routers: {},
   initialize: function() {
+    Wunderclone.Collections.notifications = new Wunderclone.Collections.Notifications();
     Wunderclone.Collections.lists = new Wunderclone.Collections.Lists();
     Wunderclone.Collections.tasks = new Wunderclone.Collections.Tasks();
     Wunderclone.Collections.lists.fetch({
@@ -23,6 +24,7 @@ window.Wunderclone = {
             Wunderclone.Views.tasksNew = createTasksNewView();
             Wunderclone.Views.listsEditModal = createListsEditModal();
             Wunderclone.Views.listsNewModal = createListsNewModal();
+            Wunderclone.Views.notificationsIndex = createNotificationsIndex();
             bindClickOutCallbacks();
             bindFocusOutCallbacks();
             Backbone.history.start();
@@ -91,6 +93,14 @@ function createCuratedListsIndex(){
   return curatedIndexView;
 }
 
+function createNotificationsIndex(){
+  var notificationIndexView = new Wunderclone.Views.NotificationsIndex({
+    collection: Wunderclone.Collections.notifications
+  })
+  
+  $('#user-nav').append(notificationIndexView.render().$el);
+  return notificationIndexView;
+}
 
 function createUserListsIndex (){
   var userIndexView = new Wunderclone.Views.UserIndex({

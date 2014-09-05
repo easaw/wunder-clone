@@ -1,3 +1,62 @@
 // Place all the styles related to the Notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#notifications-bell{
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  background-image: url(image-path('icons/bell.png'));
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+}
+
+.notifications-container{
+  display: inline-block;
+  position: relative;
+  float: right;
+  height: 30px;
+  padding: 11px 8px;
+  cursor: pointer;
+}
+
+.notifications-container > img{
+  height: 16px;
+  width: 16px;
+  margin-top: 2px;
+}
+
+.notifications-container > div{
+  display: none;
+  position: absolute;
+  background: #FAFAFA;
+  width: 300px;
+  height: 222px;
+  left: -138.5px;
+  z-index: 999;
+  border-radius: 5px;
+  cursor: auto;
+}
+
+.notifications-container.show-activities > div{
+  display: block;
+}
+
+.notifications-dropdown > h1{
+  display: block;
+  text-align: center;
+  background: #fff;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.notifications-dropdown > h3{
+  color: #818181;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 100px;
+  text-align: center;
+}

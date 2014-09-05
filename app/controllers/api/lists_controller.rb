@@ -57,7 +57,7 @@ class Api::ListsController < ApplicationController
   def trigger_delete_notification(users)
     return unless !users.nil?
     users.each do |user|
-      Pusher["notifications-#{user.id}"].trigger("destroy")
+      Pusher["notifications-#{user.id}"].trigger("destroy", {})
     end
   end
   
@@ -65,7 +65,7 @@ class Api::ListsController < ApplicationController
     return unless !list_params[:shared_user_ids].nil?
       
     list_params[:shared_user_ids].each do |user_id|
-      Pusher["notifications-#{user_id}"].trigger("update")
+      Pusher["notifications-#{user_id}"].trigger("update", {})
     end
   end
  

@@ -1,5 +1,4 @@
 <nav id="user-nav">
-  <span id="user-info" class="group">
     <% if signed_in? %>
 
       <% if current_user.avatar.exists? %>
@@ -15,9 +14,7 @@
       <% end %>
             
       <%= link_to "Sign Out", session_url, method: "delete", id: "sign-out-button" %>
-      <%= render partial: "notifications/dropdown" %>
   
     <% end %>
-  </span>
 
 </nav>

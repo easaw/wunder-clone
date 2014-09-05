@@ -1,0 +1,24 @@
+<div class="notifications-container">
+  <span id="notifications-bell"></span>
+  <div class="notifications-dropdown">
+
+    <h1>Activity Center</h1>
+     
+    <% if (notifications.length > 0){ %>
+      
+      <ul class="notification-ul">
+        <% notifications.each(function(notification){ %>
+          <li>
+            <%= notification.get("text") %>
+          </li>
+        <% }) %>  
+      </ul>
+      
+    <% } else { %>
+      
+      <h3>No Activities</h3>
+      
+    <% } %>
+
+  </div>
+</div>

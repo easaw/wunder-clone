@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     
     resources :list_shares, only: [:create, :destroy]
     
+    resources :notifications, only: [:index]
+    
     resources :users, only: [:index]
   end
 end
