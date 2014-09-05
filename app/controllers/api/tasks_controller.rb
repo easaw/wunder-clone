@@ -4,7 +4,8 @@ class Api::TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      trigger_new_shared_task(@task.list.shared_users, json: @task)
+      users = @task.list.shared_users
+      trigger_new_shared_task(users, @task.list.owner.id, json: @task)
       render "show"
     else
       # p @task.errors.full_messages
@@ -14,7 +15,8 @@ class Api::TasksController < ApplicationController
   
   def destroy
     @task = Task.find(params[:id])
-    # trigger_delete_shared_task(@task)
+    users = @task.list.shared_users
+    trigger_delete_shared_task(users, @task.list.owner.id, json: @task)
     @task.destroy!
     render json: true
   end
@@ -41,14 +43,20 @@ class Api::TasksController < ApplicationController
   
   private
   
-  def trigger_new_shared_task(users, task_data)
+  def trigger_new_shared_task(users, owner_id, task_data)
     return unless !users.nil?
     users.each do |user|
       Pusher["notifications-#{user.id}"].trigger("new-shared-task", {task_data: task_data})
     end
+    Pusher["notifications-#{owner_id}"].trigger("new-shared-task", {task_data: task_data})
   end
   
-  def trigger_delete_shared_task
+  def trigger_delete_shared_task(users, owner_id, task_data)
+    return unless !users.nil?
+    users.each do |user|
+      Pusher["notifications-#{user.id}"].trigger("delete-shared-task", {task_data: task_data})
+    end
+    Pusher["notifications-#{owner_id}"].trigger("new-shared-task", {task_data: task_data})
   end
   
   def trigger_update_shared_task
