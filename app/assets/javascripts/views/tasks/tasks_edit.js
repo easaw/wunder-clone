@@ -78,9 +78,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.find(".edit-task-form").serializeJSON();
-    this.model.save(attrs, {
-      success: function (task) {
-      }
-    });
+    this.model.set(attrs);
+    this.model.save(attrs);
   }
 })

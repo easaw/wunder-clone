@@ -41,10 +41,8 @@ $(document).ready(function(){
     channel.bind('update', function(data){
       var list_data = data.list_data.json;
       var list_id = data.list_id;
-      debugger
       var list = Wunderclone.Collections.lists.get(list_id);
       list.set(list_data);
-      debugger
     })
   
     channel.bind('destroy', function(data){
@@ -75,8 +73,8 @@ $(document).ready(function(){
     channel.bind('update-shared-task', function(data, task_id){
       var task_data = data.task_data.json;
       var task = Wunderclone.Collections.tasks.get(data.task_id);
+      // debugger
       task.set(task_data);
-      debugger
       // Wunderclone.Collections.notifications.fetch();
     })
   }
