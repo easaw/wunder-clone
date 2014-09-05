@@ -1,6 +1,6 @@
 class Api::ListsController < ApplicationController
   before_action :require_signed_in
-  # before_action :require_destroy_ability, only: [:destroy]
+  before_action :require_destroy_ability, only: [:destroy]
   
   def create
     @list = current_user.owned_lists.build(list_params)
@@ -72,7 +72,7 @@ class Api::ListsController < ApplicationController
   def require_destroy_ability
     @list = List.find(params[:id])
     return false if (@list.owner_id != current_user.id)
-    return false if (current_user.inbox.include?(@list))
+    return false if (current_user.inbox == @list)
   end
 
   def list_params

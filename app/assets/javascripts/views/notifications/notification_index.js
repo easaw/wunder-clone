@@ -8,7 +8,7 @@ Wunderclone.Views.NotificationsIndex = Backbone.View.extend({
   },
   
   initialize: function(){
-    this.listenTo(this.collection, "add remove sync", this.render);
+    this.listenTo(this.collection, "add remove", this.render);
   },
   
   render: function(){
@@ -20,10 +20,18 @@ Wunderclone.Views.NotificationsIndex = Backbone.View.extend({
   
   showActivities: function(event){
     event.stopPropagation();
-    $('.notifications-container').toggleClass('show-activities');
-    this.collection.each(function(notification){
-      notification.set("is_read", true);
-    })
+    var that = this;
+     
+    this.collection.fetch({
+      success: function(){
+        $('.notifications-container').toggleClass('show-activities');
+        that.collection.each(function(notification){
+          notification.set("is_read", true);
+          notification.save();
+        });
+      }
+    });
+  
   },
   
   handleClick: function(event){

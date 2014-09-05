@@ -4,6 +4,7 @@ class Api::TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
+      trigger_new_shared_task(@task)
       render "show"
     else
       # p @task.errors.full_messages
@@ -13,6 +14,7 @@ class Api::TasksController < ApplicationController
   
   def destroy
     @task = Task.find(params[:id])
+    trigger_new_shared_task(@task)
     @task.destroy!
     render json: true
   end
@@ -20,7 +22,7 @@ class Api::TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      # p @task
+      trigger_new_shared_task(@task)
       render "show"
     else
       render json: @task.errors, status: :unprocessable_entity
@@ -38,6 +40,14 @@ class Api::TasksController < ApplicationController
   end
   
   private
+  
+  def trigger_new_shared_task(task)
+    users = task.list.shared_users
+    return unless !users.nil?
+    users.each do |user|
+      Pusher["notifications-#{user.id}"].trigger("new-shared-task", {})
+    end
+  end
   
   def task_params
     params.require(:task).permit(:name, :list_id, :completed, :due_date, :starred)

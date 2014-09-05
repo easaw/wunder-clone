@@ -1,6 +1,10 @@
 Wunderclone.Models.List = Backbone.Model.extend({
   urlRoot: "/api/lists",
   
+  initialize: function(){
+    this.listenTo(this.tasks().parentCollection, 'add', this.addTask);
+  },
+  
   validate: function(attrs, options){
     if ( attrs.list && attrs.list.name.length < 1 ){
       return "Must enter name of list";

@@ -19,9 +19,9 @@ class ListShare < ActiveRecord::Base
     primary_key: :id
   )
   
-  has_many :notifications, as: :notifiable, inverse_of: :notifiable
+  has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
   after_commit :set_notification, on: [:create]
-  before_destroy :set_destroy_notification
+  # before_destroy :set_destroy_notification
   
   after_initialize :init
   

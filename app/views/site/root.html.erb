@@ -34,7 +34,7 @@ $(document).ready(function(){
     var channel = pusher.subscribe('notifications-' + <%= current_user.id %>);
     channel.bind('new', function(data){
       Wunderclone.Collections.lists.fetch();
-      // Wunderclone.Collections.notifications.fetch();
+      Wunderclone.Collections.notifications.fetch();
     })
   
     channel.bind('update', function(data){
@@ -44,6 +44,11 @@ $(document).ready(function(){
   
     channel.bind('destroy', function(data){
       Wunderclone.Collections.lists.fetch();
+      // Wunderclone.Collections.notifications.fetch();
+    })
+    
+    channel.bind('new-shared-task', function(data){
+      Wunderclone.Collections.tasks.fetch();
       // Wunderclone.Collections.notifications.fetch();
     })
   }
