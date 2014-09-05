@@ -41,18 +41,17 @@
     var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
     var channel = pusher.subscribe('notifications-' + <%= current_user.id %>);
     channel.bind('new', function(data){
-      var list = data.list;
       var notification = data.notification;
-      Wunderclone.Collections.lists.create(list['json']);
+      // Wunderclone.Collections.lists.create(list['json']);
+      Wunderclone.Collections.lists.fetch();
       $('.notification-ul').append(notification);
       
     })
     
     channel.bind('destroy', function(data){
-      var list_id = data.list_id;
       var notification = data.notification;
       console.log(data);
-      Wunderclone.Collections.lists.remove(list_id);
+      Wunderclone.Collections.lists.fetch();
       $('.notification-ul').append(notification);
     })
   })

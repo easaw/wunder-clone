@@ -7,7 +7,7 @@ class Api::ListsController < ApplicationController
     
     if @list.save
       #should remove notifications count / use jbuilder partial
-      trigger_share_notification(json: @list)
+      trigger_share_notification()
       render "show"
     else
       render json: @list.errors, status: :unprocessable_entity
@@ -26,7 +26,8 @@ class Api::ListsController < ApplicationController
   
   def destroy
     @list = List.find(params[:id])
-    trigger_delete_notification(@list)
+    shared_users = @list.shared_users
+    trigger_delete_notification(shared_users) if shared_users.length > 0
     @list.destroy!
     render json: true
   end
@@ -45,32 +46,29 @@ class Api::ListsController < ApplicationController
   private
   
   
-  def trigger_share_notification(list)
-    if !list_params[:shared_user_ids].nil?
+  def trigger_share_notification()
+    return unless !list_params[:shared_user_ids].nil?
       
-      list_params[:shared_user_ids].each do |user_id|
-        notification = User.find(user_id).unread_notifications.last
-        notification_partial = render_to_string(
-                partial: "notifications/notification",
-                formats: [:html],
-                locals: {notification: notification}
-        )
-        Pusher["notifications-#{user_id}"].trigger("new", {list:  list, notification: notification_partial})
-      end
+    list_params[:shared_user_ids].each do |user_id|
+      notification = User.find(user_id).unread_notifications.last
+      notification_partial = render_to_string(
+              partial: "notifications/notification",
+              formats: [:html],
+              locals: {notification: notification}
+      )
+      Pusher["notifications-#{user_id}"].trigger("new", {notification: notification_partial})
     end
   end
   
-  def trigger_delete_notification(list)
-    if list.shared_users.length > 0
-      list.shared_users.each do |user|
-        notification = User.find(user.id).unread_notifications.last
-        notification_partial = render_to_string(
-                partial: "notifications/notification",
-                formats: [:html],
-                locals: {notification: notification}
-        )
-        Pusher["notifications-#{user.id}"].trigger("destroy", {list_id:  list.id, notification: notification_partial})
-      end
+  def trigger_delete_notification(users)
+    users.each do |user|
+      notification = User.find(user.id).unread_notifications.last
+      notification_partial = render_to_string(
+              partial: "notifications/notification",
+              formats: [:html],
+              locals: {notification: notification}
+      )
+      Pusher["notifications-#{user.id}"].trigger("destroy", {notification: notification_partial})
     end
   end
  
