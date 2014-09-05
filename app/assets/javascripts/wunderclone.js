@@ -10,7 +10,6 @@ window.Wunderclone = {
     Wunderclone.Collections.lists.fetch({
       success: function(){
         Wunderclone.Collections.tasks.fetch({
-          
           success: function(){
             new Wunderclone.Routers.Lists({
               $rootEl: $('#content'),
@@ -18,15 +17,15 @@ window.Wunderclone = {
               tasks: Wunderclone.Collections.tasks
             });
 
-            generateCuratedLists();
-            Wunderclone.Views.curatedListsIndex = createCuratedListsIndex();
-            Wunderclone.Views.userListsIndex = createUserListsIndex();
-            Wunderclone.Views.tasksNew = createTasksNewView();
-            Wunderclone.Views.listsEditModal = createListsEditModal();
-            Wunderclone.Views.listsNewModal = createListsNewModal();
-            Wunderclone.Views.notificationsIndex = createNotificationsIndex();
-            bindClickOutCallbacks();
-            bindFocusOutCallbacks();
+            Wunderclone.generateCuratedLists();
+            Wunderclone.Views.curatedListsIndex = Wunderclone.createCuratedListsIndex();
+            Wunderclone.Views.userListsIndex = Wunderclone.createUserListsIndex();
+            Wunderclone.Views.tasksNew = Wunderclone.createTasksNewView();
+            Wunderclone.Views.listsEditModal = Wunderclone.createListsEditModal();
+            Wunderclone.Views.listsNewModal = Wunderclone.createListsNewModal();
+            Wunderclone.Views.notificationsIndex = Wunderclone.createNotificationsIndex();
+            Wunderclone.bindClickOutCallbacks();
+            Wunderclone.bindFocusOutCallbacks();
             Backbone.history.start();
             
             Wunderclone.Models.inbox.trigger('show');
@@ -38,7 +37,7 @@ window.Wunderclone = {
 };
 
 
-function bindFocusOutCallbacks(){
+Wunderclone.bindFocusOutCallbacks = function(){
   var focusOutCallBacks = [Wunderclone.Views.tasksNew.deactivateForm];
   $(document).on('focusout', function(){
     focusOutCallBacks.forEach(function(callBack){
@@ -47,9 +46,7 @@ function bindFocusOutCallbacks(){
   })
 }
 
-window.Wunderclone.bindFocusOutCallbacks = bindFocusOutCallbacks;
-
-function bindClickOutCallbacks(){
+Wunderclone.bindClickOutCallbacks = function(){
   $(document).on('click', function(event){
     $('#content-container').removeClass("expand");
     $('.notifications-container').removeClass('show-activities');
@@ -58,30 +55,30 @@ function bindClickOutCallbacks(){
   })
 }
 
-function createTasksNewView(){
+Wunderclone.createTasksNewView = function(){
   var newTaskView = new Wunderclone.Views.TasksNew();
   // debugger
   return newTaskView;
 }
 
-function createListsEditModal(){
+Wunderclone.createListsEditModal = function(){
   var editModalView = new Wunderclone.Views.ListsEditModal();
   return editModalView;
 }
 
-function createListsNewModal(){
+Wunderclone.createListsNewModal = function(){
   var newModalView = new Wunderclone.Views.ListsNewModal();
   return newModalView;
 }
 
-function generateCuratedLists(){
+Wunderclone.generateCuratedLists = function(){
   var inbox = Wunderclone.Collections.lists.findWhere({name: "Inbox"});
   Wunderclone.Models.inbox = inbox;
   Wunderclone.Models.starredList = new Wunderclone.Models.CuratedList({type: "starred"});
   Wunderclone.Models.todayList = new Wunderclone.Models.CuratedList({type: "today"});
 }
 
-function createCuratedListsIndex(){
+Wunderclone.createCuratedListsIndex = function(){
   var curatedIndexView = new Wunderclone.Views.CuratedIndex({
     inbox: Wunderclone.Models.inbox,
     starredList: Wunderclone.Models.starredList,
@@ -92,7 +89,7 @@ function createCuratedListsIndex(){
   return curatedIndexView;
 }
 
-function createNotificationsIndex(){
+Wunderclone.createNotificationsIndex = function(){
   var notificationIndexView = new Wunderclone.Views.NotificationsIndex({
     collection: Wunderclone.Collections.notifications
   })
@@ -101,7 +98,7 @@ function createNotificationsIndex(){
   return notificationIndexView;
 }
 
-function createUserListsIndex (){
+Wunderclone.createUserListsIndex = function(){
   var userIndexView = new Wunderclone.Views.UserIndex({
     collection: Wunderclone.Collections.lists
   });
