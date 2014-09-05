@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.active-tasks{
+  padding-top: 14px;
+//  margin-bottom: 0;
+}
 
+.star:hover{
+  cursor: pointer;
+}
 
 .star:before{
   content:"★";
@@ -101,7 +108,7 @@ form.complete-form{
   border-radius: 5px;
   background: #9E9C9C;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   height: 37px;
   font-size: 15px;
 }
