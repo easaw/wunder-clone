@@ -47,7 +47,17 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     this.activeTasks = this.list.activeTasks();
     this.completedTasks = this.list.completedTasks();
     this.listenTo(this.model, "add change remove sync", this.render);
-    
+    this.listenTo(this.model, "change:completed", this.changeCompleted);
+  },
+  
+  changeCompleted: function(){
+    if (this.activeTasks.contains(this.model) && this.model.get("completed") == true){
+      this.activeTasks.remove(this.model);
+      this.completedTasks.add(this.model);
+    } else if (this.completedTasks.contains(this.model) && this.model.get("completed") == false){
+      this.completedTasks.remove(this.model);
+      this.activeTasks.add(this.model);
+    }
   },
   
   completeTask: function(event){
