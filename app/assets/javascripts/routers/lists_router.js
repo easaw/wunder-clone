@@ -12,6 +12,7 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   },
   
   todayShow: function(){
+    Wunderclone.displayedList = Wunderclone.Models.todayList;
     var showView = new Wunderclone.Views.TodayShow({
       model: Wunderclone.Models.todayList
     });
@@ -21,7 +22,7 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   },
   
   starredShow: function(){
-    
+    Wunderclone.displayedList = Wunderclone.Models.starredList;
     var showView = new Wunderclone.Views.StarredShow({
       model: Wunderclone.Models.starredList
     });
@@ -33,7 +34,7 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
   listsShow: function(id){
     var that = this;
     var list = this.lists.getOrFetch(id);
-    
+    Wunderclone.displayedList = Wunderclone.Models.list;
     var showView = new Wunderclone.Views.ListsShow({
       model: list
     });

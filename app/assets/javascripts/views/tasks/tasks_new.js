@@ -47,7 +47,6 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     this.list = list, 
     this.render();
     this.collection = this.list.activeTasks();
-    Wunderclone.activeList = this.list;
   },
   
   ISODateString: function(d){

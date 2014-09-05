@@ -53,7 +53,6 @@ Wunderclone.Views.UserIndex = Backbone.View.extend({
     this.attachSubViews();
     this.renderSubViews();
     
-    Wunderclone.activeList.trigger("show");
     return this;
   },
   

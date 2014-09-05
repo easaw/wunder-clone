@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
   
   def tasks
-    self.owned_tasks
+    self.owned_tasks + self.shared_tasks
   end
   
   def is_password?(password)
