@@ -43,7 +43,7 @@ class Notification < ActiveRecord::Base
       list = list_share.list
       list_owner = list.owner
       
-      "#{list_owner.name} deleted their shared list, #{list.name}!"
+      "#{list_owner.name} has stopped sharing their list, #{list.name}, with you!"
       return "#"
     end
   end

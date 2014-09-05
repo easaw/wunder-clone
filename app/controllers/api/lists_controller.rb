@@ -17,7 +17,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     if @list.update(list_params)
-      # trigger_share_notification(json: @list)
+      trigger_update_notification()
       render "show"
     else
       render json: @list.errors, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class Api::ListsController < ApplicationController
   def destroy
     @list = List.find(params[:id])
     shared_users = @list.shared_users
-    trigger_delete_notification(shared_users) if shared_users.length > 0
+    trigger_delete_notification(shared_users)
     @list.destroy!
     render json: true
   end
@@ -50,25 +50,22 @@ class Api::ListsController < ApplicationController
     return unless !list_params[:shared_user_ids].nil?
       
     list_params[:shared_user_ids].each do |user_id|
-      notification = User.find(user_id).unread_notifications.last
-      notification_partial = render_to_string(
-              partial: "notifications/notification",
-              formats: [:html],
-              locals: {notification: notification}
-      )
-      Pusher["notifications-#{user_id}"].trigger("new", {notification: notification_partial})
+      Pusher["notifications-#{user_id}"].trigger("new", {})
     end
   end
   
   def trigger_delete_notification(users)
+    return unless !users.nil?
     users.each do |user|
-      notification = User.find(user.id).unread_notifications.last
-      notification_partial = render_to_string(
-              partial: "notifications/notification",
-              formats: [:html],
-              locals: {notification: notification}
-      )
-      Pusher["notifications-#{user.id}"].trigger("destroy", {notification: notification_partial})
+      Pusher["notifications-#{user.id}"].trigger("destroy")
+    end
+  end
+  
+  def trigger_update_notification(users)
+    return unless !list_params[:shared_user_ids].nil?
+      
+    list_params[:shared_user_ids].each do |user_id|
+      Pusher["notifications-#{user_id}"].trigger("update")
     end
   end
  

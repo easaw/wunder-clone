@@ -41,18 +41,18 @@
     var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>');
     var channel = pusher.subscribe('notifications-' + <%= current_user.id %>);
     channel.bind('new', function(data){
-      var notification = data.notification;
-      // Wunderclone.Collections.lists.create(list['json']);
       Wunderclone.Collections.lists.fetch();
-      $('.notification-ul').append(notification);
-      
+      // Wunderclone.Collections.notifications.fetch();
+    })
+    
+    channel.bind('update', function(data){
+      Wunderclone.Collections.lists.fetch();
+      // Wunderclone.Collections.notifications.fetch();
     })
     
     channel.bind('destroy', function(data){
-      var notification = data.notification;
-      console.log(data);
       Wunderclone.Collections.lists.fetch();
-      $('.notification-ul').append(notification);
+      // Wunderclone.Collections.notifications.fetch();
     })
   })
 </script>

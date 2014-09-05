@@ -75,6 +75,7 @@ function createListsNewModal(){
 function generateCuratedLists(){
   var inbox = Wunderclone.Collections.lists.findWhere({name: "Inbox"});
   Wunderclone.Models.inbox = inbox;
+  Wunderclone.activeList = Wunderclone.Models.inbox;
   Wunderclone.Models.starredList = new Wunderclone.Models.CuratedList({type: "starred"});
   Wunderclone.Models.todayList = new Wunderclone.Models.CuratedList({type: "today"});
 }
