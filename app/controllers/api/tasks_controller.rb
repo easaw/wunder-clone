@@ -14,7 +14,7 @@ class Api::TasksController < ApplicationController
   
   def destroy
     @task = Task.find(params[:id])
-    trigger_delete_shared_task(@task)
+    # trigger_delete_shared_task(@task)
     @task.destroy!
     render json: true
   end
@@ -22,7 +22,7 @@ class Api::TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      trigger_update_shared_task(@task)
+      # trigger_update_shared_task(@task)
       render "show"
     else
       render json: @task.errors, status: :unprocessable_entity
