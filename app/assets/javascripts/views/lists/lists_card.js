@@ -22,6 +22,7 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
     this.listenTo(this.model, "change", this.render);
     this.listenTo(this.activeTasks, "add remove sync", this.render);
     this.listenTo(this.model, "show", this.selectList);
+    this.listenTo(this.model, "highlight", this.highlightList);
   },
   
   render: function(){
@@ -32,6 +33,13 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
     this.$el.html(content);
     
     return this;
+  },
+  
+  highlightList: function(){
+    event.preventDefault();
+    $(".list-link").removeClass("selected-list editable");
+    this.$el.toggleClass("selected-list");
+    this.showEditLink();
   },
   
   selectList: function(){

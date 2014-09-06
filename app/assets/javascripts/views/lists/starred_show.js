@@ -16,9 +16,7 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
     
     this.sideView = null;
     
-    // this.listenTo(this.tasks, "add change remove", this.render);
     this.listenTo(Wunderclone.Collections.tasks, "add change remove", this.render);
-    // this.listenTo(this.model.completedTasks(), "add change remove", this.render);
   },
   
   render: function(){

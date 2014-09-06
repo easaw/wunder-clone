@@ -3,13 +3,6 @@ Wunderclone.Models.CuratedList = Backbone.Model.extend({
   initialize: function(options){
     this.type = options.type;
     this.setAttr();
-    // this._activeTasks = this.activeTasks();
-    // this.listenTo(this.tasks(), "add remove", this.triggerChange); // this.trigger.bind(this, "curatedChange"));
-   
-  },
-
-  triggerChange: function(){
-    this.trigger.bind(this, "curatedChange")
   },
   
   setAttr: function(){

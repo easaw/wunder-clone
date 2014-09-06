@@ -9,7 +9,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     'click .update-task':'submit',
     'click .delete-task': 'deleteTask',
     'click': 'handleClick',
-    'click .star' : 'starTask',
+    'mousedown .star' : 'starTask',
     'focusout input' : 'submit'
   },
   
@@ -24,9 +24,11 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     var that = this;
     if (this.model.get('starred') == false){
       $(event.target).addClass("starred");
+      this.model.set('starred', true);
       this.model.save({task: {'starred' : true }});
     } else {
       $(event.target).removeClass("starred");
+      this.model.set('starred', true);
       this.model.save({task: {'starred' : false }});
     }
   },

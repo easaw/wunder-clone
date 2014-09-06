@@ -35,7 +35,7 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
     this.attachSubViews();
     this.renderSubViews();
     if (Wunderclone.displayedList){
-      Wunderclone.displayedList.trigger("show"); 
+      Wunderclone.displayedList.trigger("highlight");
     }
     return this;
   },

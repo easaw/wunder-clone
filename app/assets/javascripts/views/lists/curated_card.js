@@ -14,6 +14,14 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
     this.listenTo(this.activeTasks, "add remove sync change", this.render);
     this.listenTo(this.model, "add remove sync change", this.render);
     this.listenTo(this.model, "show", this.selectList);
+    this.listenTo(this.model, "highlight", this.highlightList);
+  },
+  
+  
+  highlightList: function(){
+    event.preventDefault();
+    $(".list-link").removeClass("selected-list editable");
+    this.$el.toggleClass("selected-list");
   },
   
   render: function(){

@@ -49,14 +49,18 @@ class Api::ListsController < ApplicationController
   def trigger_share_notification(list_data)
     return unless !list_params[:shared_user_ids].nil?
     list_params[:shared_user_ids].each do |user_id|
-      Pusher["notifications-#{user_id}"].trigger("new", {list_data: list_data})
+      if user_id != current_user.id
+        Pusher["notifications-#{user_id}"].trigger("new", {list_data: list_data})
+      end
     end
   end
   
   def trigger_delete_notification(users, list_id)
     return unless !users.nil?
     users.each do |user|
-      Pusher["notifications-#{user.id}"].trigger("destroy", {list_id: list_id})
+      if user.id != current_user.id
+        Pusher["notifications-#{user.id}"].trigger("destroy", {list_id: list_id})
+      end
     end
   end
   
@@ -64,7 +68,9 @@ class Api::ListsController < ApplicationController
     return unless !list_params[:shared_user_ids].nil?
       
     list_params[:shared_user_ids].each do |user_id|
-      Pusher["notifications-#{user_id}"].trigger("update", {list_data: list_data, list_id: list_id})
+      if user_id != current_user.id
+        Pusher["notifications-#{user_id}"].trigger("update", {list_data: list_data, list_id: list_id})
+      end
     end
   end
  

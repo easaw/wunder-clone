@@ -74,7 +74,9 @@ $(document).ready(function(){
       var task_data = data.task_data.json;
       var task = Wunderclone.Collections.tasks.get(data.task_id);
       // debugger
-      task.set(task_data);
+      if (task.attributes != task_data){
+        task.set(task_data); 
+      }
       // Wunderclone.Collections.notifications.fetch();
     })
   }

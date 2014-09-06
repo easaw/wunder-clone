@@ -47,25 +47,44 @@ class Api::TasksController < ApplicationController
   def trigger_new_shared_task(users, owner_id, task_data)
     return unless !users.nil?
     users.each do |user|
-      Pusher["notifications-#{user.id}"].trigger("new-shared-task", {task_data: task_data})
+      if user.id != current_user.id
+        Pusher["notifications-#{user.id}"].trigger("new-shared-task", {task_data: task_data})
+      end
     end
-    Pusher["notifications-#{owner_id}"].trigger("new-shared-task", {task_data: task_data})
+    if owner_id != current_user.id
+      Pusher["notifications-#{owner_id}"].trigger("new-shared-task", {task_data: task_data})
+    end
   end
   
   def trigger_delete_shared_task(users, owner_id, task_data)
     return unless !users.nil?
     users.each do |user|
-      Pusher["notifications-#{user.id}"].trigger("delete-shared-task", {task_data: task_data})
+      if user.id != current_user.id
+        Pusher["notifications-#{user.id}"].trigger("delete-shared-task", {task_data: task_data})
+      end
     end
-    Pusher["notifications-#{owner_id}"].trigger("delete-shared-task", {task_data: task_data})
+    if owner_id != current_user.id
+      Pusher["notifications-#{owner_id}"].trigger("delete-shared-task", {task_data: task_data})
+    end
   end
   
   def trigger_update_shared_task(users, owner_id, task_data, task_id)
     return unless !users.nil?
     users.each do |user|
-      Pusher["notifications-#{user.id}"].trigger("update-shared-task", {task_data: task_data, task_id: task_id})
+      if user.id != current_user.id
+        Pusher["notifications-#{user.id}"].trigger(
+        "update-shared-task",
+        {task_data: task_data, task_id: task_id}
+        )
+      end
     end
-    Pusher["notifications-#{owner_id}"].trigger("update-shared-task", {task_data: task_data, task_id: task_id})
+    
+    if owner_id != current_user.id
+      Pusher["notifications-#{owner_id}"].trigger(
+        "update-shared-task",
+        {task_data: task_data, task_id: task_id}
+      )
+    end
   end
   
   def task_params

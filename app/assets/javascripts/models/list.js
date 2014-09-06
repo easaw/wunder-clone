@@ -2,7 +2,6 @@ Wunderclone.Models.List = Backbone.Model.extend({
   urlRoot: "/api/lists",
   
   initialize: function(){
-    this.listenTo(this.tasks().parentCollection, 'add', this.addTask);
   },
   
   validate: function(attrs, options){
