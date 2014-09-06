@@ -10,13 +10,15 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
   starTask: function(event){
     event.preventDefault();
     event.stopPropagation();
-
+    
     var that = this;
     if (this.model.get('starred') == false){
       $(event.target).addClass("starred");
+      this.model.set('starred', true);
       this.model.save({task: {'starred' : true }});
     } else {
       $(event.target).removeClass("starred");
+      this.model.set('starred', true);
       this.model.save({task: {'starred' : false }});
     }
   },

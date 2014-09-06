@@ -107,6 +107,7 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     var attrs = this.$el.find('.task-form').serializeJSON();
+    var task = new Wunderclone.Models.Task(attrs);
     this.collection.create(attrs, {
       wait: true,
       success: function(){
