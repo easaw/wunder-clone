@@ -41,6 +41,7 @@ Wunderclone.Routers.Lists = Backbone.Router.extend({
     
     that._swapView(showView);
     Wunderclone.Views.tasksNew.changeList(list);
+    showView.toggleCompleted();
   },
   
   _swapView: function(view){
