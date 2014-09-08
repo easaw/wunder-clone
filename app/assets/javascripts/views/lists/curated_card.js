@@ -33,6 +33,13 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
     });
     this.$el.html(content);
     
+    if (this.model === Wunderclone.Models.inbox){
+      this.$el.find(".list-icon").addClass("inbox");
+    } else if (this.model === Wunderclone.Models.starredList){
+      this.$el.find(".list-icon").addClass("starred");
+    } else  if (this.model === Wunderclone.Models.todatLists){
+      this.$el.find(".list-icon").addClass("today");
+    }
     return this;
   },
   

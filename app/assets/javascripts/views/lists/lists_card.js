@@ -32,6 +32,11 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
     });
     this.$el.html(content);
     
+    // check if shared for correct icon
+    // this.$el.find('list-icon').html(Wunderclone.Assets.inboxIcon);
+    if(this.model.get("shared_users").length > 0){
+      this.$el.find(".list-icon").addClass("sharred");
+    }
     return this;
   },
   

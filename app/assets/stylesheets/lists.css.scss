@@ -17,7 +17,7 @@
 }
 
 .list-link > .list-name{
-  width: 185px;
+  width: 160px;
   display: inline-block;
   padding: 9px;
   white-space: nowrap;
@@ -45,17 +45,28 @@
 .edit-button{
   display: none;
   float: right;
-  padding: 12px;
-  border-left: 1px solid #fff;
-  margin-left: 5px;
-  color: #CBCBCB;
+  height: 100%;
+  width: 16px;
+  background-image: url(image-path('icons/pencil.png'));
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
 }
 
 .edit-button:hover{
   color: #fff;
 }
 
-.editable > .edit-button {
+.editable .edit-button-container{
+  float: right;
+  border-left: 1px solid #fff;
+  display: inline-block;
+  padding: 10px;
+  height: 100%;
+  width: 37px;
+}
+
+.editable .edit-button,
+.editable .edit-button-container {
   display: inline-block;
 }
 
@@ -116,4 +127,32 @@
   border-radius: 5px;
   padding: 3px 10px;
   color: white;
+}
+
+.list-icon{
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 20px;
+  width: 20px;
+  background-image: url(image-path('icons/list.png'));
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+}
+
+.list-icon.starred {
+  background-image: url(image-path('icons/star.png'));
+}
+
+.list-icon.inbox {
+  background-image: url(image-path('icons/inbox.png'));
+}
+
+.list-icon.today {
+  background-image: url(image-path('icons/today.png'));
+}
+
+.list-icon.sharred {
+  background-image: url(image-path('icons/sharred.png'));  
 }

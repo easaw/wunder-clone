@@ -25,12 +25,21 @@
             placeholder="Email Address...">
         </form>
         
-        <ul id="list-members-ul"></ul>
+        <ul id="list-members-ul">
+        <li>
+          <%= list.get("owner").name %><span class="owner-tag">Owner</span>
+          <br>
+          <%= list.get("owner").email %>
+        </li>
+        
         <% list.get("shared_users").forEach(function(user){ %>
           <li>
             <%= user.name %>
+            <br>
+            <%= user.email %>
           </li>
         <% }) %>
+        </ul>
       </div>
       
       <div id="cancel-save-container">
