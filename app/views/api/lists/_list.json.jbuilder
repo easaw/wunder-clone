@@ -1,1 +1,1 @@
-json.(list, :id, :name, :created_at, :updated_at, :shared_users)
+json.(list, :id, :name, :created_at, :updated_at, :shared_users, :owner)
