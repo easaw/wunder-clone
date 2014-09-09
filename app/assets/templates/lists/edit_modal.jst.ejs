@@ -27,16 +27,18 @@
         
         <ul id="list-members-ul">
         <li>
-          <%= list.get("owner").name %><span class="owner-tag">Owner</span>
+          <span class="shared-user-name"><%= list.get("owner").name %></span>
+          <span class="owner-tag">Owner</span>
           <br>
-          <%= list.get("owner").email %>
+          <span class="shared-user-email"><%= list.get("owner").email %></span>
         </li>
         
         <% list.get("shared_users").forEach(function(user){ %>
           <li>
-            <%= user.name %>
+            <span class="shared-user-name"><%= user.name %></span>
+            <a href="#" data-id="<%= user.id %>" class="remove-list-share">Remove</a>
             <br>
-            <%= user.email %>
+            <span class="shared-user-email"><%= user.email %></span>
           </li>
         <% }) %>
         </ul>

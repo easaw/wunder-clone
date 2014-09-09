@@ -42,7 +42,6 @@ $(document).ready(function(){
       var list_data = data.list_data.json;
       var list_id = data.list_id;
       var list = Wunderclone.Collections.lists.get(list_id);
-      list.set(list_data);
     })
   
     channel.bind('destroy', function(data){
@@ -77,7 +76,6 @@ $(document).ready(function(){
       if (task.attributes != task_data){
         task.set(task_data); 
       }
-      // Wunderclone.Collections.notifications.fetch();
     })
       
   }

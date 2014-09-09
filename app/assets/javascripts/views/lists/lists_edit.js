@@ -7,7 +7,8 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     'click .delete-list' : 'deleteList',
     'submit #share-user-form' : 'addSharedUser',
     'submit .edit-list-form' : 'updateList',
-    'click #save-list-button' : 'updateList'
+    'click #save-list-button' : 'updateList',
+    'click .remove-list-share' : 'removeSharedUser'
   },
   
   hideModal: function(){
@@ -21,6 +22,21 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
       event.preventDefault();
       this.$el.find('#modal').removeClass("is-active");
     }
+  },
+  
+  removeSharedUser: function(event){
+    event.preventDefault();
+    var that = this;
+    var userId = $(event.target).attr("data-id");
+    
+    var i = this.currentSharedIds.indexOf(userId);
+    this.currentSharedIds.splice(i, 1);
+    
+    var attrs = this.$el.find('.edit-list-form').serializeJSON();
+    attrs['list']['shared_user_ids'] = this.currentSharedIds;
+    
+    $(event.target).closest("li").remove();
+    this.model.save(attrs);
   },
   
   addSharedUser: function(event){
@@ -84,6 +100,7 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
       this.$el.find('.delete-list').addClass("hidden");
       this.$el.find('.edit-list-form input').attr('readonly', true);
       this.$el.find('#share-user-form').addClass("hidden");
+      this.$el.find('.remove-list-share').addClass("hidden");
     };
   },
   

@@ -30,6 +30,7 @@ class List < ActiveRecord::Base
   has_many(
   :shared_users,
   through: :list_shares,
+  dependent: :destroy,
   source: :user
   )
 
