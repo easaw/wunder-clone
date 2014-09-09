@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   
   before_validation :ensure_session_token
   after_create :init
+  after_create :guest_setup
   
   attr_reader :password
   
@@ -56,6 +57,36 @@ class User < ActiveRecord::Base
   
   def init
     self.owned_lists.create(name: "Inbox")
+  end
+  
+  def guest_setup
+    return unless self.guest
+
+    lists = List.create([
+      {name: "Groceries", owner_id: self.id},
+      {name: "Home", owner_id: self.id},
+      {name: "Catch Em All", owner_id: self.id}
+    ])
+
+    grocery_list = self.owned_lists.find_by(name: "Groceries")
+    home_list = self.owned_lists.find_by(name: "Home")
+    pokemon_list = self.owned_lists.find_by(name: "Catch Em All")
+
+    tasks = Task.create([
+      {name: "Carrots", list_id: grocery_list.id, due_date: Date.today},
+      {name: "Apples", list_id: grocery_list.id, due_date: Date.today},
+      {name: "Eggs", list_id: grocery_list.id, due_date: Date.today},
+      {name: "Clean the living room", list_id: home_list.id, starred: true},
+      {name: "Walk the dog", list_id: home_list.id, due_date: Date.today},
+      {name: "Squirtle", list_id: pokemon_list.id, starred: true},
+      {name: "Geodude", list_id: pokemon_list.id, starred: true},
+      {name: "Rapidash", list_id: pokemon_list.id, starred: true},
+      {name: "Machop", list_id: pokemon_list.id}
+    ])
+    
+    pika = User.find_by(email: "pika@example.com")
+    ListShare.create(list_id: pokemon_list.id, user_id: pika.id)
+    
   end
   
   def unread_notifications
