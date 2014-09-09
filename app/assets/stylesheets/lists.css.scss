@@ -71,7 +71,7 @@
 }
 
 .add-list-container {
-  border-top: 1px solid gray;
+  border-top: 1px solid #E2E2E2;
   position: absolute;
   bottom: 0;
   font-size: 40px;
@@ -155,4 +155,8 @@
 
 .list-icon.sharred {
   background-image: url(image-path('icons/sharred.png'));  
+}
+
+.inbox-top-border {
+  border-top: 1px solid #CECECE;
 }

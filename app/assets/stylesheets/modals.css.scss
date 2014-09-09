@@ -96,6 +96,7 @@
   color: #fff;
   margin-left: 15px;
   margin-right: 15px;
+  cursor: pointer;
 }
 
 #cancel-new-button{
@@ -119,18 +120,31 @@
 }
 
 .delete-list{
+  display: inline-block;
   position: relative;
-  bottom: 1px;
   margin-left: 15px;
+  top: 6px;
   float: left;
-  background: #fff;
-  color: #7D7C7C;
-  border: 1px solid #C9C9C9;
-  padding: 7px 0px;
-  font-size: 13px;
-  border-radius: 5px;
-  width: 100px;
+  height: 100%;
+  width: 20px;
+  background-image: url(image-path('icons/trash.png'));
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
+//.list-icon{
+//  display: inline-block;
+//  float: left;
+//  margin-left: 10px;
+//  margin-top: 8px;
+//  height: 100%;
+//  width: 20px;
+//  background-image: url(image-path('icons/list.png'));
+//  background-size: 18px 18px;
+//  background-repeat: no-repeat;
+//}
+
+
 
 .owner-tag{
   display: inline-block;

@@ -10,7 +10,14 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     'click .delete-task': 'deleteTask',
     'click': 'handleClick',
     'mousedown .star' : 'starTask',
-    'focusout input' : 'submit'
+    'focusout input' : 'submit',
+    'click .hide-edit': 'hideEdit'
+  },
+  
+  hideEdit: function(){
+    event.preventDefault();
+    event.stopPropagation();
+    $('#content-container').removeClass("expand");
   },
   
   handleClick: function(event){

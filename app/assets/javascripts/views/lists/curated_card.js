@@ -35,6 +35,7 @@ Wunderclone.Views.CuratedCard = Backbone.View.extend({
     
     if (this.model === Wunderclone.Models.inbox){
       this.$el.find(".list-icon").addClass("inbox");
+      this.$el.addClass("inbox-top-border");
     } else if (this.model === Wunderclone.Models.starredList){
       this.$el.find(".list-icon").addClass("starred");
     } else  if (this.model === Wunderclone.Models.todayList){

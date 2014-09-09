@@ -62,15 +62,6 @@ button{
   background-size: cover;
   -moz-background-size: cover;  /* Firefox 3.6 */
   background-position: center;  /* Internet Explorer 7/8 */
-/*  padding: 0 13px;*/
-  //background: rgba(230,233,235,1);
-//  background: -moz-linear-gradient(45deg, rgba(230,233,235,1) 0%, rgba(3,65,128,1) 100%);
-//  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(230,233,235,1)), color-stop(100%, rgba(3,65,128,1)));
-//  background: -webkit-linear-gradient(45deg, rgba(230,233,235,1) 0%, rgba(3,65,128,1) 100%);
-//  background: -o-linear-gradient(45deg, rgba(230,233,235,1) 0%, rgba(3,65,128,1) 100%);
-//  background: -ms-linear-gradient(45deg, rgba(230,233,235,1) 0%, rgba(3,65,128,1) 100%);
-//  background: linear-gradient(45deg, rgba(230,233,235,1) 0%, rgba(3,65,128,1) 100%);
-//  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e9eb', endColorstr='#034180', GradientType=1 );
 }
 
 #content{
@@ -85,16 +76,16 @@ button{
 }
 
 #side-content {
-  padding: 15px;
+  padding: 15px 15px 15px 0;
   position: relative;
   display: none;
   float: right;
-  width: 32%;
+  width: 340px;
   height: 100%;
 }
 
 #content-container.expand > #content{
-  width: 68%;
+  max-width: 70%;
 }
 
 #content-container.expand > #side-content{
