@@ -17,6 +17,7 @@ class Api::ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     check_removed_shared_user(@list.shared_users, @list.id)
+    check_new_shared_user(@list.shared_users, json: @list)
     if @list.update(list_params)
       
       trigger_update_notification({json: list_params}, @list.id)
@@ -47,11 +48,21 @@ class Api::ListsController < ApplicationController
   
   private
   
+  def check_new_shared_user(users, list_data)
+    return unless !list_params[:shared_user_ids].nil?
+    list_params[:shared_user_ids].each do |user_id|
+      next if users.include?(User.find(user_id))
+      Pusher["notifications-#{user_id}"].trigger("new", {list_data: list_data})
+    end
+  end
+  
   def check_removed_shared_user(users, list_id)
     users.each do |user|
       if list_params[:shared_user_ids].nil?
+        @list.list_shares.destroy_all()
         trigger_delete_notification([user], list_id)
       elsif !list_params[:shared_user_ids].nil? && !list_params[:shared_user_ids].include?(user.id)
+        @list.list_shares.find_by(user_id: user.id).destroy()
         trigger_delete_notification([user], list_id)
       end
     end
