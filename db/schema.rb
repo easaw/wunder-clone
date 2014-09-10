@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902220457) do
+ActiveRecord::Schema.define(version: 20140910212038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20140902220457) do
     t.integer  "assigned_user_id"
     t.boolean  "starred"
     t.integer  "notifications_count"
+    t.integer  "lat"
+    t.integer  "lng"
   end
 
   add_index "tasks", ["list_id"], name: "index_tasks_on_list_id", using: :btree
