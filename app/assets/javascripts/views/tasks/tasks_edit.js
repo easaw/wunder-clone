@@ -14,6 +14,39 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     'click .hide-edit': 'hideEdit'
   },
   
+  createMap: function(){
+    L.mapbox.accessToken = "pk.eyJ1IjoiZXJ1YmkiLCJhIjoidWlKM1FQayJ9.1SGO52uN4uie6TDWJZHGIg";
+    var mapContainer = this.$el.find('#map')[0];
+    this.map = L.mapbox.map(mapContainer, 'erubi.jff3bc7l');
+    var myLayer = L.mapbox.featureLayer().addTo(this.map);
+    
+  },
+  
+  updateMap: function(){
+    if (!navigator.geolocation) {
+        // innerHTML = 'Geolocation is not available';
+    } else {
+        map.locate();
+    }
+    
+    map.on('locationfound', function(e) {
+        map.fitBounds(e.bounds);
+
+        myLayer.setGeoJSON({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [e.latlng.lng, e.latlng.lat]
+            },
+            properties: {
+                'title': 'Here I am!',
+                'marker-color': '#ff8888',
+                'marker-symbol': 'star'
+            }
+        });
+    });
+  },
+  
   hideEdit: function(){
     event.preventDefault();
     event.stopPropagation();
@@ -57,7 +90,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     var content = this.template({task: this.model});
     this.$el.html(content);
     this.checkStar();
-    
+    this.createMap();
     return this;
   },
   

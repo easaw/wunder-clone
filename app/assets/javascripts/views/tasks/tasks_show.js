@@ -61,7 +61,7 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     event.preventDefault();
     var that = this;
     if (this.model.get('completed') == false){
-      this.model.set('completed', true);
+      this.model.set('completed', true);  
       this.model.save({task: {'completed': true}}, {
         success: function(model){
           that.activeTasks.remove(that.model);
@@ -77,11 +77,5 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
         }
       });
     }
-  },
-  
-  editTask: function(){
-    var that = this;
-    event.preventDefault();
-    Backbone.history.navigate("#/lists/" + that.list.id + "/tasks/" + this.model.id + "/edit", { trigger: true });
   }
 })
