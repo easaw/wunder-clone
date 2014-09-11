@@ -61,7 +61,8 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     event.preventDefault();
     var that = this;
     if (this.model.get('completed') == false){
-      this.model.set('completed', true);  
+      this.model.set('completed', true); 
+      this.updateLatLng();
       this.model.save({task: {'completed': true}}, {
         success: function(model){
           that.activeTasks.remove(that.model);
@@ -77,5 +78,28 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
         }
       });
     }
-  }
+  },
+  
+  updateLatLng: function(){
+    var that = this;
+    if (!navigator.geolocation) {
+        // innerHTML = 'Geolocation is not available';
+    } else {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        that.model.set({
+          "lat": position.coords.latitude,
+          "lng": position.coords.longitude
+        });
+        that.model.save({task:
+          {
+          "lat": position.coords.latitude,
+          "lng": position.coords.longitude
+          }
+        });
+        
+      });
+    }
+    
+    
+  },
 })

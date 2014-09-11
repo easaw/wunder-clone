@@ -11,6 +11,7 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
   
   toggleCompleted: function(){
     event.preventDefault();
+    event.stopPropagation();
     $('#completed-div').toggleClass('hidden');
   },
   
@@ -27,21 +28,24 @@ Wunderclone.Views.ListsShow = Backbone.View.extend({
     var task = Wunderclone.Collections.tasks.get(taskId);
     
     this.$el.closest('#content-container').addClass("expand");
-    
     var editView = new Wunderclone.Views.TasksEdit({
       model: task
     });
     
     this.swapSideView(editView);
+    if(editView.map){
+      editView.map.invalidateSize(); 
+    }
   },
   
   swapSideView: function(view){
     if (this.sideView && this.sideView.removeSubViews){
       this.sideView.removeSubViews();
     }
-    this.sideView && this.sideView.remove();
+    if(this.sideView){
+      this.sideView.remove();
+    }
     this.sideView = view;
-    
     $('#side-content').html(view.render().$el);
   },
   

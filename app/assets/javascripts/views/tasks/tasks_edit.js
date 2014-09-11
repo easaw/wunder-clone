@@ -18,33 +18,39 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     L.mapbox.accessToken = "pk.eyJ1IjoiZXJ1YmkiLCJhIjoidWlKM1FQayJ9.1SGO52uN4uie6TDWJZHGIg";
     var mapContainer = this.$el.find('#map')[0];
     this.map = L.mapbox.map(mapContainer, 'erubi.jff3bc7l');
-    var myLayer = L.mapbox.featureLayer().addTo(this.map);
+    this.myLayer = L.mapbox.featureLayer().addTo(this.map);
+    
+    var lng = this.model.get("lng");
+    var lat = this.model.get("lat");
+    
+    if(lng && lat){
+      this.updateMap();
+    }
     
   },
   
   updateMap: function(){
-    if (!navigator.geolocation) {
-        // innerHTML = 'Geolocation is not available';
-    } else {
-        map.locate();
-    }
+    var that = this;
     
-    map.on('locationfound', function(e) {
-        map.fitBounds(e.bounds);
-
-        myLayer.setGeoJSON({
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [e.latlng.lng, e.latlng.lat]
-            },
-            properties: {
-                'title': 'Here I am!',
-                'marker-color': '#ff8888',
-                'marker-symbol': 'star'
-            }
-        });
-    });
+    var lng = that.model.get("lng");
+    var lat = that.model.get("lat");
+    // this.map.setView([lng, lat], 15);
+    this.map.setView([lat, lng], 15);
+      this.map.invalidateSize();
+    // not working
+    this.myLayer.setGeoJSON({
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [lng, lat]
+          },
+          properties: {
+              'title': 'Completed Task Here!',
+              'marker-color': '#ff8888',
+              'marker-symbol': 'star'
+          }
+      });
+    
   },
   
   hideEdit: function(){
@@ -81,6 +87,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   
   initialize: function(options){
     this.listenTo(this.model, "change sync", this.render);
+    this.listenTo(this.model, "change:lat change:lng", this.updateMap);
     this.listId = this.model.get('list_id');
     this.list = Wunderclone.Collections.lists.get(this.listId);
     this.render();
