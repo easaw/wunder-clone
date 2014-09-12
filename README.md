@@ -1,5 +1,5 @@
 # Wunderclone: a Wunderlist Clone
-Wunderclone is a clone of Wunderlist, a popular list and task creation app. It was built by Evan Rubinton in Summer 2014. You can view it at http://www.wunderclone.com.
+[Wunderclone](http://wunderclone.com) is a clone of [Wunderlist](http://wunderlist.com), a popular list and task creation app. It was built by [Evan Rubinton](http://evanrubinton.me) in Summer 2014. You can view it at http://www.wunderclone.com.
 
 ## Features
 Wunderclone has many of the same core features of Wunderlist as well as some additional features.
