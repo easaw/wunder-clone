@@ -87,9 +87,11 @@ button{
 }
 
 #content-container.expand > #content{
-  max-width: 70%;
+  padding-right: 355px;
 }
 
 #content-container.expand > #side-content{
   display: block;
+  position: absolute;
+  right: 0;
 }
