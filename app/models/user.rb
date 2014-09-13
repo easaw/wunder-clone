@@ -65,27 +65,27 @@ class User < ActiveRecord::Base
     lists = List.create([
       {name: "Groceries", owner_id: self.id},
       {name: "Home", owner_id: self.id},
-      {name: "Catch Em All", owner_id: self.id}
+      {name: "To Read", owner_id: self.id}
     ])
 
     grocery_list = self.owned_lists.find_by(name: "Groceries")
     home_list = self.owned_lists.find_by(name: "Home")
-    pokemon_list = self.owned_lists.find_by(name: "Catch Em All")
+    book_list = self.owned_lists.find_by(name: "To Read")
 
     tasks = Task.create([
       {name: "Carrots", list_id: grocery_list.id, due_date: Date.today},
-      {name: "Apples", list_id: grocery_list.id, due_date: Date.today},
+      {name: "Apples", list_id: grocery_list.id, due_date: Date.today, starred: true},
       {name: "Eggs", list_id: grocery_list.id, due_date: Date.today},
       {name: "Clean the living room", list_id: home_list.id, starred: true},
       {name: "Walk the dog", list_id: home_list.id, due_date: Date.today},
-      {name: "Squirtle", list_id: pokemon_list.id, starred: true},
-      {name: "Geodude", list_id: pokemon_list.id, starred: true},
-      {name: "Rapidash", list_id: pokemon_list.id, starred: true},
-      {name: "Machop", list_id: pokemon_list.id}
+      {name: "The Design of Everyday Things", list_id: book_list.id, starred: true},
+      {name: "Gravity's Rainbow", list_id: book_list.id, starred: true},
+      {name: "Cryptonomicon", list_id: book_list.id, starred: true},
+      {name: "David and Goliath", list_id: book_list.id}
     ])
     
-    pika = User.find_by(email: "pika@example.com")
-    ListShare.create(list_id: pokemon_list.id, user_id: pika.id)
+    bill = User.find_by(email: "murray@example.com")
+    ListShare.create(list_id: book_list.id, user_id: bill.id)
     
   end
   
