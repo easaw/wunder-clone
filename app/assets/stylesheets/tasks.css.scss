@@ -36,10 +36,10 @@ li.task{
   font-size:14px;
   line-height: 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 3px;
   margin-bottom: 2px;
 //  margin-top: 15px;
-  padding: 8px;
+  padding: 10px 8px 0 8px;
   height: 37px;
   width: 100%;
   background: #F7F8F8;
@@ -54,21 +54,23 @@ li.task{
 
 .task-link > .star {
   float: right;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .task-due_date{
   float: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #0A9DE5;
   position: relative;
-  top: 3px;
   padding-right: 10px;
+  top: 1px;
 }
 
 .task-name{
   float: left;
   position: relative;
-//  margin: 0 10px;
-  padding-top: 0 12px;
+  padding-top: 1px;
 }
 
 form.complete-form{
@@ -80,11 +82,11 @@ form.complete-form{
   position: relative;
   display: inline-block;
   float: left;
-  padding: 8px 8px;
+  padding: 7px 7px;
   margin-right: 8px;
   background: transparent;
-  border: solid 1px black;
-  border-radius: 5px;
+  border: solid 1px #B4B4B4;
+  border-radius: 4px;
 }
 
 .complete-button:hover {
@@ -92,8 +94,9 @@ form.complete-form{
 };
 
 .complete-button:active {
-  box-shadow: none;
-  background: black;
+  -moz-box-shadow:    inset 0 0 10px #CECECE;
+  -webkit-box-shadow: inset 0 0 10px #CECECE;
+  box-shadow:         inset 0 0 10px #CECECE;
 }
 
 .selected-task{
@@ -127,42 +130,17 @@ form.complete-form{
   display: none;
 }
 
-
-//.task-form > input[type="date"]{
-//  position: relative;
-//  display: none;
-//  padding: 0;
-//  margin: 0;
-//  float: right;
-//}
-
-
-//
-//.task-form-date > div {
-//  display: none;
-//  position: absolute;
-//  background: #FAFAFA;
-//  width: 150px;
-//  height: 70px;
-//  left: -128px;
-////  left: -11px;
-//  z-index: 999;
-//  border-radius: 5px;
-//  cursor: auto;
-//}
-
 .task-form .star{
   float: right;
   display: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .task-form-date{
   display: none;
   float: right;
   margin-right: 10px;
-//  position: relative;
 }
 
 .task-form.active-task-form .task-form-date,

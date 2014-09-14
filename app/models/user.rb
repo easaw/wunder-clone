@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
       {name: "Home", owner_id: self.id},
       {name: "To Read", owner_id: self.id}
     ])
-
+    
     grocery_list = self.owned_lists.find_by(name: "Groceries")
     home_list = self.owned_lists.find_by(name: "Home")
     book_list = self.owned_lists.find_by(name: "To Read")
@@ -81,7 +81,10 @@ class User < ActiveRecord::Base
       {name: "The Design of Everyday Things", list_id: book_list.id, starred: true},
       {name: "Gravity's Rainbow", list_id: book_list.id, starred: true},
       {name: "Cryptonomicon", list_id: book_list.id, starred: true},
-      {name: "David and Goliath", list_id: book_list.id}
+      {name: "David and Goliath", list_id: book_list.id},
+      {name: "Create new lists and share them with other users!", list_id: self.inbox.id},
+      {name: "Complete a task to update it's completed location!", list_id: self.inbox.id},
+      {name: "Double click on a task to edit it!", list_id: self.inbox.id}
     ])
     
     bill = User.find_by(email: "murray@example.com")
