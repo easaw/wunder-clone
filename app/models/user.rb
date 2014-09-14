@@ -83,8 +83,8 @@ class User < ActiveRecord::Base
       {name: "Cryptonomicon", list_id: book_list.id, starred: true},
       {name: "David and Goliath", list_id: book_list.id},
       {name: "Create new lists and share them with other users!", list_id: self.inbox.id},
-      {name: "Complete a task to update it's completed location!", list_id: self.inbox.id},
-      {name: "Double click on a task to edit it!", list_id: self.inbox.id}
+      {name: "Complete a task to update it's completed location", list_id: self.inbox.id},
+      {name: "Double click on a task to edit it", list_id: self.inbox.id}
     ])
     
     bill = User.find_by(email: "murray@example.com")
