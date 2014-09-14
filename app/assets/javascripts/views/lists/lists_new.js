@@ -29,11 +29,9 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
   
   addSharedUser: function(event){
     event.preventDefault();
-    // grab email
     var email = $(event.target).serializeJSON()['user_email']
     var id = Wunderclone.otherUsers[email];
     if (!id){
-      // need to show pop up saying enter a valid email address
       return;
     }
     

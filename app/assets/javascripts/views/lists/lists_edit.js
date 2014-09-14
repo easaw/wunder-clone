@@ -41,11 +41,9 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
   
   addSharedUser: function(event){
     event.preventDefault();
-    // grab email
     var email = $(event.target).serializeJSON()['user_email']
     var id = Wunderclone.otherUsers[email];
     if (!id){
-      // need to show pop up saying enter a valid email address
       return;
     }
     
@@ -72,7 +70,6 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
      this.hideModal();
      return; 
     }
-    //need to update model on click of update
     var that = this;
     event.preventDefault();
     var attrs = this.$el.find('.edit-list-form').serializeJSON();

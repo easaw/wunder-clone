@@ -95,9 +95,6 @@ Wunderclone.Views.CuratedIndex = Backbone.View.extend({
       this.todayView.render();
     }
     
-    // this._subViews.forEach(function(subView){
-//       subView.render();
-//     });
   }
 
 });

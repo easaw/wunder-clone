@@ -4,7 +4,6 @@
 
 .active-tasks{
   padding-top: 14px;
-//  margin-bottom: 0;
 }
 
 .star:hover{
@@ -14,7 +13,6 @@
 .star:before{
   content:"★";
   display:inline-block;
-//  font-size: 20px;
   color: #C6C6C6;
 }
 
@@ -25,7 +23,6 @@
 /* Styles for task show subview */
 
 li.task{
-//  height: 20px;
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
@@ -38,7 +35,6 @@ li.task{
   border: 1px solid #ccc;
   border-radius: 3px;
   margin-bottom: 2px;
-//  margin-top: 15px;
   padding: 10px 8px 0 8px;
   height: 37px;
   width: 100%;
@@ -74,7 +70,6 @@ li.task{
 }
 
 form.complete-form{
-//  display: block;
   float: left;
 }
 
@@ -116,7 +111,6 @@ form.complete-form{
 }
 
 .task-form > input[type="text"] {
-//  max-width: 100%;
   width: 100%;
   color: white;
 }
@@ -141,6 +135,7 @@ form.complete-form{
   display: none;
   float: right;
   margin-right: 10px;
+  
 }
 
 .task-form.active-task-form .task-form-date,
@@ -167,17 +162,21 @@ form.complete-form{
 
 .edit-task-top > #name{
   display: inline-block;
-  width: 85%;
+  width: 87%;
   float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+  overflow: auto;
 }
 
 .edit-task-top > .star{
-  font-size: 25px;
+  font-size: 20px;
   float: right;
+  padding-top: 5px;
 }
 
 .edit-task-middle{
-//  height: 100%;
   padding: 10px 10px;
   background: #FCFCFC;
   overflow: auto;
@@ -228,9 +227,7 @@ form.complete-form{
 }
 
 #map{
-//  position: absolute;
   margin-top: 50px;
   width: 100%;
-//  height: 100%;
   height: 300px;
 }

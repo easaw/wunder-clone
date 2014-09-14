@@ -27,7 +27,6 @@ Wunderclone.Models.Task = Backbone.Model.extend({
     var todayDate = today.getDate();
     var todayMonth = today.getMonth();
     var todayYear = today.getFullYear();
-    // var results = this.where({dueDay: todayDay, dueMonth: todayMonth, dueYear: todayYear, completed: options.completed});
     dateToday = Date.UTC(todayYear, todayMonth, todayDate);
     dateCompare = Date.UTC(this.get('due_year'), this.get('due_month'), this.get('due_day'));
     var ms = Math.abs(dateToday-dateCompare);
@@ -38,7 +37,6 @@ Wunderclone.Models.Task = Backbone.Model.extend({
     } else {
       return false;
     }
-    // return days <= 1;
   },
   
   dueDate: function(){

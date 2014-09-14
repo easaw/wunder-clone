@@ -5,7 +5,6 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     'submit .task-form':'submit',
     'mousedown .star.task-form-star' : 'starTask',
     'mousedown .task-form-date' : 'selectDate',
-    // 'mousedown .task-form-date' : 'handleClick',
     'click .task-form' : 'activateForm'
   },
   
@@ -62,7 +61,6 @@ Wunderclone.Views.TasksNew = Backbone.View.extend({
     this.delegateEvents();
     
     if(this.type === "starred"){
-      // change placeholder
       this.$el.find('.task-form-name').attr("placeholder",
        'Add a starred item in "Inbox"...');
       this.$el.find('#star').val(true);

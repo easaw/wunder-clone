@@ -60,11 +60,6 @@
   -moz-background-size: cover;  /* Firefox 3.6 */
   background-position: center;  /* Internet Explorer 7/8 */
   content: "";
-//  -webkit-filter: blur(1px);
-//   -moz-filter: blur(1px);
-//   -o-filter: blur(1px);
-//   -ms-filter: blur(1px);
-//   filter: blur(1px);
 }
 
 .logo-with-text{
@@ -199,7 +194,6 @@ a#facebook-button{
 
 .landing-buttons{
   position: absolute;
-//  padding: 0 10px;
   bottom: 0;
   width: 100%;
 }

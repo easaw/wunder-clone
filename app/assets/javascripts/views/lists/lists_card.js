@@ -11,9 +11,7 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
   },
   
   editList: function(){
-    // var editView = new Wunderclone.Views.ListsEdit({model: this.model});
     Wunderclone.Views.listsEditModal.edit(this.model);
-    // editView.render().$el.appendTo('#modal');
   },
   
   initialize: function(options){
@@ -32,8 +30,6 @@ Wunderclone.Views.ListsCard = Backbone.View.extend({
     });
     this.$el.html(content);
     
-    // check if shared for correct icon
-    // this.$el.find('list-icon').html(Wunderclone.Assets.inboxIcon);
     if(this.model.get("owner").id != Wunderclone.currentUserId ||
        this.model.get('shared_users').length > 0){
          this.$el.find(".list-icon").addClass("sharred");

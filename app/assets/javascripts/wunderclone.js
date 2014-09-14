@@ -57,7 +57,6 @@ Wunderclone.bindClickOutCallbacks = function(){
 
 Wunderclone.createTasksNewView = function(){
   var newTaskView = new Wunderclone.Views.TasksNew();
-  // debugger
   return newTaskView;
 }
 

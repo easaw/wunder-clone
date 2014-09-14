@@ -34,10 +34,9 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     
     var lng = that.model.get("lng");
     var lat = that.model.get("lat");
-    // this.map.setView([lng, lat], 15);
     this.map.setView([lat, lng], 15);
       this.map.invalidateSize();
-    // not working
+
     this.myLayer.setGeoJSON({
           type: 'Feature',
           geometry: {

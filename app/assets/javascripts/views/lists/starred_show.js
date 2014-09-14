@@ -63,7 +63,7 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
 
     Object.keys(this.tasksByList).forEach(function(list_id){
         var list = Wunderclone.Collections.lists.get(list_id);
-        var starredTasks = that.tasksByList[list_id]; // could be subset?
+        var starredTasks = that.tasksByList[list_id];
         var miniListView = new Wunderclone.Views.MiniListShow({
           model: list,
           miniListTasks: starredTasks

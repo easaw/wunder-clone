@@ -16,9 +16,7 @@ Wunderclone.Views.TodayShow = Backbone.View.extend({
     
     this.sideView = null;
     
-    // this.listenTo(this.tasks, "add change remove", this.render);
     this.listenTo(Wunderclone.Collections.tasks, "add change remove", this.render);
-    // this.listenTo(this.model.completedTasks(), "add change remove", this.render);
   },
   
   render: function(){
@@ -64,7 +62,7 @@ Wunderclone.Views.TodayShow = Backbone.View.extend({
 
     Object.keys(this.tasksByList).forEach(function(list_id){
         var list = Wunderclone.Collections.lists.get(list_id);
-        var todayTasks = that.tasksByList[list_id]; // could be subset?
+        var todayTasks = that.tasksByList[list_id];
         var miniListView = new Wunderclone.Views.MiniListShow({
           model: list,
           miniListTasks: todayTasks
