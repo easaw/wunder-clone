@@ -90,6 +90,9 @@ Wunderclone.Views.TodayShow = Backbone.View.extend({
     });
     
     this.swapSideView(editView);
+    if(editView.map){
+      editView.map.invalidateSize(); 
+    }
   },
   
   swapSideView: function(view){
