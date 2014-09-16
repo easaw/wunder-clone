@@ -46,6 +46,7 @@ group :test do
   gem 'guard-rspec'
   gem 'faker'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', require: false
 end
 
 group :development do
