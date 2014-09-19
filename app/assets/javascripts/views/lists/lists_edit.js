@@ -111,8 +111,6 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     if (this.currentSharedIds.indexOf(Wunderclone.currentUserId) != -1){
       this.$el.find('.delete-list').addClass("hidden");
       this.$el.find('.edit-list-form input').attr('readonly', true);
-      this.$el.find('#share-user-form').addClass("hidden");
-      this.$el.find('.remove-list-share').addClass("hidden");
     };
   },
   

@@ -6,7 +6,6 @@ class Api::ListsController < ApplicationController
     @list = current_user.owned_lists.build(list_params)
     
     if @list.save
-      #should remove notifications count / use jbuilder partial
       trigger_share_notification(json: @list)
       render "show"
     else
