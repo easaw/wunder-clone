@@ -147,6 +147,28 @@
   padding-bottom: 14px;
 }
 
+#share-user-form{
+  position:relative;
+}
+
+.invalid-email-msg{
+  display:none;
+  position: absolute;
+  background: #009AE4;
+  border-radius: 3px;
+  border: 1px solid #BCBCBC;
+  width: 100%;
+  padding: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+#share-user-form.invalid-email{
+  .invalid-email-msg{
+    display: block;
+  }
+}
+
 .shared-user-name{
   font-weight: 700;
 }

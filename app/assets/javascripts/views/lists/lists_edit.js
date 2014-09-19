@@ -8,7 +8,14 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     'submit #share-user-form' : 'addSharedUser',
     'submit .edit-list-form' : 'updateList',
     'click #save-list-button' : 'updateList',
-    'click .remove-list-share' : 'removeSharedUser'
+    'click .remove-list-share' : 'removeSharedUser',
+    'keyup #share-user-form input[type=text]': 'checkEmpty'
+  },
+  
+  checkEmpty:function(event){
+    if(!event.target.value){
+      this.$el.find('#share-user-form').removeClass("invalid-email");
+    }
   },
   
   hideModal: function(){
@@ -41,16 +48,24 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
   
   addSharedUser: function(event){
     event.preventDefault();
+    this.$el.find('#share-user-form').removeClass("invalid-email");
+    
     var email = $(event.target).serializeJSON()['user_email']
     var id = Wunderclone.otherUsers[email];
     if (!id){
+      this.$el.find('#share-user-form').addClass("invalid-email");
       return;
     }
     
     if (this.currentSharedIds.indexOf(id) == -1){
+      $(event.target).find("input[type=text]").val("");
       var newUserLi = '<li>' + email + '</li>';
       this.currentSharedIds.push(id); 
       this.$el.find('#list-members-ul').append(newUserLi);
+      
+      var attrs = this.$el.find('.edit-list-form').serializeJSON();
+      attrs['list']['shared_user_ids'] = this.currentSharedIds;
+      this.model.save(attrs);
     }
   },
   

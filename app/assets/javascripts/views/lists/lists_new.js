@@ -5,7 +5,14 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
     'click .hide-modal': 'hideModal',
     'click #save-list-button' : 'submit',
     'submit .new-list-form' : 'submit',
-    'submit #share-user-form' : 'addSharedUser'
+    'submit #share-user-form' : 'addSharedUser',
+    'keyup #share-user-form input[type=text]': 'checkEmpty'
+  },
+  
+  checkEmpty:function(event){
+    if(!event.target.value){
+      this.$el.find('#share-user-form').removeClass("invalid-email");
+    }
   },
   
   render: function(){
@@ -29,9 +36,12 @@ Wunderclone.Views.ListsNewModal = Backbone.View.extend({
   
   addSharedUser: function(event){
     event.preventDefault();
+    this.$el.find('#share-user-form').removeClass("invalid-email");
     var email = $(event.target).serializeJSON()['user_email']
     var id = Wunderclone.otherUsers[email];
+    
     if (!id){
+      this.$el.find('#share-user-form').addClass("invalid-email");
       return;
     }
     
