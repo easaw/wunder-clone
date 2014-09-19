@@ -59,7 +59,7 @@ Wunderclone.Views.ListsEditModal = Backbone.View.extend({
     
     if (this.currentSharedIds.indexOf(id) == -1){
       $(event.target).find("input[type=text]").val("");
-      var newUserLi = '<li>' + email + '</li>';
+      var newUserLi = '<li>' + email + '<span class="pending-tag">Pending</span></li>';
       this.currentSharedIds.push(id); 
       this.$el.find('#list-members-ul').append(newUserLi);
       
