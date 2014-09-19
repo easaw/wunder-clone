@@ -16,7 +16,7 @@ Wunderclone.Views.TodayShow = Backbone.View.extend({
     
     this.sideView = null;
     
-    this.listenTo(Wunderclone.Collections.tasks, "add change remove", this.render);
+    this.listenTo(Wunderclone.Collections.tasks, "add change:due_date change:completed remove", this.render);
   },
   
   render: function(){

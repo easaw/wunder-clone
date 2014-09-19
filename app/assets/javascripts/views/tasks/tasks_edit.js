@@ -85,7 +85,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.listenTo(this.model, "change sync", this.render);
+    this.listenTo(this.model, "change:completed", this.render);
     this.listenTo(this.model, "change:lat change:lng", this.updateMap);
     this.listId = this.model.get('list_id');
     this.list = Wunderclone.Collections.lists.get(this.listId);
