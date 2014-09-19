@@ -14,6 +14,50 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     'click .hide-edit': 'hideEdit'
   },
   
+  initialize: function(options){
+    this.listenTo(this.model, "change:completed", this.render);
+    this.listenTo(this.model, "change:lat change:lng", this.updateMap);
+    this.listenTo(this.model, "remove", this.removeView);
+    this.listId = this.model.get('list_id');
+    this.list = Wunderclone.Collections.lists.get(this.listId);
+    this.render();
+  },
+  
+  render: function(){
+    var content = this.template({task: this.model});
+    this.$el.html(content);
+    this.checkStar();
+    this.createMap();
+    return this;
+  },
+  
+  deleteTask: function(){
+    var that = this;
+    event.preventDefault();
+    
+    that.list.activeTasks().remove(that.model);
+    that.list.completedTasks().remove(that.model);
+    Wunderclone.Models.starredList.activeTasks().remove(that.model);
+    Wunderclone.Models.todayList.activeTasks().remove(that.model);
+    Wunderclone.Collections.tasks.remove(that.model);
+        
+    this.model.destroy({
+      success: function(){
+      },
+      error: function(data){
+        console.log("ERROR", data);
+      }
+    });
+  },
+  
+  submit: function(){
+    var that = this;
+    event.preventDefault();
+    var attrs = this.$el.find(".edit-task-form").serializeJSON();
+    this.model.set(attrs);
+    this.model.save(attrs);
+  },
+  
   createMap: function(){
     L.mapbox.accessToken = "pk.eyJ1IjoiZXJ1YmkiLCJhIjoidWlKM1FQayJ9.1SGO52uN4uie6TDWJZHGIg";
     var mapContainer = this.$el.find('#map')[0];
@@ -84,43 +128,8 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     }
   },
   
-  initialize: function(options){
-    this.listenTo(this.model, "change:completed", this.render);
-    this.listenTo(this.model, "change:lat change:lng", this.updateMap);
-    this.listId = this.model.get('list_id');
-    this.list = Wunderclone.Collections.lists.get(this.listId);
-    this.render();
-  },
-  
-  render: function(){
-    var content = this.template({task: this.model});
-    this.$el.html(content);
-    this.checkStar();
-    this.createMap();
-    return this;
-  },
-  
-  deleteTask: function(){
-    var that = this;
-    event.preventDefault();
-    
-    this.model.destroy({
-      success: function(){
-        that.list.activeTasks().remove(that.model);
-        that.list.completedTasks().remove(that.model);
-        Backbone.history.navigate("#/lists/" + that.listId, { trigger: true });
-      },
-      error: function(data){
-        console.log("ERROR", data);
-      }
-    });
-  },
-  
-  submit: function(){
-    var that = this;
-    event.preventDefault();
-    var attrs = this.$el.find(".edit-task-form").serializeJSON();
-    this.model.set(attrs);
-    this.model.save(attrs);
+  removeView: function(){
+    this.hideEdit();
+    this.$el.empty();
   }
 })

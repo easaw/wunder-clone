@@ -1,5 +1,7 @@
 Wunderclone.Models.Task = Backbone.Model.extend({
   
+  urlRoot: "/api/tasks",
+  
   validate: function(attrs, options){
     if (attrs.task){
       if( attrs.task.name && attrs.task.name.length < 1){
@@ -49,5 +51,5 @@ Wunderclone.Models.Task = Backbone.Model.extend({
   
   dueYear: function(){
     return new Date(this.get("due_date")).getFullYear();
-  },
+  }
 })
