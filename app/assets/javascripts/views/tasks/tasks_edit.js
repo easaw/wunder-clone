@@ -15,9 +15,8 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
   },
   
   initialize: function(options){
-    this.listenTo(this.model, "change:completed", this.render);
+    this.listenTo(this.model, "change:completed change:starred", this.render);
     this.listenTo(this.model, "change:lat change:lng", this.updateMap);
-    this.listenTo(this.model, "remove", this.removeView);
     this.listId = this.model.get('list_id');
     this.list = Wunderclone.Collections.lists.get(this.listId);
     this.render();
@@ -40,7 +39,7 @@ Wunderclone.Views.TasksEdit = Backbone.View.extend({
     Wunderclone.Models.starredList.activeTasks().remove(that.model);
     Wunderclone.Models.todayList.activeTasks().remove(that.model);
     Wunderclone.Collections.tasks.remove(that.model);
-        
+    this.removeView();
     this.model.destroy({
       success: function(){
       },
