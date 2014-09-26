@@ -7,6 +7,23 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     'click div.star' : 'starTask'
   },
   
+  render: function(){
+    var content = this.template({task: this.model});
+    this.$el.html(content);
+    this.checkStar();
+    
+    return this;
+  },
+  
+  initialize: function(options){
+    var that = this;
+    this.list = Wunderclone.Collections.lists.getOrFetch(this.model.get('list_id'));
+    this.activeTasks = this.list.activeTasks();
+    this.completedTasks = this.list.completedTasks();
+    this.listenTo(this.model, "add change remove sync", this.render);
+    this.listenTo(this.model, "change:completed", this.changeCompleted);
+  },
+  
   starTask: function(event){
     event.preventDefault();
     event.stopPropagation();
@@ -27,23 +44,6 @@ Wunderclone.Views.TasksShow = Backbone.View.extend({
     if (this.model.get('starred')){
       this.$el.find('.star').addClass("starred")
     }
-  },
-  
-  render: function(){
-    var content = this.template({task: this.model});
-    this.$el.html(content);
-    this.checkStar();
-    
-    return this;
-  },
-  
-  initialize: function(options){
-    var that = this;
-    this.list = Wunderclone.Collections.lists.getOrFetch(this.model.get('list_id'));
-    this.activeTasks = this.list.activeTasks();
-    this.completedTasks = this.list.completedTasks();
-    this.listenTo(this.model, "add change remove sync", this.render);
-    this.listenTo(this.model, "change:completed", this.changeCompleted);
   },
   
   changeCompleted: function(){
