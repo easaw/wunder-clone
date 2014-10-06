@@ -117,8 +117,15 @@ form.complete-form{
 }
 
 .task-form.active-task-form > input[type="text"]{
-  max-width: 80%;
-  width: 70%;
+  width: 80%;
+  
+  @media screen and (max-width:  1210px){
+    width: 60%;
+  }
+  
+  @media screen and (max-width: 730px){
+    width: 50%;
+  }
 }
 
 .task-form > input[type="submit"]{
@@ -130,13 +137,16 @@ form.complete-form{
   display: none;
   cursor: pointer;
   font-size: 17px;
+  position: relative;
+  bottom: 4px;
 }
 
 .task-form-date{
   display: none;
   float: right;
   margin-right: 10px;
-  
+  position: relative;
+  bottom: 4px;
 }
 
 .task-form.active-task-form .task-form-date,
