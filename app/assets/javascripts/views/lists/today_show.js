@@ -75,7 +75,7 @@ Wunderclone.Views.TodayShow = Backbone.View.extend({
 
   selectTask: function(event){
     event.preventDefault();
-    $taskEl = $(event.target);
+    $taskEl = $(event.target).closest('.task-link');
     $('.task-link').removeClass("selected-task");
     $taskEl.toggleClass("selected-task");
   },
