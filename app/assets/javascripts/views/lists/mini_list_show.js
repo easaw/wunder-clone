@@ -5,13 +5,7 @@ Wunderclone.Views.MiniListShow = Backbone.View.extend({
   className: 'mini-list-view',
 
   initialize: function(options){
-
-    if (this._subViews && this._subViews.length > 0){
-      this.removeSubViews();
-    }
-
     this.collection = options.miniListTasks;
-
   },
 
   render: function(){

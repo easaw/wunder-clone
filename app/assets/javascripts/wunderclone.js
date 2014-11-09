@@ -27,7 +27,7 @@ window.Wunderclone = {
             Wunderclone.bindClickOutCallbacks();
             Wunderclone.bindFocusOutCallbacks();
             Backbone.history.start();
-            
+
             Wunderclone.Models.inbox.trigger('show');
           }
         })
@@ -92,7 +92,7 @@ Wunderclone.createNotificationsIndex = function(){
   var notificationIndexView = new Wunderclone.Views.NotificationsIndex({
     collection: Wunderclone.Collections.notifications
   })
-  
+
   $('#user-nav').append(notificationIndexView.render().$el);
   return notificationIndexView;
 }

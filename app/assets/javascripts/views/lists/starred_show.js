@@ -9,9 +9,6 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
   },
 
   initialize: function(){
-    if (this._subViews && this._subViews.length > 0){
-      this.removeSubViews();
-    }
     this.tasks = this.model.activeTasks();
 
     this.sideView = null;
@@ -39,10 +36,6 @@ Wunderclone.Views.StarredShow = Backbone.View.extend({
 
   splitByList: function(){
     var that = this;
-    this.tasks.comparator = function(model){
-      return model.get("list_id");
-    }
-    this.tasks.sort();
 
     this.tasksByList = {};
     this.tasks.forEach(function(task){
